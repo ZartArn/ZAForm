@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00D8FC34C51B1FFD3E60FA79 /* libPods-TestForm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C37845DADEA91F259C137D6E /* libPods-TestForm.a */; };
+		B50A7A631D37A8BA00788568 /* InfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50A7A621D37A8BA00788568 /* InfoCell.m */; };
+		B50A7A661D37BD2500788568 /* AccNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B50A7A651D37BD2500788568 /* AccNumberFormatter.m */; };
+		B50A7A691D37C33F00788568 /* ZAFormSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B50A7A681D37C33F00788568 /* ZAFormSection.m */; };
+		B50B79C01D311DEB004CCD12 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79BF1D311DEB004CCD12 /* TestObject.m */; };
+		B50B79C31D31237E004CCD12 /* ZAFormRowAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79C21D31237E004CCD12 /* ZAFormRowAmount.m */; };
+		B50B79C61D3124CE004CCD12 /* ZAFormTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79C51D3124CE004CCD12 /* ZAFormTextFieldCell.m */; };
+		B50B79C91D312502004CCD12 /* ZAFormAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79C81D312502004CCD12 /* ZAFormAmountCell.m */; };
+		B50B79CF1D3139A6004CCD12 /* ZAFormRowWithViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79CE1D3139A6004CCD12 /* ZAFormRowWithViewModel.m */; };
+		B50B79D51D31A24C004CCD12 /* ZAFormRowSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79D41D31A24C004CCD12 /* ZAFormRowSelector.m */; };
+		B50B79D81D31ADD1004CCD12 /* ZAFormOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79D71D31ADD1004CCD12 /* ZAFormOptionsViewController.m */; };
+		B50B79DB1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79DA1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m */; };
+		B50B79DE1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79DD1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m */; };
+		B5BEC8551D2E5EC100DF7920 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC8541D2E5EC100DF7920 /* main.m */; };
+		B5BEC8581D2E5EC100DF7920 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC8571D2E5EC100DF7920 /* AppDelegate.m */; };
+		B5BEC85B1D2E5EC100DF7920 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC85A1D2E5EC100DF7920 /* ViewController.m */; };
+		B5BEC85E1D2E5EC100DF7920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BEC85C1D2E5EC100DF7920 /* Main.storyboard */; };
+		B5BEC8601D2E5EC100DF7920 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BEC85F1D2E5EC100DF7920 /* Assets.xcassets */; };
+		B5BEC8631D2E5EC100DF7920 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BEC8611D2E5EC100DF7920 /* LaunchScreen.storyboard */; };
+		B5BEC86F1D2E5EFA00DF7920 /* ZAFormRow.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC86C1D2E5EFA00DF7920 /* ZAFormRow.m */; };
+		B5BEC8701D2E5EFA00DF7920 /* ZAFormTableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC86E1D2E5EFA00DF7920 /* ZAFormTableManager.m */; };
+		B5BEC8731D2E5FD300DF7920 /* ZAFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC8721D2E5FD300DF7920 /* ZAFormBaseCell.m */; };
+		B5FAE8231D38E3EB008E3A02 /* MoneyNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAE8221D38E3EB008E3A02 /* MoneyNumberFormatter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9888530DA036EB3FE77CCFE5 /* Pods-TestForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestForm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestForm/Pods-TestForm.debug.xcconfig"; sourceTree = "<group>"; };
+		B50A7A611D37A8BA00788568 /* InfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCell.h; sourceTree = "<group>"; };
+		B50A7A621D37A8BA00788568 /* InfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCell.m; sourceTree = "<group>"; };
+		B50A7A641D37BD2500788568 /* AccNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccNumberFormatter.h; sourceTree = "<group>"; };
+		B50A7A651D37BD2500788568 /* AccNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccNumberFormatter.m; sourceTree = "<group>"; };
+		B50A7A671D37C33F00788568 /* ZAFormSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormSection.h; sourceTree = "<group>"; };
+		B50A7A681D37C33F00788568 /* ZAFormSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormSection.m; sourceTree = "<group>"; };
+		B50B79BE1D311DEB004CCD12 /* TestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
+		B50B79BF1D311DEB004CCD12 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
+		B50B79C11D31237E004CCD12 /* ZAFormRowAmount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormRowAmount.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B50B79C21D31237E004CCD12 /* ZAFormRowAmount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormRowAmount.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B50B79C41D3124CE004CCD12 /* ZAFormTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormTextFieldCell.h; sourceTree = "<group>"; };
+		B50B79C51D3124CE004CCD12 /* ZAFormTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormTextFieldCell.m; sourceTree = "<group>"; };
+		B50B79C71D312502004CCD12 /* ZAFormAmountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormAmountCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B50B79C81D312502004CCD12 /* ZAFormAmountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormAmountCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B50B79CD1D3139A6004CCD12 /* ZAFormRowWithViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowWithViewModel.h; sourceTree = "<group>"; };
+		B50B79CE1D3139A6004CCD12 /* ZAFormRowWithViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowWithViewModel.m; sourceTree = "<group>"; };
+		B50B79D31D31A24C004CCD12 /* ZAFormRowSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowSelector.h; sourceTree = "<group>"; };
+		B50B79D41D31A24C004CCD12 /* ZAFormRowSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowSelector.m; sourceTree = "<group>"; };
+		B50B79D61D31ADD1004CCD12 /* ZAFormOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormOptionsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B50B79D71D31ADD1004CCD12 /* ZAFormOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormOptionsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B50B79D91D31AE74004CCD12 /* ZAFormOptionsModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormOptionsModalViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B50B79DA1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormOptionsModalViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B50B79DC1D31B4AF004CCD12 /* ZAFormWithViewModelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormWithViewModelCell.h; sourceTree = "<group>"; };
+		B50B79DD1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormWithViewModelCell.m; sourceTree = "<group>"; };
+		B5BEC8501D2E5EC100DF7920 /* TestForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5BEC8541D2E5EC100DF7920 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B5BEC8561D2E5EC100DF7920 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B5BEC8571D2E5EC100DF7920 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B5BEC8591D2E5EC100DF7920 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B5BEC85A1D2E5EC100DF7920 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B5BEC85D1D2E5EC100DF7920 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5BEC85F1D2E5EC100DF7920 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5BEC8621D2E5EC100DF7920 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5BEC8641D2E5EC100DF7920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5BEC86B1D2E5EFA00DF7920 /* ZAFormRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRow.h; sourceTree = "<group>"; };
+		B5BEC86C1D2E5EFA00DF7920 /* ZAFormRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRow.m; sourceTree = "<group>"; };
+		B5BEC86D1D2E5EFA00DF7920 /* ZAFormTableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormTableManager.h; sourceTree = "<group>"; };
+		B5BEC86E1D2E5EFA00DF7920 /* ZAFormTableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormTableManager.m; sourceTree = "<group>"; };
+		B5BEC8711D2E5FD300DF7920 /* ZAFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormBaseCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		B5BEC8721D2E5FD300DF7920 /* ZAFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormBaseCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B5FAE8211D38E3EB008E3A02 /* MoneyNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyNumberFormatter.h; sourceTree = "<group>"; };
+		B5FAE8221D38E3EB008E3A02 /* MoneyNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyNumberFormatter.m; sourceTree = "<group>"; };
+		C2D77B3CE1F2D81AF50B0EDF /* Pods-TestForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestForm.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestForm/Pods-TestForm.release.xcconfig"; sourceTree = "<group>"; };
+		C37845DADEA91F259C137D6E /* libPods-TestForm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestForm.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B5BEC84D1D2E5EC100DF7920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00D8FC34C51B1FFD3E60FA79 /* libPods-TestForm.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2629C488C3BD4204F7C52770 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9888530DA036EB3FE77CCFE5 /* Pods-TestForm.debug.xcconfig */,
+				C2D77B3CE1F2D81AF50B0EDF /* Pods-TestForm.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		702AC665DCA5064B1102E9EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C37845DADEA91F259C137D6E /* libPods-TestForm.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B5BEC8471D2E5EC100DF7920 = {
+			isa = PBXGroup;
+			children = (
+				B5BEC86A1D2E5EFA00DF7920 /* ZAForm */,
+				B5BEC8521D2E5EC100DF7920 /* TestForm */,
+				B5BEC8511D2E5EC100DF7920 /* Products */,
+				2629C488C3BD4204F7C52770 /* Pods */,
+				702AC665DCA5064B1102E9EE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B5BEC8511D2E5EC100DF7920 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5BEC8501D2E5EC100DF7920 /* TestForm.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5BEC8521D2E5EC100DF7920 /* TestForm */ = {
+			isa = PBXGroup;
+			children = (
+				B5BEC8561D2E5EC100DF7920 /* AppDelegate.h */,
+				B5BEC8571D2E5EC100DF7920 /* AppDelegate.m */,
+				B5BEC8591D2E5EC100DF7920 /* ViewController.h */,
+				B5BEC85A1D2E5EC100DF7920 /* ViewController.m */,
+				B5BEC85C1D2E5EC100DF7920 /* Main.storyboard */,
+				B5BEC85F1D2E5EC100DF7920 /* Assets.xcassets */,
+				B5BEC8611D2E5EC100DF7920 /* LaunchScreen.storyboard */,
+				B5BEC8641D2E5EC100DF7920 /* Info.plist */,
+				B5BEC8531D2E5EC100DF7920 /* Supporting Files */,
+				B50B79BE1D311DEB004CCD12 /* TestObject.h */,
+				B50B79BF1D311DEB004CCD12 /* TestObject.m */,
+				B50A7A611D37A8BA00788568 /* InfoCell.h */,
+				B50A7A621D37A8BA00788568 /* InfoCell.m */,
+			);
+			path = TestForm;
+			sourceTree = "<group>";
+		};
+		B5BEC8531D2E5EC100DF7920 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5BEC8541D2E5EC100DF7920 /* main.m */,
+				B50A7A641D37BD2500788568 /* AccNumberFormatter.h */,
+				B50A7A651D37BD2500788568 /* AccNumberFormatter.m */,
+				B5FAE8211D38E3EB008E3A02 /* MoneyNumberFormatter.h */,
+				B5FAE8221D38E3EB008E3A02 /* MoneyNumberFormatter.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5BEC86A1D2E5EFA00DF7920 /* ZAForm */ = {
+			isa = PBXGroup;
+			children = (
+				B5BEC86D1D2E5EFA00DF7920 /* ZAFormTableManager.h */,
+				B5BEC86E1D2E5EFA00DF7920 /* ZAFormTableManager.m */,
+				B50A7A671D37C33F00788568 /* ZAFormSection.h */,
+				B50A7A681D37C33F00788568 /* ZAFormSection.m */,
+				B5BEC86B1D2E5EFA00DF7920 /* ZAFormRow.h */,
+				B5BEC86C1D2E5EFA00DF7920 /* ZAFormRow.m */,
+				B50B79C11D31237E004CCD12 /* ZAFormRowAmount.h */,
+				B50B79C21D31237E004CCD12 /* ZAFormRowAmount.m */,
+				B50B79D31D31A24C004CCD12 /* ZAFormRowSelector.h */,
+				B50B79D41D31A24C004CCD12 /* ZAFormRowSelector.m */,
+				B50B79CD1D3139A6004CCD12 /* ZAFormRowWithViewModel.h */,
+				B50B79CE1D3139A6004CCD12 /* ZAFormRowWithViewModel.m */,
+				B5BEC8711D2E5FD300DF7920 /* ZAFormBaseCell.h */,
+				B5BEC8721D2E5FD300DF7920 /* ZAFormBaseCell.m */,
+				B50B79C41D3124CE004CCD12 /* ZAFormTextFieldCell.h */,
+				B50B79C51D3124CE004CCD12 /* ZAFormTextFieldCell.m */,
+				B50B79C71D312502004CCD12 /* ZAFormAmountCell.h */,
+				B50B79C81D312502004CCD12 /* ZAFormAmountCell.m */,
+				B50B79DC1D31B4AF004CCD12 /* ZAFormWithViewModelCell.h */,
+				B50B79DD1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m */,
+				B50B79D61D31ADD1004CCD12 /* ZAFormOptionsViewController.h */,
+				B50B79D71D31ADD1004CCD12 /* ZAFormOptionsViewController.m */,
+				B50B79D91D31AE74004CCD12 /* ZAFormOptionsModalViewController.h */,
+				B50B79DA1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m */,
+			);
+			name = ZAForm;
+			path = TestForm/ZAForm;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5BEC84F1D2E5EC100DF7920 /* TestForm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5BEC8671D2E5EC100DF7920 /* Build configuration list for PBXNativeTarget "TestForm" */;
+			buildPhases = (
+				AF8C1DDD4D395221F77F80DA /* Check Pods Manifest.lock */,
+				B5BEC84C1D2E5EC100DF7920 /* Sources */,
+				B5BEC84D1D2E5EC100DF7920 /* Frameworks */,
+				B5BEC84E1D2E5EC100DF7920 /* Resources */,
+				93F18C8B1D72E57BA760D1B5 /* Embed Pods Frameworks */,
+				A3DACC37D5AA976631734D1A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestForm;
+			productName = TestForm;
+			productReference = B5BEC8501D2E5EC100DF7920 /* TestForm.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5BEC8481D2E5EC100DF7920 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = ZartArn;
+				TargetAttributes = {
+					B5BEC84F1D2E5EC100DF7920 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = B5BEC84B1D2E5EC100DF7920 /* Build configuration list for PBXProject "TestForm" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5BEC8471D2E5EC100DF7920;
+			productRefGroup = B5BEC8511D2E5EC100DF7920 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5BEC84F1D2E5EC100DF7920 /* TestForm */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B5BEC84E1D2E5EC100DF7920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5BEC8631D2E5EC100DF7920 /* LaunchScreen.storyboard in Resources */,
+				B5BEC8601D2E5EC100DF7920 /* Assets.xcassets in Resources */,
+				B5BEC85E1D2E5EC100DF7920 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		93F18C8B1D72E57BA760D1B5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TestForm/Pods-TestForm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3DACC37D5AA976631734D1A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TestForm/Pods-TestForm-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF8C1DDD4D395221F77F80DA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B5BEC84C1D2E5EC100DF7920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5BEC8701D2E5EFA00DF7920 /* ZAFormTableManager.m in Sources */,
+				B50B79C31D31237E004CCD12 /* ZAFormRowAmount.m in Sources */,
+				B50B79CF1D3139A6004CCD12 /* ZAFormRowWithViewModel.m in Sources */,
+				B50B79D81D31ADD1004CCD12 /* ZAFormOptionsViewController.m in Sources */,
+				B50B79DB1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m in Sources */,
+				B5BEC8731D2E5FD300DF7920 /* ZAFormBaseCell.m in Sources */,
+				B50B79DE1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m in Sources */,
+				B5BEC85B1D2E5EC100DF7920 /* ViewController.m in Sources */,
+				B5BEC86F1D2E5EFA00DF7920 /* ZAFormRow.m in Sources */,
+				B5BEC8581D2E5EC100DF7920 /* AppDelegate.m in Sources */,
+				B5FAE8231D38E3EB008E3A02 /* MoneyNumberFormatter.m in Sources */,
+				B50B79C01D311DEB004CCD12 /* TestObject.m in Sources */,
+				B50A7A631D37A8BA00788568 /* InfoCell.m in Sources */,
+				B50B79D51D31A24C004CCD12 /* ZAFormRowSelector.m in Sources */,
+				B50B79C91D312502004CCD12 /* ZAFormAmountCell.m in Sources */,
+				B50A7A691D37C33F00788568 /* ZAFormSection.m in Sources */,
+				B50B79C61D3124CE004CCD12 /* ZAFormTextFieldCell.m in Sources */,
+				B50A7A661D37BD2500788568 /* AccNumberFormatter.m in Sources */,
+				B5BEC8551D2E5EC100DF7920 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B5BEC85C1D2E5EC100DF7920 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5BEC85D1D2E5EC100DF7920 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B5BEC8611D2E5EC100DF7920 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5BEC8621D2E5EC100DF7920 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B5BEC8651D2E5EC100DF7920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5BEC8661D2E5EC100DF7920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B5BEC8681D2E5EC100DF7920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9888530DA036EB3FE77CCFE5 /* Pods-TestForm.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TestForm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = spider.TestForm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		B5BEC8691D2E5EC100DF7920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2D77B3CE1F2D81AF50B0EDF /* Pods-TestForm.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TestForm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = spider.TestForm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B5BEC84B1D2E5EC100DF7920 /* Build configuration list for PBXProject "TestForm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5BEC8651D2E5EC100DF7920 /* Debug */,
+				B5BEC8661D2E5EC100DF7920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5BEC8671D2E5EC100DF7920 /* Build configuration list for PBXNativeTarget "TestForm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5BEC8681D2E5EC100DF7920 /* Debug */,
+				B5BEC8691D2E5EC100DF7920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B5BEC8481D2E5EC100DF7920 /* Project object */;
+}
