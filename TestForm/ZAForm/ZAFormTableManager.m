@@ -9,8 +9,9 @@
 #import "ZAFormTableManager.h"
 #import "ZAFormSection.h"
 #import "ZAFormRow.h"
-#import "ZAFormBaseCell.h"
 #import "ZAFormRowSelector.h"
+#import "ZAFormBaseCell.h"
+#import "ZAFormTextFieldCell.h"
 
 @implementation ZAFormTableManager
 
@@ -60,8 +61,12 @@
     ZAFormSection *sectionItem = [self.sections objectAtIndex:indexPath.section];
     ZAFormRow *rowItem = [sectionItem.rowItems objectAtIndex:indexPath.row];
     ZAFormBaseCell *cell = [rowItem cellForForm];
-    [cell update];
-//    [cell updateWithViewModel:rowItem.viewModel];
+    if ([rowItem isKindOfClass:[ZAFormRowSelector class]]) {
+        [cell updateWithViewModel:rowItem.viewModel];        
+    } else {
+        [cell update];
+    }
+    
     return cell;
 }
 
@@ -91,8 +96,21 @@
     ZAFormSection *sectionItem = [self.sections objectAtIndex:indexPath.section];
     ZAFormRow *rowItem = [sectionItem.rowItems objectAtIndex:indexPath.row];
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // textfield
+    if ([[rowItem cellForForm] isKindOfClass:[ZAFormTextFieldCell class]]) {
+        ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)[rowItem cellForForm];
+        if (![cell.textField isFirstResponder]) {
+            [cell.textField becomeFirstResponder];
+        }
+        return;
+    }
+    
+    // select options
     if ([rowItem isKindOfClass:[ZAFormRowSelector class]]) {
         ZAFormRowSelector *rowItemSelector = (ZAFormRowSelector *)rowItem;
+        
         if (rowItemSelector.typeSelector == ZAFormTypeSelectorModalCustomController) {
             ZAFormOptionsViewController *vc = [(ZAFormOptionsViewController *)[rowItemSelector.optionsViewControllerClass alloc] initWithZAFormRrowSelector:rowItemSelector];
             vc.delegate = rowItemSelector;
@@ -102,7 +120,15 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.presenterViewController presentViewController:vc animated:YES completion:nil];
             });
+            return;
         }
+        
+        if (rowItemSelector.typeSelector == ZAFormTypeSelectorPush) {
+            ZAFormOptionsViewController *vc = [(ZAFormOptionsViewController *)[rowItemSelector.optionsViewControllerClass alloc] initWithZAFormRrowSelector:rowItemSelector];
+            vc.delegate = rowItemSelector;
+            [rowItemSelector.presenterController.navigationController pushViewController:vc animated:YES];
+        }
+        
     }
 }
 

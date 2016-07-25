@@ -14,7 +14,6 @@
 
 - (void)configure {
     self.textField.keyboardType = UIKeyboardTypeDecimalPad;
-    self.contentView.backgroundColor = [UIColor yellowColor];
     [self update];
     
     RAC(self.formRow, value) = [RACObserve(self.textField, text)

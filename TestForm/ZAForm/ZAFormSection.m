@@ -11,6 +11,13 @@
 
 @implementation ZAFormSection
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [self configure];
+    }
+    return self;
+}
+
 - (instancetype)initWithTitle:(NSString *)title {
     if (self = [super init]) {
         _title = title;
