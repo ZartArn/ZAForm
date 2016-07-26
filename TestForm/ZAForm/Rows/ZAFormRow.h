@@ -11,7 +11,9 @@
 
 @class ZAFormBaseCell;
 
-@interface ZAFormRow : NSObject
+@interface ZAFormRow : NSObject {
+    ZAFormBaseCell *_cell;
+}
 
 /// cell
 @property (nonatomic) id cellClass;

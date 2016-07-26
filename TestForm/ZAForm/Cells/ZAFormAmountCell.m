@@ -7,7 +7,7 @@
 //
 
 #import "ZAFormAmountCell.h"
-#import "ZAFormRow.h"
+#import "ZAFormRowAmount.h"
 #import <ReactiveCocoa.h>
 
 @implementation ZAFormAmountCell
@@ -18,10 +18,15 @@
     
     RAC(self.formRow, value) = [RACObserve(self.textField, text)
         map:^id(NSString *text) {
+            NSLog(@"form %@", text);
             id objectValue = nil;
             BOOL res = [self.formRow.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
             return (res ? objectValue : nil);
         }];
+    
+    
+    ZAFormRowAmount *row = (ZAFormRowAmount *)self.formRow;
+    RAC(self.textField, enabled) = row.enabledSignal;
 }
 
 - (void)update {

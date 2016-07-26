@@ -8,9 +8,20 @@
 
 #import "ZAFormRow.h"
 
+@class RACSignal;
+
 @interface ZAFormRowAmount : ZAFormRow
+
+/// enabled signal
+@property (strong, nonatomic) RACSignal *enabledSignal;
 
 /// currency code for formatter
 @property (copy, nonatomic) NSString *currencyCode;
+
+/// placeholder value
+@property (strong, nonatomic) id placeholderValue;
+
+/// redign first responder
+- (void)resignFirstResponder;
 
 @end

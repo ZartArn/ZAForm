@@ -111,7 +111,7 @@
     if ([rowItem isKindOfClass:[ZAFormRowSelector class]]) {
         ZAFormRowSelector *rowItemSelector = (ZAFormRowSelector *)rowItem;
         
-        if (rowItemSelector.typeSelector == ZAFormTypeSelectorModalCustomController) {
+        if (rowItemSelector.typeSelector == ZAFormTypeSelectorModalCustomController && (rowItemSelector.selectorOptions.count > 0)) {
             ZAFormOptionsViewController *vc = [(ZAFormOptionsViewController *)[rowItemSelector.optionsViewControllerClass alloc] initWithZAFormRrowSelector:rowItemSelector];
             vc.delegate = rowItemSelector;
             vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -123,7 +123,7 @@
             return;
         }
         
-        if (rowItemSelector.typeSelector == ZAFormTypeSelectorPush) {
+        if (rowItemSelector.typeSelector == ZAFormTypeSelectorPush && (rowItemSelector.selectorOptions.count > 0)) {
             ZAFormOptionsViewController *vc = [(ZAFormOptionsViewController *)[rowItemSelector.optionsViewControllerClass alloc] initWithZAFormRrowSelector:rowItemSelector];
             vc.delegate = rowItemSelector;
             [rowItemSelector.presenterController.navigationController pushViewController:vc animated:YES];

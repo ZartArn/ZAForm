@@ -15,7 +15,8 @@
 
 @implementation ZAFormRowAmount
 
-@synthesize cell = _cell;
+//@synthesize cell = _cell;
+@synthesize valueFormatter = _valueFormatter;
 
 #pragma mark - cell
 
@@ -31,6 +32,9 @@
     ZAFormAmountCell *ccell = (ZAFormAmountCell *)cell;
     
     ccell.textField.delegate = self;
+    if (_placeholderValue) {
+        ccell.textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
+    }
 }
 
 
@@ -94,6 +98,12 @@
     return NO;
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    textField.text = nil;
+//    self.value = nil;
+    return YES;
+}
+
 #pragma mark -
 
 - (void)setTextPositionBeforeSuffix:(UITextField *)textField {
@@ -109,9 +119,23 @@
 
 #pragma mark -
 
+- (void)setCurrencyCode:(NSString *)currencyCode {
+    if (_currencyCode != currencyCode) {
+        _currencyCode = currencyCode;
+        _valueFormatter = nil;
+        if (_cell) {
+            UITextField *textField = [(ZAFormTextFieldCell *)_cell textField];
+            textField.text = nil;
+            if (_placeholderValue) {
+                textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
+            }
+        }
+    }
+}
+
 - (NSFormatter *)valueFormatter {
-    static NSNumberFormatter *numberFormatter = nil;
-    if (!numberFormatter) {
+    if (!_valueFormatter) {
+        NSNumberFormatter *numberFormatter = nil;
         numberFormatter = [[NSNumberFormatter alloc] init];
         numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
         numberFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"ru_RU"];
@@ -121,8 +145,20 @@
         [numberFormatter setLenient:YES];
         NSString *currencyCode = _currencyCode ? _currencyCode : @"RUB";
         numberFormatter.currencyCode = currencyCode;
+        _valueFormatter = numberFormatter;
     }
-    return numberFormatter;
+    return _valueFormatter;
+}
+
+#pragma mark -
+
+- (void)resignFirstResponder {
+    if (_cell) {
+        ZAFormTextFieldCell *ccell = (ZAFormTextFieldCell *)_cell;
+        if ([ccell.textField isFirstResponder]) {
+            [ccell.textField resignFirstResponder];
+        }
+    }
 }
 
 @end
