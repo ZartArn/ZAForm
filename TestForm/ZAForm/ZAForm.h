@@ -2,6 +2,7 @@
 #import "ZAFormTableManager.h"
 #import "ZAFormSection.h"
 #import "ZAFormRow.h"
+#import "ZAFormRowTextField.h"
 #import "ZAFormRowAmount.h"
 #import "ZAFormRowAction.h"
 #import "ZAFormRowWithViewModel.h"

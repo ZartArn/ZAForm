@@ -15,4 +15,11 @@
 /// enabled signal
 @property (strong, nonatomic) RACSignal *enabledSignal;
 
+/// placeholder value
+@property (strong, nonatomic) id placeholderValue;
+
+/// redign first responder
+- (void)resignFirstResponder;
+
+
 @end
