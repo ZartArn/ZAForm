@@ -40,6 +40,18 @@
     return self;
 }
 
+#pragma mark - lazy
+
+- (id)viewModel {
+    if (!_viewModel) {
+        ZAFormTitleValueViewModel *viewModel = [ZAFormTitleValueViewModel new];
+        viewModel.title = self.title;
+        viewModel.value = [self.value isKindOfClass:[NSString class]] ? self.value : nil;
+        _viewModel = viewModel;
+    }
+    return _viewModel;
+}
+
 #pragma mark - cell
 
 + (Class)defaultCellClass {

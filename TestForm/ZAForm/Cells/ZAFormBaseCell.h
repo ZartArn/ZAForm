@@ -23,6 +23,9 @@
 /// update data
 - (void)updateWithViewModel:(id)viewModel;
 
+/// calculate auto height
++ (NSNumber *)prefferedHeightForViewModel:(id)viewModel forWidth:(NSNumber *)width;
+
 @end
 
 
@@ -32,5 +35,12 @@
 
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *imageName;
+
+@end
+
+@interface ZAFormTitleValueViewModel : NSObject;
+
+@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *value;
 
 @end

@@ -66,6 +66,8 @@
     } else {
         [cell update];
     }
+    [cell layoutIfNeeded];
+//    [cell needsUpdateConstraints];
     
     return cell;
 }
@@ -78,12 +80,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // row height set same in form
     if (self.rowHeight) {
         return self.rowHeight.integerValue;
     }
     ZAFormSection *sectionItem = [self.sections objectAtIndex:indexPath.section];
     ZAFormRow *rowItem = [sectionItem.rowItems objectAtIndex:indexPath.row];
-    return (rowItem.cellHeight ? rowItem.cellHeight : 44.f);
+    // row height set fix in row
+    if (rowItem.cellHeight) {
+        return rowItem.cellHeight;
+    }
+    // row height calculated
+    if ([rowItem.cellClass isSubclassOfClass:[ZAFormBaseCell class]]) {
+        return [[rowItem.cellClass prefferedHeightForViewModel:rowItem.viewModel forWidth:@(self.tableView.bounds.size.width)] doubleValue];
+    }
+    return 42.f;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
@@ -130,6 +141,10 @@
         }
         
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    return;
 }
 
 #pragma mark - proxy UIScrollView delegate

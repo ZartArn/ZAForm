@@ -30,7 +30,7 @@
     ZAFormTextFieldCell *ccell = (ZAFormTextFieldCell *)cell;
     ccell.textField.delegate = self;
     if (_placeholderValue) {
-        ccell.textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
+        ccell.textField.placeholder = _placeholderValue; // [self.valueFormatter stringForObjectValue:self.placeholderValue];
     }
 
 //    @weakify(self);
@@ -50,11 +50,15 @@
     // replace string
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
 
-    //
-    NSString *obj;
-    [self.valueFormatter getObjectValue:&obj forString:newString errorDescription:nil];
-    
-    textField.text = [self.valueFormatter stringForObjectValue:obj];
+    if (self.valueFormatter) {
+        //
+        NSString *obj;
+        [self.valueFormatter getObjectValue:&obj forString:newString errorDescription:nil];
+        
+        textField.text = [self.valueFormatter stringForObjectValue:obj];
+    } else {
+        textField.text = newString;
+    }
     
     return NO;
 }

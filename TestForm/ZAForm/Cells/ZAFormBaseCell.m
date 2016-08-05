@@ -26,6 +26,12 @@
     self.imageView.image = [UIImage imageNamed:vm.imageName];
 }
 
+#pragma mark - auto height
+
++ (NSNumber *)prefferedHeightForViewModel:(id)viewModel forWidth:(NSNumber *)width {
+    return @42.f;
+}
+
 #pragma mark -
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -38,6 +44,11 @@
 
 
 @implementation ZAFormBaseCellViewModel
+
+
+@end
+
+@implementation ZAFormTitleValueViewModel
 
 
 @end

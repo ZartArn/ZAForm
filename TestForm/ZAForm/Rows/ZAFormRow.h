@@ -16,7 +16,7 @@
 }
 
 /// cell
-@property (nonatomic) id cellClass;
+@property (nonatomic) Class cellClass;
 @property (strong, nonatomic) ZAFormBaseCell *cell;
 @property (nonatomic) CGFloat cellHeight;
 

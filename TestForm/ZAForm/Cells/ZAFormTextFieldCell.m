@@ -61,9 +61,13 @@
     RAC(self.formRow, value) = [RACObserve(self.textField, text)
                                 map:^id(NSString *text) {
                                     @strongify(self);
-                                    id objectValue = nil;
-                                    BOOL res = [self.formRow.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
-                                    return (res ? objectValue : nil);
+                                    if (self.formRow.valueFormatter) {
+                                        id objectValue = nil;
+                                        BOOL res = [self.formRow.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
+                                        return (res ? objectValue : nil);
+                                    } else {
+                                        return text;
+                                    }
                                 }];
 }
 
