@@ -25,6 +25,9 @@
 /// items array
 @property (strong, nonatomic) NSMutableArray *sections;
 
+/// section header height
+@property (nonatomic) NSNumber *sectionHeight;
+
 /// row height
 @property (nonatomic) NSNumber *rowHeight;
 

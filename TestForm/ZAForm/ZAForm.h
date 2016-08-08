@@ -8,6 +8,7 @@
 #import "ZAFormRowWithViewModel.h"
 #import "ZAFormRowSelector.h"
 #import "ZAFormBaseCell.h"
+#import "ZAFormBaseSectionCell.h"
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormAmountCell.h"
 #import "ZAFormWithViewModelCell.h"

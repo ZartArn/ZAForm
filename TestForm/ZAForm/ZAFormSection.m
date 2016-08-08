@@ -8,6 +8,7 @@
 
 #import "ZAFormSection.h"
 #import "ZAFormRow.h"
+#import "ZAFormBaseSectionCell.h"
 
 @implementation ZAFormSection
 
@@ -36,6 +37,24 @@
 
 - (void)addRows:(NSArray *)rowsArray {
     [self.rowItems addObjectsFromArray:rowsArray];
+}
+
+#pragma mark - cell
+
++ (Class)defaultCellClass {
+    return [ZAFormBaseSectionCell class];
+}
+
+- (ZAFormBaseSectionCell *)sectionCellForForm {
+    if (!_sectionCell) {
+        if (!_sectionCellClass) {
+            _sectionCellClass = [[self class] defaultCellClass];
+        }
+        _sectionCell = [[_sectionCellClass alloc] initWithReuseIdentifier:nil];
+        _sectionCell.formSection = self;
+        [_sectionCell configure];
+    }
+    return _sectionCell;
 }
 
 @end

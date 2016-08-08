@@ -8,11 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class ZAFormRow;
+@class ZAFormRow, ZAFormBaseSectionCell;
 
 @interface ZAFormSection : NSObject
 
+/// cell
+@property (nonatomic) Class sectionCellClass;
+@property (strong, nonatomic) ZAFormBaseSectionCell *sectionCell;
+@property (nonatomic) CGFloat cellHeight;
+
+
+/// title
 @property (copy, nonatomic) NSString *title;
+
+/// icon
+@property (copy, nonatomic) NSString *iconName;
 
 /// items array
 @property (strong, nonatomic) NSMutableArray *rowItems;
@@ -25,5 +35,8 @@
 
 /// add Rows
 - (void)addRows:(NSArray *)rowsArray;
+
+/// create section for form
+- (ZAFormBaseSectionCell *)sectionCellForForm;
 
 @end

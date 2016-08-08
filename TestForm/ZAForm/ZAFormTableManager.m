@@ -11,6 +11,7 @@
 #import "ZAFormRow.h"
 #import "ZAFormRowSelector.h"
 #import "ZAFormBaseCell.h"
+#import "ZAFormBaseSectionCell.h"
 #import "ZAFormTextFieldCell.h"
 
 @implementation ZAFormTableManager
@@ -72,12 +73,42 @@
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - UITableViewDelegate SectionView
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
-    return sectionItem.title;
+    if (sectionItem.title) {
+        ZAFormBaseSectionCell *headerView = [sectionItem sectionCellForForm];
+        [headerView update];
+        return (UIView *)headerView;
+    }
+    return nil;
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if ([self.proxyTableDelegate respondsToSelector:@selector(tableView:willDisplayHeaderView:forSection:)]) {
+        [self.proxyTableDelegate tableView:tableView willDisplayHeaderView:view forSection:section];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    if (!sectionItem.title) {
+        return 0;
+    }
+    if (self.sectionHeight) {
+        return self.sectionHeight.integerValue;
+    }
+    return 28.f;
+}
+
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+//    return sectionItem.title;
+//}
+
+
+#pragma mark - UITableViewDelegate Row
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     // row height set same in form
@@ -97,11 +128,11 @@
     return 42.f;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    if ([self.proxyTableDelegate respondsToSelector:@selector(tableView:willDisplayHeaderView:forSection:)]) {
-        [self.proxyTableDelegate tableView:tableView willDisplayHeaderView:view forSection:section];
-    }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    return;
 }
+
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ZAFormSection *sectionItem = [self.sections objectAtIndex:indexPath.section];
@@ -141,10 +172,6 @@
         }
         
     }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    return;
 }
 
 #pragma mark - proxy UIScrollView delegate
