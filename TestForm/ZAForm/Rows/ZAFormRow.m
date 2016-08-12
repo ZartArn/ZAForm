@@ -80,7 +80,8 @@
 }
 
 - (void)updateCell {
-    [self.cell updateWithViewModel:self.viewModel];
+    [self.cell update];
+//    [self.cell updateWithViewModel:self.viewModel];
 }
 
 @end

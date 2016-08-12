@@ -24,6 +24,9 @@
 /// icon
 @property (copy, nonatomic) NSString *iconName;
 
+/// viewModel
+@property (strong, nonatomic) id viewModel;
+
 /// items array
 @property (strong, nonatomic) NSMutableArray *rowItems;
 

@@ -20,4 +20,7 @@
 /// update
 - (void)update;
 
+/// update data
+- (void)updateWithViewModel:(id)viewModel;
+
 @end

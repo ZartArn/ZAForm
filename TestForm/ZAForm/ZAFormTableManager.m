@@ -185,9 +185,9 @@
 #pragma mark -
 
 - (void)upgradeRow:(ZAFormRow *)row {
-    [self.tableView beginUpdates];
+//    [self.tableView beginUpdates];
     [row updateCell];
-    [self.tableView endUpdates];
+//    [self.tableView endUpdates];
 }
 
 - (void)reset {

@@ -18,4 +18,7 @@
     self.textLabel.text = self.formSection.title;
 }
 
+- (void)updateWithViewModel:(id)viewModel {
+}
+
 @end

@@ -23,7 +23,7 @@
 - (void)updateWithViewModel:(id)viewModel {
     ZAFormBaseCellViewModel *vm = (ZAFormBaseCellViewModel *)viewModel;
     self.textLabel.text = vm.title;
-    self.imageView.image = [UIImage imageNamed:vm.imageName];
+    self.imageView.image = vm.imageName ? [UIImage imageNamed:vm.imageName] : nil;
 }
 
 #pragma mark - auto height
