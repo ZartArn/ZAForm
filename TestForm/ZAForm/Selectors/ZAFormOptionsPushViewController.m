@@ -79,6 +79,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id option = [self.formRow.selectorOptions objectAtIndex:indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(optionsViewController:didSelectValue:)]) {
+        option = [self.delegate optionsViewController:self didSelectValue:option];
+    }
     [self _done:option];
 }
 

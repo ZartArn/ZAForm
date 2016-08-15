@@ -26,10 +26,17 @@
 //    return viewModel;
 }
 
-#pragma mark -
+#pragma mark - ZAFormOptionsViewControllerDelegate
 
 - (void)optionsViewControllerDone:(ZAFormOptionsViewController *)optionsViewController {
     [self.cell update];
+}
+
+- (id)optionsViewController:(ZAFormOptionsViewController *)optionsViewController didSelectValue:(id)value {
+    if (self.didSelectBlock) {
+        value = self.didSelectBlock(value);
+    }
+    return value;
 }
 
 @end

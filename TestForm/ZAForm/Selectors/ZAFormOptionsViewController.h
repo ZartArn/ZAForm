@@ -27,4 +27,7 @@
 
 - (void)optionsViewControllerDone:(ZAFormOptionsViewController *)optionsViewController;
 
+@optional
+- (id)optionsViewController:(ZAFormOptionsViewController *)optionsViewController didSelectValue:(id)value;
+
 @end
