@@ -24,6 +24,12 @@
 /// icon
 @property (copy, nonatomic) NSString *iconName;
 
+/// tint color
+@property (strong, nonatomic) UIColor *tintColor;
+
+/// backgroung coloe
+@property (strong, nonatomic) UIColor *bgColor;
+
 /// viewModel
 @property (strong, nonatomic) id viewModel;
 

@@ -55,6 +55,9 @@
 
 - (void)configure {
     self.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    if (!self.formRow.editable) {
+        self.textField.clearButtonMode = UITextFieldViewModeNever;
+    }
     [self update];
 
     @weakify(self);
@@ -73,7 +76,11 @@
 
 - (void)update {
     self.titleLabel.text = self.formRow.title;
-    self.textField.text = [self.formRow.valueFormatter stringForObjectValue:self.formRow.value];
+    if (self.formRow.valueFormatter) {
+        self.textField.text = [self.formRow.valueFormatter stringForObjectValue:self.formRow.value];
+    } else {
+        self.textField.text = self.formRow.value;
+    }
 }
 
 @end

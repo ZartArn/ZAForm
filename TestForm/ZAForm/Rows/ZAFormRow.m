@@ -36,8 +36,20 @@
         _title = title;
         _value = value;
         _cellClass = cellClass;
+        [self configure];
     }
     return self;
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        [self configure];
+    }
+    return self;
+}
+
+- (void)configure {
+    _editable = YES;
 }
 
 #pragma mark - lazy
@@ -71,6 +83,7 @@
         _cell.formRow = self;
         [_cell configure];
         [self configureCell:_cell];
+        _cell.userInteractionEnabled = self.editable;
     }
     return _cell;
 }

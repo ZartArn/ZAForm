@@ -12,6 +12,7 @@
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormAmountCell.h"
 #import "ZAFormWithViewModelCell.h"
+#import "ZAFormBooleanCell.h"
 //#import "ZAFormCustomCell.h"
 #import "ZAFormOptionsModalViewController.h"
 #import "ZAFormOptionsViewController.h"

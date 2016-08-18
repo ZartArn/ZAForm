@@ -26,6 +26,9 @@
 /// value
 @property (strong, nonatomic) id value;
 
+/// editable
+@property (nonatomic) BOOL editable;
+
 /// viewModel
 @property (strong, nonatomic) id viewModel;
 

@@ -14,6 +14,9 @@
 
 - (void)configure {
     self.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    if (!self.formRow.editable) {
+        self.textField.clearButtonMode = UITextFieldViewModeNever;
+    }
     [self update];
     
     RAC(self.formRow, value) = [RACObserve(self.textField, text)
