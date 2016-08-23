@@ -55,4 +55,8 @@
 /// cell reload
 - (void)updateCell;
 
+/// for override
+- (void)configureRow;
+
+
 @end

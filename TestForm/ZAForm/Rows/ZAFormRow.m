@@ -36,19 +36,19 @@
         _title = title;
         _value = value;
         _cellClass = cellClass;
-        [self configure];
+        [self configureRow];
     }
     return self;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self configure];
+        [self configureRow];
     }
     return self;
 }
 
-- (void)configure {
+- (void)configureRow {
     _editable = YES;
 }
 

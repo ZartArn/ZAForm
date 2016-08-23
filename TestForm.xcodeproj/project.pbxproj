@@ -12,23 +12,31 @@
 		B50A7A661D37BD2500788568 /* AccNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B50A7A651D37BD2500788568 /* AccNumberFormatter.m */; };
 		B50A7A691D37C33F00788568 /* ZAFormSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B50A7A681D37C33F00788568 /* ZAFormSection.m */; };
 		B50B79C01D311DEB004CCD12 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79BF1D311DEB004CCD12 /* TestObject.m */; };
-		B50B79C31D31237E004CCD12 /* ZAFormRowAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79C21D31237E004CCD12 /* ZAFormRowAmount.m */; };
-		B50B79C61D3124CE004CCD12 /* ZAFormTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79C51D3124CE004CCD12 /* ZAFormTextFieldCell.m */; };
-		B50B79C91D312502004CCD12 /* ZAFormAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79C81D312502004CCD12 /* ZAFormAmountCell.m */; };
-		B50B79CF1D3139A6004CCD12 /* ZAFormRowWithViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79CE1D3139A6004CCD12 /* ZAFormRowWithViewModel.m */; };
-		B50B79D51D31A24C004CCD12 /* ZAFormRowSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79D41D31A24C004CCD12 /* ZAFormRowSelector.m */; };
-		B50B79D81D31ADD1004CCD12 /* ZAFormOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79D71D31ADD1004CCD12 /* ZAFormOptionsViewController.m */; };
-		B50B79DB1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79DA1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m */; };
-		B50B79DE1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50B79DD1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m */; };
+		B54B6A411D6B32CB0048D585 /* ZAFormRow.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A221D6B32CB0048D585 /* ZAFormRow.m */; };
+		B54B6A421D6B32CB0048D585 /* ZAFormRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A241D6B32CB0048D585 /* ZAFormRowAction.m */; };
+		B54B6A431D6B32CB0048D585 /* ZAFormRowAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A261D6B32CB0048D585 /* ZAFormRowAmount.m */; };
+		B54B6A441D6B32CB0048D585 /* ZAFormRowSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A281D6B32CB0048D585 /* ZAFormRowSelector.m */; };
+		B54B6A451D6B32CB0048D585 /* ZAFormRowTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A2A1D6B32CB0048D585 /* ZAFormRowTextField.m */; };
+		B54B6A461D6B32CB0048D585 /* ZAFormRowWithViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A2C1D6B32CB0048D585 /* ZAFormRowWithViewModel.m */; };
+		B54B6A471D6B32CB0048D585 /* ZAFormAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A2F1D6B32CB0048D585 /* ZAFormAmountCell.m */; };
+		B54B6A481D6B32CB0048D585 /* ZAFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A311D6B32CB0048D585 /* ZAFormBaseCell.m */; };
+		B54B6A491D6B32CB0048D585 /* ZAFormBaseSectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A331D6B32CB0048D585 /* ZAFormBaseSectionCell.m */; };
+		B54B6A4A1D6B32CB0048D585 /* ZAFormBooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A351D6B32CB0048D585 /* ZAFormBooleanCell.m */; };
+		B54B6A4B1D6B32CB0048D585 /* ZAFormTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A371D6B32CB0048D585 /* ZAFormTextFieldCell.m */; };
+		B54B6A4C1D6B32CB0048D585 /* ZAFormWithViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A391D6B32CB0048D585 /* ZAFormWithViewModelCell.m */; };
+		B54B6A4D1D6B32CB0048D585 /* ZAFormOptionsModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A3C1D6B32CB0048D585 /* ZAFormOptionsModalViewController.m */; };
+		B54B6A4E1D6B32CB0048D585 /* ZAFormOptionsPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A3E1D6B32CB0048D585 /* ZAFormOptionsPushViewController.m */; };
+		B54B6A4F1D6B32CB0048D585 /* ZAFormOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A401D6B32CB0048D585 /* ZAFormOptionsViewController.m */; };
+		B54B6A551D6B384F0048D585 /* ZAFormMaskFieldLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A541D6B384F0048D585 /* ZAFormMaskFieldLogic.m */; };
+		B54B6A581D6B386B0048D585 /* ZAFormCardNumberLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A571D6B386B0048D585 /* ZAFormCardNumberLogic.m */; };
+		B54B6A5B1D6B38840048D585 /* ZAFormCardExpireLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = B54B6A5A1D6B38840048D585 /* ZAFormCardExpireLogic.m */; };
 		B5BEC8551D2E5EC100DF7920 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC8541D2E5EC100DF7920 /* main.m */; };
 		B5BEC8581D2E5EC100DF7920 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC8571D2E5EC100DF7920 /* AppDelegate.m */; };
 		B5BEC85B1D2E5EC100DF7920 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC85A1D2E5EC100DF7920 /* ViewController.m */; };
 		B5BEC85E1D2E5EC100DF7920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BEC85C1D2E5EC100DF7920 /* Main.storyboard */; };
 		B5BEC8601D2E5EC100DF7920 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5BEC85F1D2E5EC100DF7920 /* Assets.xcassets */; };
 		B5BEC8631D2E5EC100DF7920 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5BEC8611D2E5EC100DF7920 /* LaunchScreen.storyboard */; };
-		B5BEC86F1D2E5EFA00DF7920 /* ZAFormRow.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC86C1D2E5EFA00DF7920 /* ZAFormRow.m */; };
 		B5BEC8701D2E5EFA00DF7920 /* ZAFormTableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC86E1D2E5EFA00DF7920 /* ZAFormTableManager.m */; };
-		B5BEC8731D2E5FD300DF7920 /* ZAFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BEC8721D2E5FD300DF7920 /* ZAFormBaseCell.m */; };
 		B5FAE8231D38E3EB008E3A02 /* MoneyNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAE8221D38E3EB008E3A02 /* MoneyNumberFormatter.m */; };
 /* End PBXBuildFile section */
 
@@ -42,22 +50,45 @@
 		B50A7A681D37C33F00788568 /* ZAFormSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormSection.m; sourceTree = "<group>"; };
 		B50B79BE1D311DEB004CCD12 /* TestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
 		B50B79BF1D311DEB004CCD12 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
-		B50B79C11D31237E004CCD12 /* ZAFormRowAmount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormRowAmount.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B50B79C21D31237E004CCD12 /* ZAFormRowAmount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormRowAmount.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B50B79C41D3124CE004CCD12 /* ZAFormTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormTextFieldCell.h; sourceTree = "<group>"; };
-		B50B79C51D3124CE004CCD12 /* ZAFormTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormTextFieldCell.m; sourceTree = "<group>"; };
-		B50B79C71D312502004CCD12 /* ZAFormAmountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormAmountCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B50B79C81D312502004CCD12 /* ZAFormAmountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormAmountCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B50B79CD1D3139A6004CCD12 /* ZAFormRowWithViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowWithViewModel.h; sourceTree = "<group>"; };
-		B50B79CE1D3139A6004CCD12 /* ZAFormRowWithViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowWithViewModel.m; sourceTree = "<group>"; };
-		B50B79D31D31A24C004CCD12 /* ZAFormRowSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowSelector.h; sourceTree = "<group>"; };
-		B50B79D41D31A24C004CCD12 /* ZAFormRowSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowSelector.m; sourceTree = "<group>"; };
-		B50B79D61D31ADD1004CCD12 /* ZAFormOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormOptionsViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B50B79D71D31ADD1004CCD12 /* ZAFormOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormOptionsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B50B79D91D31AE74004CCD12 /* ZAFormOptionsModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormOptionsModalViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B50B79DA1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormOptionsModalViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		B50B79DC1D31B4AF004CCD12 /* ZAFormWithViewModelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormWithViewModelCell.h; sourceTree = "<group>"; };
-		B50B79DD1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormWithViewModelCell.m; sourceTree = "<group>"; };
+		B54B6A211D6B32CB0048D585 /* ZAFormRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRow.h; sourceTree = "<group>"; };
+		B54B6A221D6B32CB0048D585 /* ZAFormRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRow.m; sourceTree = "<group>"; };
+		B54B6A231D6B32CB0048D585 /* ZAFormRowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowAction.h; sourceTree = "<group>"; };
+		B54B6A241D6B32CB0048D585 /* ZAFormRowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowAction.m; sourceTree = "<group>"; };
+		B54B6A251D6B32CB0048D585 /* ZAFormRowAmount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowAmount.h; sourceTree = "<group>"; };
+		B54B6A261D6B32CB0048D585 /* ZAFormRowAmount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowAmount.m; sourceTree = "<group>"; };
+		B54B6A271D6B32CB0048D585 /* ZAFormRowSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowSelector.h; sourceTree = "<group>"; };
+		B54B6A281D6B32CB0048D585 /* ZAFormRowSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowSelector.m; sourceTree = "<group>"; };
+		B54B6A291D6B32CB0048D585 /* ZAFormRowTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowTextField.h; sourceTree = "<group>"; };
+		B54B6A2A1D6B32CB0048D585 /* ZAFormRowTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowTextField.m; sourceTree = "<group>"; };
+		B54B6A2B1D6B32CB0048D585 /* ZAFormRowWithViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowWithViewModel.h; sourceTree = "<group>"; };
+		B54B6A2C1D6B32CB0048D585 /* ZAFormRowWithViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRowWithViewModel.m; sourceTree = "<group>"; };
+		B54B6A2E1D6B32CB0048D585 /* ZAFormAmountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormAmountCell.h; sourceTree = "<group>"; };
+		B54B6A2F1D6B32CB0048D585 /* ZAFormAmountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormAmountCell.m; sourceTree = "<group>"; };
+		B54B6A301D6B32CB0048D585 /* ZAFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormBaseCell.h; sourceTree = "<group>"; };
+		B54B6A311D6B32CB0048D585 /* ZAFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormBaseCell.m; sourceTree = "<group>"; };
+		B54B6A321D6B32CB0048D585 /* ZAFormBaseSectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormBaseSectionCell.h; sourceTree = "<group>"; };
+		B54B6A331D6B32CB0048D585 /* ZAFormBaseSectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormBaseSectionCell.m; sourceTree = "<group>"; };
+		B54B6A341D6B32CB0048D585 /* ZAFormBooleanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormBooleanCell.h; sourceTree = "<group>"; };
+		B54B6A351D6B32CB0048D585 /* ZAFormBooleanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormBooleanCell.m; sourceTree = "<group>"; };
+		B54B6A361D6B32CB0048D585 /* ZAFormTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormTextFieldCell.h; sourceTree = "<group>"; };
+		B54B6A371D6B32CB0048D585 /* ZAFormTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormTextFieldCell.m; sourceTree = "<group>"; };
+		B54B6A381D6B32CB0048D585 /* ZAFormWithViewModelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormWithViewModelCell.h; sourceTree = "<group>"; };
+		B54B6A391D6B32CB0048D585 /* ZAFormWithViewModelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormWithViewModelCell.m; sourceTree = "<group>"; };
+		B54B6A3B1D6B32CB0048D585 /* ZAFormOptionsModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormOptionsModalViewController.h; sourceTree = "<group>"; };
+		B54B6A3C1D6B32CB0048D585 /* ZAFormOptionsModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormOptionsModalViewController.m; sourceTree = "<group>"; };
+		B54B6A3D1D6B32CB0048D585 /* ZAFormOptionsPushViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormOptionsPushViewController.h; sourceTree = "<group>"; };
+		B54B6A3E1D6B32CB0048D585 /* ZAFormOptionsPushViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormOptionsPushViewController.m; sourceTree = "<group>"; };
+		B54B6A3F1D6B32CB0048D585 /* ZAFormOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormOptionsViewController.h; sourceTree = "<group>"; };
+		B54B6A401D6B32CB0048D585 /* ZAFormOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormOptionsViewController.m; sourceTree = "<group>"; };
+		B54B6A501D6B33CE0048D585 /* ZAFormTextFieldLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZAFormTextFieldLogic.h; path = Logic/ZAFormTextFieldLogic.h; sourceTree = "<group>"; };
+		B54B6A511D6B34AB0048D585 /* ZAForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAForm.h; sourceTree = "<group>"; };
+		B54B6A531D6B384F0048D585 /* ZAFormMaskFieldLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZAFormMaskFieldLogic.h; path = Logic/ZAFormMaskFieldLogic.h; sourceTree = "<group>"; };
+		B54B6A541D6B384F0048D585 /* ZAFormMaskFieldLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZAFormMaskFieldLogic.m; path = Logic/ZAFormMaskFieldLogic.m; sourceTree = "<group>"; };
+		B54B6A561D6B386B0048D585 /* ZAFormCardNumberLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZAFormCardNumberLogic.h; path = Logic/ZAFormCardNumberLogic.h; sourceTree = "<group>"; };
+		B54B6A571D6B386B0048D585 /* ZAFormCardNumberLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZAFormCardNumberLogic.m; path = Logic/ZAFormCardNumberLogic.m; sourceTree = "<group>"; };
+		B54B6A591D6B38840048D585 /* ZAFormCardExpireLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZAFormCardExpireLogic.h; path = Logic/ZAFormCardExpireLogic.h; sourceTree = "<group>"; };
+		B54B6A5A1D6B38840048D585 /* ZAFormCardExpireLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZAFormCardExpireLogic.m; path = Logic/ZAFormCardExpireLogic.m; sourceTree = "<group>"; };
+		B54B6A5D1D6B48F60048D585 /* ZAFormValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormValidator.h; sourceTree = "<group>"; };
 		B5BEC8501D2E5EC100DF7920 /* TestForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BEC8541D2E5EC100DF7920 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B5BEC8561D2E5EC100DF7920 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,12 +99,8 @@
 		B5BEC85F1D2E5EC100DF7920 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5BEC8621D2E5EC100DF7920 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5BEC8641D2E5EC100DF7920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5BEC86B1D2E5EFA00DF7920 /* ZAFormRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRow.h; sourceTree = "<group>"; };
-		B5BEC86C1D2E5EFA00DF7920 /* ZAFormRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRow.m; sourceTree = "<group>"; };
 		B5BEC86D1D2E5EFA00DF7920 /* ZAFormTableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormTableManager.h; sourceTree = "<group>"; };
 		B5BEC86E1D2E5EFA00DF7920 /* ZAFormTableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormTableManager.m; sourceTree = "<group>"; };
-		B5BEC8711D2E5FD300DF7920 /* ZAFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ZAFormBaseCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B5BEC8721D2E5FD300DF7920 /* ZAFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ZAFormBaseCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B5FAE8211D38E3EB008E3A02 /* MoneyNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyNumberFormatter.h; sourceTree = "<group>"; };
 		B5FAE8221D38E3EB008E3A02 /* MoneyNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyNumberFormatter.m; sourceTree = "<group>"; };
 		C2D77B3CE1F2D81AF50B0EDF /* Pods-TestForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestForm.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestForm/Pods-TestForm.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +134,79 @@
 				C37845DADEA91F259C137D6E /* libPods-TestForm.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B54B6A201D6B32CB0048D585 /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				B54B6A211D6B32CB0048D585 /* ZAFormRow.h */,
+				B54B6A221D6B32CB0048D585 /* ZAFormRow.m */,
+				B54B6A231D6B32CB0048D585 /* ZAFormRowAction.h */,
+				B54B6A241D6B32CB0048D585 /* ZAFormRowAction.m */,
+				B54B6A251D6B32CB0048D585 /* ZAFormRowAmount.h */,
+				B54B6A261D6B32CB0048D585 /* ZAFormRowAmount.m */,
+				B54B6A271D6B32CB0048D585 /* ZAFormRowSelector.h */,
+				B54B6A281D6B32CB0048D585 /* ZAFormRowSelector.m */,
+				B54B6A291D6B32CB0048D585 /* ZAFormRowTextField.h */,
+				B54B6A2A1D6B32CB0048D585 /* ZAFormRowTextField.m */,
+				B54B6A2B1D6B32CB0048D585 /* ZAFormRowWithViewModel.h */,
+				B54B6A2C1D6B32CB0048D585 /* ZAFormRowWithViewModel.m */,
+			);
+			path = Rows;
+			sourceTree = "<group>";
+		};
+		B54B6A2D1D6B32CB0048D585 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B54B6A2E1D6B32CB0048D585 /* ZAFormAmountCell.h */,
+				B54B6A2F1D6B32CB0048D585 /* ZAFormAmountCell.m */,
+				B54B6A301D6B32CB0048D585 /* ZAFormBaseCell.h */,
+				B54B6A311D6B32CB0048D585 /* ZAFormBaseCell.m */,
+				B54B6A321D6B32CB0048D585 /* ZAFormBaseSectionCell.h */,
+				B54B6A331D6B32CB0048D585 /* ZAFormBaseSectionCell.m */,
+				B54B6A341D6B32CB0048D585 /* ZAFormBooleanCell.h */,
+				B54B6A351D6B32CB0048D585 /* ZAFormBooleanCell.m */,
+				B54B6A361D6B32CB0048D585 /* ZAFormTextFieldCell.h */,
+				B54B6A371D6B32CB0048D585 /* ZAFormTextFieldCell.m */,
+				B54B6A381D6B32CB0048D585 /* ZAFormWithViewModelCell.h */,
+				B54B6A391D6B32CB0048D585 /* ZAFormWithViewModelCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		B54B6A3A1D6B32CB0048D585 /* Selectors */ = {
+			isa = PBXGroup;
+			children = (
+				B54B6A3B1D6B32CB0048D585 /* ZAFormOptionsModalViewController.h */,
+				B54B6A3C1D6B32CB0048D585 /* ZAFormOptionsModalViewController.m */,
+				B54B6A3D1D6B32CB0048D585 /* ZAFormOptionsPushViewController.h */,
+				B54B6A3E1D6B32CB0048D585 /* ZAFormOptionsPushViewController.m */,
+				B54B6A3F1D6B32CB0048D585 /* ZAFormOptionsViewController.h */,
+				B54B6A401D6B32CB0048D585 /* ZAFormOptionsViewController.m */,
+			);
+			path = Selectors;
+			sourceTree = "<group>";
+		};
+		B54B6A521D6B37990048D585 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				B54B6A501D6B33CE0048D585 /* ZAFormTextFieldLogic.h */,
+				B54B6A531D6B384F0048D585 /* ZAFormMaskFieldLogic.h */,
+				B54B6A541D6B384F0048D585 /* ZAFormMaskFieldLogic.m */,
+				B54B6A561D6B386B0048D585 /* ZAFormCardNumberLogic.h */,
+				B54B6A571D6B386B0048D585 /* ZAFormCardNumberLogic.m */,
+				B54B6A591D6B38840048D585 /* ZAFormCardExpireLogic.h */,
+				B54B6A5A1D6B38840048D585 /* ZAFormCardExpireLogic.m */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		B54B6A5C1D6B48C90048D585 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				B54B6A5D1D6B48F60048D585 /* ZAFormValidator.h */,
+			);
+			path = Validators;
 			sourceTree = "<group>";
 		};
 		B5BEC8471D2E5EC100DF7920 = {
@@ -163,30 +263,16 @@
 		B5BEC86A1D2E5EFA00DF7920 /* ZAForm */ = {
 			isa = PBXGroup;
 			children = (
+				B54B6A5C1D6B48C90048D585 /* Validators */,
+				B54B6A521D6B37990048D585 /* Logic */,
+				B54B6A511D6B34AB0048D585 /* ZAForm.h */,
+				B54B6A201D6B32CB0048D585 /* Rows */,
+				B54B6A2D1D6B32CB0048D585 /* Cells */,
+				B54B6A3A1D6B32CB0048D585 /* Selectors */,
 				B5BEC86D1D2E5EFA00DF7920 /* ZAFormTableManager.h */,
 				B5BEC86E1D2E5EFA00DF7920 /* ZAFormTableManager.m */,
 				B50A7A671D37C33F00788568 /* ZAFormSection.h */,
 				B50A7A681D37C33F00788568 /* ZAFormSection.m */,
-				B5BEC86B1D2E5EFA00DF7920 /* ZAFormRow.h */,
-				B5BEC86C1D2E5EFA00DF7920 /* ZAFormRow.m */,
-				B50B79C11D31237E004CCD12 /* ZAFormRowAmount.h */,
-				B50B79C21D31237E004CCD12 /* ZAFormRowAmount.m */,
-				B50B79D31D31A24C004CCD12 /* ZAFormRowSelector.h */,
-				B50B79D41D31A24C004CCD12 /* ZAFormRowSelector.m */,
-				B50B79CD1D3139A6004CCD12 /* ZAFormRowWithViewModel.h */,
-				B50B79CE1D3139A6004CCD12 /* ZAFormRowWithViewModel.m */,
-				B5BEC8711D2E5FD300DF7920 /* ZAFormBaseCell.h */,
-				B5BEC8721D2E5FD300DF7920 /* ZAFormBaseCell.m */,
-				B50B79C41D3124CE004CCD12 /* ZAFormTextFieldCell.h */,
-				B50B79C51D3124CE004CCD12 /* ZAFormTextFieldCell.m */,
-				B50B79C71D312502004CCD12 /* ZAFormAmountCell.h */,
-				B50B79C81D312502004CCD12 /* ZAFormAmountCell.m */,
-				B50B79DC1D31B4AF004CCD12 /* ZAFormWithViewModelCell.h */,
-				B50B79DD1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m */,
-				B50B79D61D31ADD1004CCD12 /* ZAFormOptionsViewController.h */,
-				B50B79D71D31ADD1004CCD12 /* ZAFormOptionsViewController.m */,
-				B50B79D91D31AE74004CCD12 /* ZAFormOptionsModalViewController.h */,
-				B50B79DA1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m */,
 			);
 			name = ZAForm;
 			path = TestForm/ZAForm;
@@ -313,24 +399,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B54B6A471D6B32CB0048D585 /* ZAFormAmountCell.m in Sources */,
+				B54B6A551D6B384F0048D585 /* ZAFormMaskFieldLogic.m in Sources */,
 				B5BEC8701D2E5EFA00DF7920 /* ZAFormTableManager.m in Sources */,
-				B50B79C31D31237E004CCD12 /* ZAFormRowAmount.m in Sources */,
-				B50B79CF1D3139A6004CCD12 /* ZAFormRowWithViewModel.m in Sources */,
-				B50B79D81D31ADD1004CCD12 /* ZAFormOptionsViewController.m in Sources */,
-				B50B79DB1D31AE74004CCD12 /* ZAFormOptionsModalViewController.m in Sources */,
-				B5BEC8731D2E5FD300DF7920 /* ZAFormBaseCell.m in Sources */,
-				B50B79DE1D31B4AF004CCD12 /* ZAFormWithViewModelCell.m in Sources */,
+				B54B6A4C1D6B32CB0048D585 /* ZAFormWithViewModelCell.m in Sources */,
 				B5BEC85B1D2E5EC100DF7920 /* ViewController.m in Sources */,
-				B5BEC86F1D2E5EFA00DF7920 /* ZAFormRow.m in Sources */,
+				B54B6A4A1D6B32CB0048D585 /* ZAFormBooleanCell.m in Sources */,
+				B54B6A461D6B32CB0048D585 /* ZAFormRowWithViewModel.m in Sources */,
 				B5BEC8581D2E5EC100DF7920 /* AppDelegate.m in Sources */,
+				B54B6A451D6B32CB0048D585 /* ZAFormRowTextField.m in Sources */,
+				B54B6A441D6B32CB0048D585 /* ZAFormRowSelector.m in Sources */,
+				B54B6A4B1D6B32CB0048D585 /* ZAFormTextFieldCell.m in Sources */,
+				B54B6A4E1D6B32CB0048D585 /* ZAFormOptionsPushViewController.m in Sources */,
+				B54B6A491D6B32CB0048D585 /* ZAFormBaseSectionCell.m in Sources */,
+				B54B6A411D6B32CB0048D585 /* ZAFormRow.m in Sources */,
 				B5FAE8231D38E3EB008E3A02 /* MoneyNumberFormatter.m in Sources */,
+				B54B6A421D6B32CB0048D585 /* ZAFormRowAction.m in Sources */,
 				B50B79C01D311DEB004CCD12 /* TestObject.m in Sources */,
+				B54B6A431D6B32CB0048D585 /* ZAFormRowAmount.m in Sources */,
 				B50A7A631D37A8BA00788568 /* InfoCell.m in Sources */,
-				B50B79D51D31A24C004CCD12 /* ZAFormRowSelector.m in Sources */,
-				B50B79C91D312502004CCD12 /* ZAFormAmountCell.m in Sources */,
+				B54B6A4F1D6B32CB0048D585 /* ZAFormOptionsViewController.m in Sources */,
+				B54B6A581D6B386B0048D585 /* ZAFormCardNumberLogic.m in Sources */,
 				B50A7A691D37C33F00788568 /* ZAFormSection.m in Sources */,
-				B50B79C61D3124CE004CCD12 /* ZAFormTextFieldCell.m in Sources */,
+				B54B6A5B1D6B38840048D585 /* ZAFormCardExpireLogic.m in Sources */,
 				B50A7A661D37BD2500788568 /* AccNumberFormatter.m in Sources */,
+				B54B6A481D6B32CB0048D585 /* ZAFormBaseCell.m in Sources */,
+				B54B6A4D1D6B32CB0048D585 /* ZAFormOptionsModalViewController.m in Sources */,
 				B5BEC8551D2E5EC100DF7920 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
