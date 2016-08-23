@@ -62,6 +62,15 @@
     [self update];
 
     @weakify(self);
+    
+    RACChannelTerminal *t1 = self.textField.rac_newTextChannel;
+    RACChannelTerminal *t2 = RACChannelTo(self.formRow, value);
+
+//    [t1 subscribe:t2];
+//    [t2 subscribe:t1];
+    
+//    RACChannelTo(self.formRow, value) = self.textField.rac_newTextChannel;
+    
     RAC(self.formRow, value) = [RACObserve(self.textField, text)
                                 map:^id(NSString *text) {
                                     @strongify(self);
