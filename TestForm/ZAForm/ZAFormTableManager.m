@@ -13,6 +13,15 @@
 #import "ZAFormBaseCell.h"
 #import "ZAFormBaseSectionCell.h"
 #import "ZAFormTextFieldCell.h"
+#import <ReactiveCocoa.h>
+
+@interface ZAFormTableManager()
+
+@property (strong, nonatomic) NSArray *allRows;
+@property (strong, nonatomic) UIBarButtonItem *prevBBtn;
+@property (strong, nonatomic) UIBarButtonItem *nextBBtn;
+
+@end
 
 @implementation ZAFormTableManager
 
@@ -29,6 +38,8 @@
     self.sections = [NSMutableArray array];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    [self createAccessoryView];
 }
 
 #pragma mark -
@@ -40,6 +51,7 @@
 }
 
 - (void)addSection:(ZAFormSection *)sectionItem {
+    sectionItem.form = self;
     [self.sections addObject:sectionItem];
 }
 
@@ -184,6 +196,10 @@
 
 #pragma mark -
 
+- (void)reloadForm {
+    [self.tableView reloadData];
+}
+
 - (void)upgradeRow:(ZAFormRow *)row {
 //    [self.tableView beginUpdates];
     [row updateCell];
@@ -193,6 +209,188 @@
 - (void)reset {
     [self.sections removeAllObjects];
     [self.tableView reloadData];
+}
+
+#pragma mark -
+
+- (void)createAccessoryView {
+    UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:(CGRect){0.f, 0.f, 320.f, 44.f}];
+
+    UIBarButtonItem *bbPrev = [[UIBarButtonItem alloc] initWithTitle:@"Prev" style:UIBarButtonItemStyleDone target:self action:@selector(_prevInput:)];
+
+    UIBarButtonItem *bbNext = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(_nextInput:)];
+    
+    UIBarButtonItem *bbSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    toolBar.items = @[bbPrev, bbSpace, bbNext];
+    self.prevBBtn = bbPrev;
+    self.nextBBtn = bbNext;
+    
+    self.accessoryView = toolBar;
+}
+
+- (void)scrollToRowIfNeeded:(ZAFormRow *)row {
+    NSIndexPath *indexPath = [self pathForRow:row];
+    NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+    NSSet *visibleSet = [NSSet setWithArray:visiblePaths];
+    
+    if (![visibleSet containsObject:indexPath]) {
+//        [self.tableView rectForRowAtIndexPath:indexPath];
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [row becomeFirstResponder];
+        });
+    } else {
+        [row becomeFirstResponder];
+    }
+}
+
+- (void)_prevInput:(id)sender {
+    
+    ZAFormRow *currentRow = [self findCurrentResponder];
+    if (!currentRow) {
+        return;
+    }
+    
+    
+    NSInteger currentRowIdx = [self.allRows indexOfObject:currentRow];
+    if (currentRowIdx == NSNotFound) {
+        return;
+    }
+    
+    if (self.allRows.count == 0) {
+        [currentRow resignFirstResponder];
+        return;
+    }
+    
+    NSInteger prevRowIdx = NSNotFound;
+    for (NSInteger i = currentRowIdx - 1; i >= 0; i--) {
+        ZAFormRow *prevRow = self.allRows[i];
+        if ([prevRow canBeFirstResponder]) {
+            prevRowIdx = i;
+            break;
+        }
+    }
+    
+    if (prevRowIdx == NSNotFound) {
+        [currentRow resignFirstResponder];
+        return;
+    }
+    
+    ZAFormRow *nextRow = self.allRows[prevRowIdx];
+    [self scrollToRowIfNeeded:nextRow];
+//    [nextRow becomeFirstResponder];
+}
+
+- (void)_nextInput:(id)sender {
+    
+    ZAFormRow *currentRow = [self findCurrentResponder];
+    if (!currentRow) {
+        return;
+    }
+    
+    NSInteger currentRowIdx = [self.allRows indexOfObject:currentRow];
+    if (currentRowIdx == NSNotFound) {
+        return;
+    }
+    
+    if (self.allRows.count == 0) {
+        [currentRow resignFirstResponder];
+        return;
+    }
+    
+    NSInteger nextRowIdx = NSNotFound;
+    for (NSInteger i = currentRowIdx + 1; i < self.allRows.count; i++) {
+        ZAFormRow *nextRow = self.allRows[i];
+        if ([nextRow canBeFirstResponder]) {
+            nextRowIdx = i;
+            break;
+        }
+    }
+    
+    if (nextRowIdx == NSNotFound) {
+        [currentRow resignFirstResponder];
+        return;
+    }
+    
+    ZAFormRow *nextRow = self.allRows[nextRowIdx];
+    [self scrollToRowIfNeeded:nextRow];
+//    [nextRow becomeFirstResponder];
+}
+
+- (ZAFormRow *)findCurrentResponder {
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"isFirstResponder = %@", @YES];
+    ZAFormRow *row = [self.allRows filteredArrayUsingPredicate:p].firstObject;
+    return row;
+}
+
+- (NSIndexPath *)pathForRow:(ZAFormRow *)row {
+    __block NSIndexPath *indexPath = nil;
+    [self.sections enumerateObjectsUsingBlock:^(ZAFormSection *section, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger jdx = NSNotFound;
+        jdx = [section.rowItems indexOfObject:row];
+        if (jdx != NSNotFound) {
+            indexPath = [NSIndexPath indexPathForRow:jdx inSection:idx];
+            *stop = YES;
+        }
+    }];
+    return indexPath;
+}
+
+// do next
+- (void)nextInput {
+    return [self _nextInput:nil];
+}
+
+// check
+- (BOOL)checkPreviousResponderFor:(ZAFormRow *)row {
+    NSInteger currentRowIdx = [self.allRows indexOfObject:row];
+    if (currentRowIdx == NSNotFound) {
+        return NO;
+    }
+    NSInteger nextRowIdx = NSNotFound;
+    for (NSInteger i = currentRowIdx - 1; i >= 0; i--) {
+        ZAFormRow *nextRow = self.allRows[i];
+        if ([nextRow canBeFirstResponder]) {
+            nextRowIdx = i;
+            break;
+        }
+    }
+    return (nextRowIdx != NSNotFound);
+}
+
+- (BOOL)checkNextResponderFor:(ZAFormRow *)row {
+    NSInteger currentRowIdx = [self.allRows indexOfObject:row];
+    if (currentRowIdx == NSNotFound) {
+        return NO;
+    }
+    NSInteger nextRowIdx = NSNotFound;
+    for (NSInteger i = currentRowIdx + 1; i < self.allRows.count; i++) {
+        ZAFormRow *nextRow = self.allRows[i];
+        if ([nextRow canBeFirstResponder]) {
+            nextRowIdx = i;
+            break;
+        }
+    }
+    return (nextRowIdx != NSNotFound);
+}
+
+// update accessory view
+- (void)updateAccessoryView:(ZAFormRow *)row {
+    self.prevBBtn.enabled = [self checkPreviousResponderFor:row];
+    self.nextBBtn.enabled = [self checkNextResponderFor:row];
+}
+
+#pragma mark - lazy
+
+- (NSArray *)allRows {
+    if (!_allRows) {
+        _allRows = [self.sections.rac_sequence
+                            flattenMap:^RACStream *(ZAFormSection *value) {
+                                return value.rowItems.rac_sequence;
+                            }].array;
+    }
+    return _allRows;
 }
 
 @end

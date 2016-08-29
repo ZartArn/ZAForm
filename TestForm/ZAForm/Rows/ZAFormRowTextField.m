@@ -9,6 +9,7 @@
 #import "ZAFormRow.h"
 #import "ZAFormRowTextField.h"
 #import "ZAFormTextFieldCell.h"
+#import "ZAFormTableManager.h"
 #import <ReactiveCocoa.h>
 
 @interface ZAFormRowTextField() <UITextFieldDelegate>
@@ -25,27 +26,50 @@
 #pragma mark - cell
 
 + (Class)defaultCellClass {
-    return [ZAFormRowTextField class];
+    return [ZAFormTextFieldCell class];
 }
 
-- (void)configureCell:(ZAFormBaseCell *)cell {
-    NSAssert(cell, @"Cell not defined");
-    NSAssert([cell isKindOfClass:[ZAFormTextFieldCell class]], @"Cell Class must be subclass of ZAFormTextFieldCell");
+- (void)configureCell:(ZAFormBaseCell *)aCell {
+    NSAssert(aCell, @"Cell not defined");
+    NSAssert([aCell isKindOfClass:[ZAFormTextFieldCell class]], @"Cell Class must be subclass of ZAFormTextFieldCell");
     
-    ZAFormTextFieldCell *ccell = (ZAFormTextFieldCell *)cell;
-    ccell.textField.delegate = self;
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)aCell;
+    cell.textField.delegate = self;
+    cell.textField.inputAccessoryView = self.form.accessoryView;
+    
     if (_placeholderValue) {
-        ccell.textField.placeholder = _placeholderValue; // [self.valueFormatter stringForObjectValue:self.placeholderValue];
+        cell.textField.placeholder = _placeholderValue; // [self.valueFormatter stringForObjectValue:self.placeholderValue];
     }
 
-//    @weakify(self);
-//    self.value = [ccell.textField.rac_textSignal
-//                                map:^id(NSString *text) {
-//                                    @strongify(self);
-//                                    id objectValue = nil;
-//                                    BOOL res = [self.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
-//                                    return (res ? objectValue : nil);
-//                                }];
+    @weakify(self);
+    RACChannelTerminal *fieldTerminal = RACChannelTo(cell.textField, text);
+    RACChannelTerminal *valueTerminal = RACChannelTo(self, value);
+
+    RACSignal *valueChangedSignal = [valueTerminal
+        map:^id(id value) {
+            NSLog(@"value changed %@", value);
+            @strongify(self);
+            if (value && self.valueFormatter) {
+                return [self.valueFormatter stringForObjectValue:value];
+            }
+            return value;
+        }];
+    [valueChangedSignal subscribe:fieldTerminal];
+    
+    RACSignal *fieldChangedSignal = [fieldTerminal
+        map:^id(NSString *text) {
+            NSLog(@"field changed %@", text);
+            @strongify(self);
+            if (self.valueFormatter) {
+                id objectValue = nil;
+                BOOL res = [self.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
+                return (res ? objectValue : nil);
+            } else {
+                return text;
+            }
+        }];
+    
+    [[fieldChangedSignal skip:1] subscribe:valueTerminal];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -78,7 +102,39 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.form nextInput];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField.inputAccessoryView) {
+        [self.form updateAccessoryView:self];
+    }
+}
+
 #pragma mark - lazy
+
+#pragma mark - responders
+
+- (BOOL)canBeFirstResponder {
+    return YES;
+}
+
+- (BOOL)isFirstResponder {
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
+    return (cell.textField.isFirstResponder);
+}
+
+- (void)becomeFirstResponder {
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
+    [cell.textField becomeFirstResponder];
+}
+
+- (void)resignFirstResponder {
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
+    [cell.textField resignFirstResponder];
+}
 
 #pragma mark - validators
 

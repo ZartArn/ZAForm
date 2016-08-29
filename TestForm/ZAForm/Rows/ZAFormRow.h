@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class ZAFormBaseCell;
+@class ZAFormTableManager, ZAFormBaseCell;
 
 @interface ZAFormRow : NSObject {
     ZAFormBaseCell *_cell;
 }
+
+@property (assign, nonatomic) ZAFormTableManager *form;
 
 /// cell
 @property (nonatomic) Class cellClass;
@@ -58,5 +60,15 @@
 /// for override
 - (void)configureRow;
 
+/// can be first responder
+- (BOOL)canBeFirstResponder;
+
+/// is first responder
+- (BOOL)isFirstResponder;
+
+/// --
+- (void)becomeFirstResponder;
+
+- (void)resignFirstResponder;
 
 @end

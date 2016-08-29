@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class ZAFormRow, ZAFormBaseSectionCell;
+@class ZAFormTableManager, ZAFormRow, ZAFormBaseSectionCell;
 
 @interface ZAFormSection : NSObject
+
+@property (assign, nonatomic) ZAFormTableManager *form;
 
 /// cell
 @property (nonatomic) Class sectionCellClass;

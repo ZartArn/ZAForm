@@ -97,4 +97,22 @@
 //    [self.cell updateWithViewModel:self.viewModel];
 }
 
+#pragma mark -
+
+- (BOOL)canBeFirstResponder {
+    return NO;
+}
+
+- (BOOL)isFirstResponder {
+    return NO;
+}
+
+- (void)becomeFirstResponder {
+    
+}
+
+- (void)resignFirstResponder {
+    
+}
+
 @end

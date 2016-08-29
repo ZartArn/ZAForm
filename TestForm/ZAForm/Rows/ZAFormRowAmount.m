@@ -8,6 +8,7 @@
 
 #import "ZAFormRowAmount.h"
 #import "ZAFormAmountCell.h"
+#import "ZAFormTableManager.h"
 
 @interface ZAFormRowAmount() <UITextFieldDelegate>
 
@@ -17,13 +18,15 @@
 
 //@synthesize cell = _cell;
 @synthesize valueFormatter = _valueFormatter;
+@synthesize placeholderValue = _placeholderValue;
+@synthesize enabledSignal = _enabledSignal;
 
 #pragma mark - cell
 
 + (Class)defaultCellClass {
     return [ZAFormAmountCell class];
 }
-
+/*
 - (void)configureCell:(ZAFormBaseCell *)cell {
     NSLog(@"%@ :: %@", _cell, cell);
     
@@ -32,16 +35,19 @@
     ZAFormAmountCell *ccell = (ZAFormAmountCell *)cell;
     
     ccell.textField.delegate = self;
-    if (_placeholderValue) {
+    if (self.placeholderValue) {
         ccell.textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
     }
 }
-
+*/
 
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self setTextPositionBeforeSuffix:textField];
+    if (textField.inputAccessoryView) {
+        [self.form updateAccessoryView:self];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(nonnull NSString *)string  {
@@ -126,7 +132,7 @@
         if (_cell) {
             UITextField *textField = [(ZAFormTextFieldCell *)_cell textField];
             textField.text = nil;
-            if (_placeholderValue) {
+            if (self.placeholderValue) {
                 textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
             }
         }

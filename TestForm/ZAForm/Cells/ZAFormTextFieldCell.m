@@ -61,19 +61,7 @@
     }
     [self update];
 
-    @weakify(self);
-    RAC(self.formRow, value) = [RACObserve(self.textField, text)
-                                map:^id(NSString *text) {
-                                    @strongify(self);
-                                    if (self.formRow.valueFormatter) {
-                                        id objectValue = nil;
-                                        BOOL res = [self.formRow.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
-                                        return (res ? objectValue : nil);
-                                    } else {
-                                        return text;
-                                    }
-                                }];
-
+    // set warning color
     if ([self.formRow isKindOfClass:[ZAFormRowTextField class]]) {
         ZAFormRowTextField *row = (ZAFormRowTextField *)self.formRow;
         RAC(self.textField, textColor) = [row.warningSignal
@@ -85,11 +73,11 @@
 
 - (void)update {
     self.titleLabel.text = self.formRow.title;
-    if (self.formRow.valueFormatter) {
-        self.textField.text = [self.formRow.valueFormatter stringForObjectValue:self.formRow.value];
-    } else {
-        self.textField.text = self.formRow.value;
-    }
+//    if (self.formRow.valueFormatter) {
+//        self.textField.text = [self.formRow.valueFormatter stringForObjectValue:self.formRow.value];
+//    } else {
+//        self.textField.text = self.formRow.value;
+//    }
 }
 
 

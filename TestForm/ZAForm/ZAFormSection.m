@@ -32,6 +32,7 @@
 }
 
 - (void)addRow:(ZAFormRow *)rowItem {
+    rowItem.form = self.form;
     [self.rowItems addObject:rowItem];
 }
 

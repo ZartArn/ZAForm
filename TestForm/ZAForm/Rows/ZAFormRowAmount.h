@@ -7,10 +7,11 @@
 //
 
 #import "ZAFormRow.h"
+#import "ZAFormRowTextField.h"
 
 @class RACSignal;
 
-@interface ZAFormRowAmount : ZAFormRow
+@interface ZAFormRowAmount : ZAFormRowTextField
 
 /// enabled signal
 @property (strong, nonatomic) RACSignal *enabledSignal;
@@ -21,7 +22,7 @@
 /// placeholder value
 @property (strong, nonatomic) id placeholderValue;
 
-/// redign first responder
+/// resign first responder
 - (void)resignFirstResponder;
 
 @end

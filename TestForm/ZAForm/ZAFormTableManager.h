@@ -19,6 +19,9 @@
 /// proxy delegate UITableViewDelegate
 @property (assign, nonatomic) id<UITableViewDelegate> proxyTableDelegate;
 
+/// accessoryView
+@property (strong, nonatomic) UIView *accessoryView;
+
 /// viewController for presenting
 @property (assign, nonatomic) UIViewController *presenterViewController;
 
@@ -39,10 +42,25 @@
 - (void)addSection:(ZAFormSection *)sectionItem;
 - (void)addSections:(NSArray *)sectionsArray;
 
+/// reload form
+- (void)reloadForm;
+
 /// reload Row Item
 - (void)upgradeRow:(ZAFormRow *)row;
 
 /// reset
 - (void)reset;
+
+/// next input
+- (void)nextInput;
+
+/// checkPreviousResponder
+- (BOOL)checkPreviousResponderFor:(ZAFormRow *)row;
+
+/// checkNextResponder
+- (BOOL)checkNextResponderFor:(ZAFormRow *)row;
+
+/// update accessoryView when new row begin editing
+- (void)updateAccessoryView:(ZAFormRow *)row;
 
 @end

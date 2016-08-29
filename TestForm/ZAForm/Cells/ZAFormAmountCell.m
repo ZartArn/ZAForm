@@ -19,22 +19,13 @@
     }
     [self update];
     
-    RAC(self.formRow, value) = [RACObserve(self.textField, text)
-        map:^id(NSString *text) {
-            NSLog(@"form %@", text);
-            id objectValue = nil;
-            BOOL res = [self.formRow.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
-            return (res ? objectValue : nil);
-        }];
-    
-    
     ZAFormRowAmount *row = (ZAFormRowAmount *)self.formRow;
     RAC(self.textField, enabled) = row.enabledSignal;
 }
 
 - (void)update {
     self.titleLabel.text = self.formRow.title;
-    self.textField.text = [self.formRow.valueFormatter stringForObjectValue:self.formRow.value];
+//    self.textField.text = [self.formRow.valueFormatter stringForObjectValue:self.formRow.value];
 }
 
 @end
