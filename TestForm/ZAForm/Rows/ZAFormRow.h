@@ -60,6 +60,9 @@
 /// for override
 - (void)configureRow;
 
+/// for override
+- (void)configureCell:(ZAFormBaseCell *)cell;
+
 /// can be first responder
 - (BOOL)canBeFirstResponder;
 
