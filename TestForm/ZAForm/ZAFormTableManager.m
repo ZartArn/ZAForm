@@ -181,6 +181,11 @@
             ZAFormOptionsViewController *vc = [(ZAFormOptionsViewController *)[rowItemSelector.optionsViewControllerClass alloc] initWithZAFormRrowSelector:rowItemSelector];
             vc.delegate = rowItemSelector;
             [rowItemSelector.presenterController.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+        
+        if (rowItemSelector.typeSelector == ZAFormTypeSelectorAlert && (rowItemSelector.selectorOptions.count > 1)) {
+            [self showAlertOptions:rowItemSelector];
         }
         
     }
@@ -211,7 +216,37 @@
     [self.tableView reloadData];
 }
 
-#pragma mark -
+#pragma mark - insert\remove
+
+- (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation {
+    NSIndexPath *indexPath = [self pathForRow:afterRow];
+    
+    [self.tableView beginUpdates];
+    ZAFormSection *section = [self.sections objectAtIndex:indexPath.section];
+    [section.rowItems insertObject:newRow atIndex:(indexPath.row + 1)];
+    
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:indexPath.section];
+    [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView endUpdates];
+}
+
+- (void)removeRow:(ZAFormRow *)oldRow animation:(BOOL)animation {
+    NSIndexPath *indexPath = [self pathForRow:oldRow];
+    if (!indexPath) {
+        return;
+    }
+    
+    [self.tableView beginUpdates];
+    ZAFormSection *section = [self.sections objectAtIndex:indexPath.section];
+    [section.rowItems removeObject:oldRow];
+    
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self.tableView endUpdates];
+}
+
+#pragma mark - Accessory View
 
 - (void)createAccessoryView {
     UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:(CGRect){0.f, 0.f, 320.f, 44.f}];
@@ -379,6 +414,62 @@
 - (void)updateAccessoryView:(ZAFormRow *)row {
     self.prevBBtn.enabled = [self checkPreviousResponderFor:row];
     self.nextBBtn.enabled = [self checkNextResponderFor:row];
+}
+
+#pragma mark - alert options
+
+- (void)showAlertOptions:(ZAFormRowSelector *)rowSelector {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    if (rowSelector.tintColor) {
+        alert.view.tintColor = rowSelector.tintColor;
+    }
+    
+    [rowSelector.selectorOptions enumerateObjectsUsingBlock:^(id option, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSString *title = nil;
+        if (rowSelector.valueFormatter) {
+            title = [rowSelector.valueFormatter stringForObjectValue:option];
+        } else if ([option isKindOfClass:[NSString class]]) {
+            title = option;
+        } else if ([option isKindOfClass:[NSNumber class]]) {
+            title = [option stringValue];
+        } else {
+            title = [@(idx) stringValue];
+        }
+        
+        UIAlertAction *rowAction = [UIAlertAction actionWithTitle:title
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              rowSelector.value = option;
+                                                              [rowSelector optionsViewControllerDone:nil];
+                                                          }];
+        [alert addAction:rowAction];
+    }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Отмена"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alert addAction:cancelAction];
+    
+    UIViewController *presenter = rowSelector.presenterController;
+    
+    UIPopoverPresentationController *popup = alert.popoverPresentationController;
+    if (popup) {
+        popup.sourceView = presenter.view;
+        popup.sourceRect = (CGRect){presenter.view.center, {0.f, 0.f}};
+        popup.permittedArrowDirections = 0;
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [presenter presentViewController:alert animated:YES completion:^{
+            if (rowSelector.tintColor) {
+                alert.view.tintColor = rowSelector.tintColor;
+            }
+        }];
+    });
 }
 
 #pragma mark - lazy

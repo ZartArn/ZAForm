@@ -47,7 +47,7 @@
 
     RACSignal *valueChangedSignal = [valueTerminal
         map:^id(id value) {
-            NSLog(@"value changed %@", value);
+//            NSLog(@"value changed %@", value);
             @strongify(self);
             if (value && self.valueFormatter) {
                 return [self.valueFormatter stringForObjectValue:value];
@@ -58,7 +58,7 @@
     
     RACSignal *fieldChangedSignal = [fieldTerminal
         map:^id(NSString *text) {
-            NSLog(@"field changed %@", text);
+//            NSLog(@"field changed %@", text);
             @strongify(self);
             if (self.valueFormatter) {
                 id objectValue = nil;

@@ -29,4 +29,6 @@ typedef NS_ENUM(NSInteger, ZAFormTypeSelector) {
 @property (assign, nonatomic) UIViewController *presenterController;
 @property (nonatomic) Class optionsViewControllerClass;
 
+@property (strong, nonatomic) UIColor *tintColor;
+
 @end

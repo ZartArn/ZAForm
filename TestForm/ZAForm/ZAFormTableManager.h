@@ -63,4 +63,10 @@
 /// update accessoryView when new row begin editing
 - (void)updateAccessoryView:(ZAFormRow *)row;
 
+/// insert row
+- (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation;
+
+/// delete row
+- (void)removeRow:(ZAFormRow *)oldRow animation:(BOOL)animation;
+
 @end
