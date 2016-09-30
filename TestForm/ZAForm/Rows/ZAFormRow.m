@@ -89,7 +89,7 @@
 }
 
 - (void)configureCell:(ZAFormBaseCell *)cell {
-    NSLog(@"%@ :: %@", _cell, cell);
+//    NSLog(@"%@ :: %@", _cell, cell);
 }
 
 - (void)updateCell {

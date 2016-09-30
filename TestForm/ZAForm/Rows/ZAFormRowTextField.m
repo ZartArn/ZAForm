@@ -12,7 +12,7 @@
 #import "ZAFormTableManager.h"
 #import <ReactiveCocoa.h>
 
-@interface ZAFormRowTextField() <UITextFieldDelegate>
+@interface ZAFormRowTextField()
 
 @end
 
@@ -35,7 +35,7 @@
     
     ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)aCell;
     cell.textField.delegate = self;
-    cell.textField.inputAccessoryView = self.form.accessoryView;
+//    cell.textField.inputAccessoryView = self.form.accessoryView;
     
     if (_placeholderValue) {
         cell.textField.placeholder = _placeholderValue; // [self.valueFormatter stringForObjectValue:self.placeholderValue];
@@ -43,6 +43,7 @@
 
     @weakify(self);
     RACChannelTerminal *fieldTerminal = RACChannelTo(cell.textField, text);
+//    RACChannelTerminal *fieldTerminal = [cell.textField rac_newTextChannel];
     RACChannelTerminal *valueTerminal = RACChannelTo(self, value);
 
     RACSignal *valueChangedSignal = [valueTerminal
@@ -70,6 +71,12 @@
         }];
     
     [[fieldChangedSignal skip:1] subscribe:valueTerminal];
+    
+    // text input traits proxy
+    if (_manualInputTraits) {
+        cell.textField.keyboardType = self.keyboardType;
+        cell.textField.returnKeyType = self.returnKeyType;
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -103,7 +110,9 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.form nextInput];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.form nextInput];
+    });
     return YES;
 }
 

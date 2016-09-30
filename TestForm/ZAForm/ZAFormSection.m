@@ -37,7 +37,10 @@
 }
 
 - (void)addRows:(NSArray *)rowsArray {
-    [self.rowItems addObjectsFromArray:rowsArray];
+//    [self.rowItems addObjectsFromArray:rowsArray];
+    for (ZAFormRow *row in rowsArray) {
+        [self addRow:row];
+    }
 }
 
 #pragma mark - cell

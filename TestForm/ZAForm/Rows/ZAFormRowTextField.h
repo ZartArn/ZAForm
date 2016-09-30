@@ -12,7 +12,7 @@
 
 @class RACSignal;
 
-@interface ZAFormRowTextField : ZAFormRow
+@interface ZAFormRowTextField : ZAFormRow <UITextFieldDelegate, UITextInputTraits>
 
 /// fix length then need show warning
 @property (strong, nonatomic) NSNumber *warningLength;
@@ -25,6 +25,9 @@
 
 /// placeholder value
 @property (strong, nonatomic) id placeholderValue;
+
+/// set manual TextInputTraits, default NO
+@property (nonatomic) BOOL manualInputTraits;
 
 /// resign first responder
 - (void)resignFirstResponder;
@@ -43,5 +46,10 @@
 
 /// launch validate process, not can add validator after(?)
 - (void)launchValidate;
+
+#pragma mark - UITextInputTraits
+
+@property (nonatomic) UIKeyboardType keyboardType;
+@property (nonatomic) UIReturnKeyType returnKeyType;
 
 @end
