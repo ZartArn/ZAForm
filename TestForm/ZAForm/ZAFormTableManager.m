@@ -155,9 +155,15 @@
     // textfield
     if ([[rowItem cellForForm] isKindOfClass:[ZAFormTextFieldCell class]]) {
         ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)[rowItem cellForForm];
-        if (![cell.textField isFirstResponder]) {
+        if (![cell.textField isFirstResponder] && [rowItem canBeFirstResponder]) {
             [cell.textField becomeFirstResponder];
         }
+        return;
+    }
+    
+    // did select block
+    if (rowItem.didSelectBlock) {
+        rowItem.didSelectBlock(rowItem, indexPath);
         return;
     }
     

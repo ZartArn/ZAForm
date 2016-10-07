@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, ZAFormTypeSelector) {
 @property (strong, nonatomic) NSArray *selectorOptions;
 @property (nonatomic) ZAFormTypeSelector typeSelector;
 
-@property (copy, nonatomic) id(^didSelectBlock)(id value);
+@property (copy, nonatomic) id(^didSelectOptionBlock)(id value);
 
 /// for ZAFormTypeSelectorModalCustomController
 @property (assign, nonatomic) UIViewController *presenterController;

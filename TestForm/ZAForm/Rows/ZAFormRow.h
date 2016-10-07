@@ -45,6 +45,9 @@
 - (instancetype)initWithTitle:(NSString *)title value:(id)value;
 - (instancetype)initWithTitle:(NSString *)title value:(id)value cellClass:(Class)cellClass;
 
+/// select cell block
+@property (copy, nonatomic) void(^didSelectBlock)(ZAFormRow *row, NSIndexPath *indexPath);
+
 /// register cell
 - (void)registerClassForCell:(Class)cellClass;
 

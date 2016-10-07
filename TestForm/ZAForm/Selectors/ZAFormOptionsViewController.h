@@ -16,7 +16,7 @@
 @interface ZAFormOptionsViewController : UIViewController
 
 @property (assign, nonatomic) id<ZAFormOptionsViewControllerDelegate> delegate;
-@property (assign, nonatomic) ZAFormRowSelector *formRow;
+@property (strong, nonatomic) ZAFormRowSelector *formRow;
 
 - (instancetype)initWithZAFormRrowSelector:(ZAFormRowSelector *)formRow;
 

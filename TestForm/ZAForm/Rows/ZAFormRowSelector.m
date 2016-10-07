@@ -33,8 +33,8 @@
 }
 
 - (id)optionsViewController:(ZAFormOptionsViewController *)optionsViewController didSelectValue:(id)value {
-    if (self.didSelectBlock) {
-        value = self.didSelectBlock(value);
+    if (self.didSelectOptionBlock) {
+        value = self.didSelectOptionBlock(value);
     }
     return value;
 }
