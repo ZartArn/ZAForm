@@ -18,7 +18,7 @@
 - (void)configure {
     
     // init
-    self.validators = [NSMutableArray array];
+//    self.validators = [NSMutableArray array];
     
     // set delegate
     self.textField.delegate = self;

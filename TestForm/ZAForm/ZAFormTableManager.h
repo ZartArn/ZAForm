@@ -48,6 +48,9 @@
 /// reload Row Item
 - (void)upgradeRow:(ZAFormRow *)row;
 
+/// lazy all rows
+- (NSArray *)allRows;
+
 /// reset
 - (void)reset;
 

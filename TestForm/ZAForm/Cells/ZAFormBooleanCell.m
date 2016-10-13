@@ -64,7 +64,7 @@
     }];
     
     [self.valueSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.contentView.mas_trailingMargin);
+        make.trailing.equalTo(self.contentView.mas_trailingMargin).offset(5.f);
         make.width.equalTo(@60);
         make.centerY.equalTo(@0);
     }];
