@@ -26,20 +26,16 @@
 + (Class)defaultCellClass {
     return [ZAFormAmountCell class];
 }
-/*
-- (void)configureCell:(ZAFormBaseCell *)cell {
-    NSLog(@"%@ :: %@", _cell, cell);
+
+- (void)configureCell:(ZAFormBaseCell *)aCell {
     
-    NSAssert(cell, @"Cell not defined");
-    NSAssert([cell isKindOfClass:[ZAFormAmountCell class]], @"Cell Class must be subclass of ZAFormAmountCell");
-    ZAFormAmountCell *ccell = (ZAFormAmountCell *)cell;
+    [super configureCell:aCell];
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)aCell;
     
-    ccell.textField.delegate = self;
-    if (self.placeholderValue) {
-        ccell.textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
+    if (_placeholderValue) {
+        cell.textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
     }
 }
-*/
 
 #pragma mark - UITextFieldDelegate
 

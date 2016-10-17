@@ -45,8 +45,11 @@
 /// reload form
 - (void)reloadForm;
 
-/// reload Row Item
+/// update Row Item
 - (void)upgradeRow:(ZAFormRow *)row;
+
+/// reload Row Item
+- (void)reloadRow:(ZAFormRow *)row;
 
 /// lazy all rows
 - (NSArray *)allRows;

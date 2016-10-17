@@ -21,6 +21,15 @@
     
     ZAFormRowAmount *row = (ZAFormRowAmount *)self.formRow;
     RAC(self.textField, enabled) = row.enabledSignal;
+
+    // set warning color
+    if ([self.formRow isKindOfClass:[ZAFormRowTextField class]]) {
+        ZAFormRowTextField *row = (ZAFormRowTextField *)self.formRow;
+        RAC(self.textField, textColor) = [row.warningSignal
+                                          map:^id(NSNumber *value) {
+                                              return value.boolValue ? [UIColor redColor] : [UIColor blackColor];
+                                          }];
+    }
 }
 
 - (void)update {

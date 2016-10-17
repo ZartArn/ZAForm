@@ -208,6 +208,7 @@
 #pragma mark -
 
 - (void)reloadForm {
+    NSLog(@"form reload");
     [self.tableView reloadData];
 }
 
@@ -215,6 +216,14 @@
 //    [self.tableView beginUpdates];
     [row updateCell];
 //    [self.tableView endUpdates];
+}
+
+- (void)reloadRow:(ZAFormRow *)row {
+    NSIndexPath *path = [self pathForRow:row];
+    [self.tableView beginUpdates];
+    [row clearCell];
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
 }
 
 - (void)reset {
@@ -225,14 +234,21 @@
 #pragma mark - insert\remove
 
 - (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation {
+    NSLog(@"form add row %@", newRow);
     NSIndexPath *indexPath = [self pathForRow:afterRow];
     
-    [self.tableView beginUpdates];
-    ZAFormSection *section = [self.sections objectAtIndex:indexPath.section];
-    [section.rowItems insertObject:newRow atIndex:(indexPath.row + 1)];
+    NSIndexPath *nextIndexPath;
+    if (indexPath) {
+        nextIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:indexPath.section];
+    } else {
+        nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
     
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:indexPath.section];
-    [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView beginUpdates];
+    ZAFormSection *section = [self.sections objectAtIndex:nextIndexPath.section];
+    [section.rowItems insertObject:newRow atIndex:(nextIndexPath.row)];
+    
+    [self.tableView insertRowsAtIndexPaths:@[nextIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     
     [self.tableView endUpdates];
 }

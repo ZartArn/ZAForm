@@ -97,6 +97,10 @@
 //    [self.cell updateWithViewModel:self.viewModel];
 }
 
+- (void)clearCell {
+    self.cell = nil;
+}
+
 #pragma mark -
 
 - (BOOL)canBeFirstResponder {
