@@ -16,6 +16,7 @@
 #import "ZAFormMaskFieldLogic.h"
 #import "ZAFormCardNumberLogic.h"
 #import "ZAFormCardExpireLogic.h"
+#import "ZAFormPhoneLogic.h"
 #import "ZAFormAmountCell.h"
 #import "ZAFormWithViewModelCell.h"
 #import "ZAFormBooleanCell.h"

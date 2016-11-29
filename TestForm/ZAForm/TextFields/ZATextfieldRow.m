@@ -7,6 +7,7 @@
 //
 
 #import "ZATextfieldRow.h"
+#import "ZAFormPhoneLogic.h"
 #import <ReactiveCocoa.h>
 
 @interface ZATextfieldRow()
@@ -15,6 +16,10 @@
 
 @implementation ZATextfieldRow
 
+- (void)start {
+    [self configure];
+}
+
 - (void)configure {
     
     // init
@@ -22,6 +27,10 @@
     
     // set delegate
     self.textField.delegate = self;
+    if ([self.logicDelegate isKindOfClass:[ZAFormPhoneLogic class]] && [self.valueFormatter conformsToProtocol:@protocol(ZAFormFormatterLogicable)]) {
+        ZAFormPhoneLogic *logic = (ZAFormPhoneLogic *)self.logicDelegate;
+        logic.textFormatter = self.valueFormatter;
+    }
     
     // placeholder
     if (self.placeholdeValue) {
@@ -69,14 +78,15 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(nonnull NSString *)string  {
-    // replace string
-    NSString *newString;
     
     if (self.logicDelegate) {
-        newString = [self.logicDelegate textField:textField willChangeCharactersInRange:range replacementString:string];
-    } else {
-        newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        [self.logicDelegate textField:textField willChangeCharactersInRange:range replacementString:string];
+        return NO;
     }
+    
+    // no logic delegate
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if (self.valueFormatter) {
         //
@@ -89,6 +99,29 @@
     }
     
     return NO;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldShouldClear:) withObject:textField];
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldDidBeginEditing:) withObject:textField];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldDidEndEditing:) withObject:textField];
+    }
 }
 
 #pragma mark - validators

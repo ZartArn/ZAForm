@@ -55,4 +55,7 @@
 /// configure
 - (void)configure;
 
+/// start
+- (void)start;
+
 @end

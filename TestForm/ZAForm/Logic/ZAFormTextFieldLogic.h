@@ -11,6 +11,9 @@
 
 @protocol ZAFormTextFieldLogic <NSObject>
 
+/// formatted string and sace in field
+- (void)applyFormatTo:(UITextField *)textField forText:(NSString *)text;
+
 /// input text handler. return new string
 - (NSString *)textField:(UITextField *)textField willChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 
