@@ -33,6 +33,7 @@
 
 - (void)addRow:(ZAFormRow *)rowItem {
     rowItem.form = self.form;
+    rowItem.section = self;
     [self.rowItems addObject:rowItem];
 }
 
@@ -41,6 +42,11 @@
     for (ZAFormRow *row in rowsArray) {
         [self addRow:row];
     }
+}
+
+// override in subclass
+- (void)didSelectRow:(ZAFormRow *)row {
+    
 }
 
 #pragma mark - cell
@@ -60,5 +66,6 @@
     }
     return _sectionCell;
 }
+
 
 @end

@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class ZAFormTableManager, ZAFormBaseCell;
+@class ZAFormTableManager, ZAFormSection, ZAFormBaseCell;
 
 @interface ZAFormRow : NSObject {
     ZAFormBaseCell *_cell;
 }
 
 @property (assign, nonatomic) ZAFormTableManager *form;
+
+@property (assign, nonatomic) ZAFormSection *section;
 
 /// cell
 @property (nonatomic) Class cellClass;
@@ -65,6 +67,9 @@
 
 /// for override
 - (void)configureCell:(ZAFormBaseCell *)cell;
+
+/// on select cell
+- (void)didSelect:(NSIndexPath *)indexPath;
 
 /// clear cell
 - (void)clearCell;

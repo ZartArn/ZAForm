@@ -101,6 +101,13 @@
     self.cell = nil;
 }
 
+- (void)didSelect:(NSIndexPath *)indexPath {
+    if (self.didSelectBlock) {
+        self.didSelectBlock(self, indexPath);
+        return;
+    }
+}
+
 #pragma mark -
 
 - (BOOL)canBeFirstResponder {
@@ -111,7 +118,7 @@
     return NO;
 }
 
-- (void)becomeFirstResponder {
+- (BOOL)becomeFirstResponder {
     
 }
 

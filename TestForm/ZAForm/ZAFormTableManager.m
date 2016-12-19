@@ -8,6 +8,8 @@
 
 #import "ZAFormTableManager.h"
 #import "ZAFormSection.h"
+#import "ZAFormSectionHeader.h"
+#import "ZAFormSectionSingleSelectable.h"
 #import "ZAFormRow.h"
 #import "ZAFormRowSelector.h"
 #import "ZAFormBaseCell.h"
@@ -56,7 +58,9 @@
 }
 
 - (void)addSections:(NSArray *)sectionsArray {
-    [self.sections addObjectsFromArray:sectionsArray];
+    for (ZAFormSection *sec in sectionsArray) {
+        [self addSection:sec];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -79,8 +83,8 @@
     } else {
         [cell update];
     }
-    [cell layoutIfNeeded];
 //    [cell needsUpdateConstraints];
+    [cell layoutIfNeeded];
     
     return cell;
 }
@@ -114,6 +118,27 @@
     return 28.f;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    return (sectionItem.footer.aView ?: nil);
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    return (sectionItem.footer.title ?: nil);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    if (sectionItem.footer.aView) {
+        return sectionItem.footer.height;
+    }
+    if (sectionItem.footer.title) {
+        return (sectionItem.footer.height > 0 ?: 28.f);
+    }
+    return 0.f;
+}
+
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 //    ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
 //    return sectionItem.title;
@@ -135,10 +160,35 @@
     }
     // row height calculated
     if ([rowItem.cellClass isSubclassOfClass:[ZAFormBaseCell class]]) {
-        return [[rowItem.cellClass prefferedHeightForViewModel:rowItem.viewModel forWidth:@(self.tableView.bounds.size.width)] doubleValue];
+        NSNumber *h = [rowItem.cellClass prefferedHeightForViewModel:rowItem.viewModel forWidth:@(self.tableView.bounds.size.width)];
+        if (h) {
+            return h.doubleValue;
+        }
     }
     return 42.f;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    // row height set same in form
+    if (self.rowHeight && self.rowHeight.integerValue >= 0) {
+        return self.rowHeight.integerValue;
+    }
+    ZAFormSection *sectionItem = [self.sections objectAtIndex:indexPath.section];
+    ZAFormRow *rowItem = [sectionItem.rowItems objectAtIndex:indexPath.row];
+    // row height set fix in row
+    if (rowItem.cellHeight && rowItem.cellHeight >= 0) {
+        return rowItem.cellHeight;
+    }
+    // row height calculated
+    if ([rowItem.cellClass isSubclassOfClass:[ZAFormBaseCell class]]) {
+        NSNumber *h = [rowItem.cellClass prefferedHeightForViewModel:rowItem.viewModel forWidth:@(self.tableView.bounds.size.width)];
+        if (h) {
+            return h.doubleValue;
+        }
+    }
+    return 42.f;
+}
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     return;
@@ -152,18 +202,18 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    // selectable section
+    if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]]) {
+        [sectionItem didSelectRow:rowItem];
+        return;
+    }
+    
     // textfield
     if ([[rowItem cellForForm] isKindOfClass:[ZAFormTextFieldCell class]]) {
         ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)[rowItem cellForForm];
         if (![cell.textField isFirstResponder] && [rowItem canBeFirstResponder]) {
             [cell.textField becomeFirstResponder];
         }
-        return;
-    }
-    
-    // did select block
-    if (rowItem.didSelectBlock) {
-        rowItem.didSelectBlock(rowItem, indexPath);
         return;
     }
     
@@ -195,6 +245,13 @@
         }
         
     }
+    
+    // did select
+    [rowItem didSelect:indexPath];
+//    if (rowItem.didSelectBlock) {
+//        rowItem.didSelectBlock(rowItem, indexPath);
+//        return;
+//    }
 }
 
 #pragma mark - proxy UIScrollView delegate
@@ -202,6 +259,18 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if ([self.proxyTableDelegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
         [self.proxyTableDelegate scrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    if ([self.proxyTableDelegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)]) {
+        [self.proxyTableDelegate scrollViewWillBeginDecelerating:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if ([self.proxyTableDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
+        [self.proxyTableDelegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
@@ -224,6 +293,18 @@
     [row clearCell];
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
+}
+
+- (void)reloadRows:(NSArray *)rows {    
+    NSMutableArray *paths = [NSMutableArray arrayWithCapacity:rows.count];
+    
+    for (ZAFormRow *row in rows) {
+        NSIndexPath *path = [self pathForRow:row];
+        [paths addObject:path];
+    }
+//    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:[paths copy] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.tableView endUpdates];
 }
 
 - (void)reset {

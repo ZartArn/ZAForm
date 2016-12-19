@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ZAFormTableManager, ZAFormRow, ZAFormBaseSectionCell;
+@class ZAFormTableManager, ZAFormRow, ZAFormBaseSectionCell, ZAFormSectionHeader;
 
 @interface ZAFormSection : NSObject
 
@@ -32,6 +32,12 @@
 /// backgroung coloe
 @property (strong, nonatomic) UIColor *bgColor;
 
+/// header (title or view)
+@property (strong, nonatomic) ZAFormSectionHeader *header;
+
+/// footer (title or view)
+@property (strong, nonatomic) ZAFormSectionHeader *footer;
+
 /// viewModel
 @property (strong, nonatomic) id viewModel;
 
@@ -49,5 +55,8 @@
 
 /// create section for form
 - (ZAFormBaseSectionCell *)sectionCellForForm;
+
+/// on cell selection
+- (void)didSelectRow:(ZAFormRow *)row;
 
 @end

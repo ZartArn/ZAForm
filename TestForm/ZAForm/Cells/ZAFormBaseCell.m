@@ -29,7 +29,7 @@
 #pragma mark - auto height
 
 + (NSNumber *)prefferedHeightForViewModel:(id)viewModel forWidth:(NSNumber *)width {
-    return @42.f;
+    return nil; // @42.f;
 }
 
 #pragma mark -
