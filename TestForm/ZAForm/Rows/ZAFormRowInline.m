@@ -22,7 +22,7 @@
 
 - (void)didSelect:(NSIndexPath *)indexPath {
     [super didSelect:indexPath];
-    
+
     if (!_showed) {
         _showed = YES;
         [self.section.form addRow:self.inlineRow afterRow:self animation:YES];
@@ -31,5 +31,21 @@
         [self.section.form removeRow:self.inlineRow animation:YES];
     }
 }
+
+/*
+- (void)configureRow {
+    [super configureRow];
+    
+    RACChannelTo(self, value) = RACChannelTo(self.inlineRow, value);
+    
+    @weakify(self);
+    [[RACObserve(self, value) distinctUntilChanged]
+        subscribeNext:^(id x) {
+            @strongify(self);
+            NSLog(@"inline row :: %@", x);
+            [self.cell update];
+        }];
+}
+*/
 
 @end
