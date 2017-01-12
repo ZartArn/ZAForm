@@ -10,6 +10,7 @@
 #import "ZAFormRowTextField.h"
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormTableManager.h"
+#import "ZAFormPhoneLogic.h"
 #import <ReactiveCocoa.h>
 
 @interface ZAFormRowTextField()
@@ -34,21 +35,34 @@
     NSAssert([aCell isKindOfClass:[ZAFormTextFieldCell class]], @"Cell Class must be subclass of ZAFormTextFieldCell");
     
     ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)aCell;
-    cell.textField.delegate = self;
+    
 //    cell.textField.inputAccessoryView = self.form.accessoryView;
     
+    // text field delegate
+    cell.textField.delegate = self;
+    if ([self.logicDelegate isKindOfClass:[ZAFormPhoneLogic class]] && [self.valueFormatter conformsToProtocol:@protocol(ZAFormFormatterLogicable)]) {
+        ZAFormPhoneLogic *logic = (ZAFormPhoneLogic *)self.logicDelegate;
+        logic.textFormatter = self.valueFormatter;
+    }
+
+    // placeholder
     if (_placeholderValue) {
         cell.textField.placeholder = _placeholderValue; // [self.valueFormatter stringForObjectValue:self.placeholderValue];
     }
 
+    // channel value <-> textField.text
+    
     @weakify(self);
-    RACChannelTerminal *fieldTerminal = RACChannelTo(cell.textField, text);
-//    RACChannelTerminal *fieldTerminal = [cell.textField rac_newTextChannel];
+    RACChannelTerminal *fieldTerminal;
+    if (cell.textField.secureTextEntry) {
+        fieldTerminal = [cell.textField rac_newTextChannel];
+    } else {
+        fieldTerminal = RACChannelTo(cell.textField, text);
+    }
     RACChannelTerminal *valueTerminal = RACChannelTo(self, value);
 
     RACSignal *valueChangedSignal = [valueTerminal
         map:^id(id value) {
-//            NSLog(@"value changed %@", value);
             @strongify(self);
             if (value && self.valueFormatter) {
                 return [self.valueFormatter stringForObjectValue:value];
@@ -59,7 +73,6 @@
     
     RACSignal *fieldChangedSignal = [fieldTerminal
         map:^id(NSString *text) {
-//            NSLog(@"field changed %@", text);
             @strongify(self);
             if (self.valueFormatter) {
                 id objectValue = nil;
@@ -82,6 +95,28 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(nonnull NSString *)string  {
+
+    if (self.logicDelegate) {
+        [self.logicDelegate textField:textField willChangeCharactersInRange:range replacementString:string];
+        return NO;
+    }
+    
+    // no logic delegate
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (self.valueFormatter) {
+        //
+        NSString *obj;
+        [self.valueFormatter getObjectValue:&obj forString:newString errorDescription:nil];
+        
+        textField.text = [self.valueFormatter stringForObjectValue:obj];
+    } else {
+        textField.text = newString;
+    }
+
+    
+/*
     // replace string
     NSString *newString;
     
@@ -100,13 +135,9 @@
     } else {
         textField.text = newString;
     }
+*/
     
     return NO;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField {
-    textField.text = nil;
-    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -116,9 +147,27 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldShouldClear:) withObject:textField];
+    } else {
+        textField.text = nil;
+        return YES;
+    }
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldDidBeginEditing:) withObject:textField];
+    }
     if (textField.inputAccessoryView) {
         [self.form updateAccessoryView:self];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldDidEndEditing:) withObject:textField];
     }
 }
 

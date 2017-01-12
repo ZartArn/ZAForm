@@ -75,6 +75,9 @@
 /// insert row
 - (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation;
 
+/// insert row first in section
+- (void)insertRow:(ZAFormRow *)newRow inSection:(ZAFormSection *)section animation:(BOOL)animation;
+
 /// delete row
 - (void)removeRow:(ZAFormRow *)oldRow animation:(BOOL)animation;
 

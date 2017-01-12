@@ -338,6 +338,26 @@
     }
 }
 
+- (void)insertRow:(ZAFormRow *)newRow inSection:(ZAFormSection *)section animation:(BOOL)animation {
+    if (self.sections == nil) {
+        return;
+    }
+    NSInteger sectionIdx = [self.sections indexOfObject:section];
+    if (sectionIdx == NSNotFound) {
+        return;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sectionIdx];
+    if (animation) {
+        [self.tableView beginUpdates];
+        [section.rowItems insertObject:newRow atIndex:(indexPath.row)];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+    } else {
+        [section.rowItems insertObject:newRow atIndex:(indexPath.row)];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)removeRow:(ZAFormRow *)oldRow animation:(BOOL)animation {
     NSIndexPath *indexPath = [self pathForRow:oldRow];
     if (!indexPath) {
