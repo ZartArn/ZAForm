@@ -8,6 +8,7 @@
 
 #import "ZAFormRow.h"
 #import "ZAFormBaseCell.h"
+#import <ReactiveCocoa.h>
 
 @implementation ZAFormRow
 
@@ -83,6 +84,7 @@
         _cell.formRow = self;
         [_cell configure];
         [self configureCell:_cell];
+        RAC(self.cell, userInteractionEnabled) = RACObserve(self, editable);
         _cell.userInteractionEnabled = self.editable;
     }
     return _cell;

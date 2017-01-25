@@ -19,6 +19,9 @@
 /// currency code for formatter
 @property (copy, nonatomic) NSString *currencyCode;
 
+/// placeholder
+@property (copy, nonatomic) NSString *placeholder;
+
 /// placeholder value
 @property (strong, nonatomic) id placeholderValue;
 

@@ -202,12 +202,16 @@
 
 - (void)launchValidate {
     
-    self.validateSignal = [[[RACSignal combineLatest:[self.validators copy]]
-                            map:^(RACTuple *signalValues) {
-                                return @([signalValues.rac_sequence all:^BOOL(NSNumber *value) {
-                                    return value.boolValue;
-                                }]);
-                            }] distinctUntilChanged];
+    if (self.validators.count > 1) {
+        self.validateSignal = [[[RACSignal combineLatest:[self.validators copy]]
+                                map:^(RACTuple *signalValues) {
+                                    return @([signalValues.rac_sequence all:^BOOL(NSNumber *value) {
+                                        return value.boolValue;
+                                    }]);
+                                }] distinctUntilChanged];
+    } else if (self.validators.count == 1) {
+        self.validateSignal = self.validators.firstObject;
+    }
 
     if (self.warningLength) {
         // value must be NSString (!)

@@ -136,6 +136,9 @@
     if (sectionItem.footer.title) {
         return (sectionItem.footer.height > 0 ?: 28.f);
     }
+    if ([self.proxyTableDelegate respondsToSelector:@selector(tableView:heightForFooterInSection:)]) {
+        return [self.proxyTableDelegate tableView:tableView heightForFooterInSection:section];
+    }
     return 0.f;
 }
 

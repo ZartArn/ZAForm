@@ -32,7 +32,9 @@
     [super configureCell:aCell];
     ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)aCell;
     
-    if (_placeholderValue) {
+    if (_placeholder) {
+        cell.textField.placeholder = self.placeholder;
+    } else if (_placeholderValue) {
         cell.textField.placeholder = [self.valueFormatter stringForObjectValue:self.placeholderValue];
     }
 }
