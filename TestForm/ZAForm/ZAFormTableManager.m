@@ -318,6 +318,10 @@
 #pragma mark - insert\remove
 
 - (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation {
+    return [self addRow:newRow afterRow:afterRow animation:animation andScroll:NO];
+}
+
+- (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation andScroll:(BOOL)isScrollTo {
     NSLog(@"form add row %@", newRow);
     NSIndexPath *indexPath = [self pathForRow:afterRow];
     
@@ -333,11 +337,17 @@
     if (animation) {
         [self.tableView beginUpdates];
         [section.rowItems insertObject:newRow atIndex:(nextIndexPath.row)];
-        [self.tableView insertRowsAtIndexPaths:@[nextIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView insertRowsAtIndexPaths:@[nextIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
         [self.tableView endUpdates];
+        if (isScrollTo) {
+            [self.tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     } else {
         [section.rowItems insertObject:newRow atIndex:(nextIndexPath.row)];
         [self.tableView insertRowsAtIndexPaths:@[nextIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        if (isScrollTo) {
+            [self.tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     }
 }
 
