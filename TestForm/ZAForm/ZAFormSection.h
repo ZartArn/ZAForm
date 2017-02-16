@@ -47,6 +47,9 @@
 /// initialize
 - (instancetype)initWithTitle:(NSString *)title;
 
+/// configuration
+- (void)configure;
+
 /// add Row Item
 - (void)addRow:(ZAFormRow *)rowItem;
 

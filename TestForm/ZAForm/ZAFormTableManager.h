@@ -81,6 +81,20 @@
 /// insert row first in section
 - (void)insertRow:(ZAFormRow *)newRow inSection:(ZAFormSection *)section animation:(BOOL)animation;
 
+/// insert rows
+- (void)addRows:(NSArray *)rows afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation;
+
+/// insert rows and scroll
+- (void)addRows:(NSArray *)rows afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation andScroll:(BOOL)isScrollTo;
+
+/// insertRow before row
+- (void)addRow:(ZAFormRow *)row beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation;
+- (void)addRow:(ZAFormRow *)row beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation andScrollTo:(BOOL)isScrollTo;
+
+/// insert rows before row
+- (void)addRows:(NSArray *)rows beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation;
+- (void)addRows:(NSArray *)rows beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation andScrollTo:(BOOL)isScrollTo;
+
 /// delete row
 - (void)removeRow:(ZAFormRow *)oldRow animation:(BOOL)animation;
 

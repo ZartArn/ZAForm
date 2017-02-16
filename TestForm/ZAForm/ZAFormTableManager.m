@@ -206,7 +206,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     // selectable section
-    if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]]) {
+    if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]] || [sectionItem isKindOfClass:[ZAFormSectionMultiTagsSingleSelectable class]]) {
         [sectionItem didSelectRow:rowItem];
         return;
     }
@@ -317,6 +317,118 @@
 
 #pragma mark - insert\remove
 
+// private
+// !!: add rows only in one section
+- (void)addRows:(NSArray *)newRows atIndexPaths:(NSArray *)indexPaths animation:(BOOL)animation andScroll:(BOOL)isScrollTo {
+    
+    NSIndexPath *firstIndexPath = indexPaths.firstObject;
+    if (firstIndexPath == nil) {
+        return;
+    }
+    ZAFormSection *section = [self.sections objectAtIndex:firstIndexPath.section];
+    
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    for (NSIndexPath *indexPath in indexPaths) {
+        [indexSet addIndex:indexPath.row];
+    }
+    
+    if (animation) {
+        [self.tableView beginUpdates];
+        [section.rowItems insertObjects:newRows atIndexes:indexSet];
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+        if (isScrollTo) {
+            [self.tableView scrollToRowAtIndexPath:indexPaths.lastObject atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+    } else {
+        [section.rowItems insertObjects:newRows atIndexes:indexSet];
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        if (isScrollTo) {
+            [self.tableView scrollToRowAtIndexPath:indexPaths.lastObject atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+    }
+}
+
+// public
+
+// add few row before
+- (void)addRows:(NSArray *)rows beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation {
+    return [self addRows:rows beforeRow:beforeRow animation:animation andScrollTo:NO];
+}
+
+- (void)addRows:(NSArray *)rows beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation andScrollTo:(BOOL)isScrollTo {
+    
+    NSIndexPath *indexPath = [self pathForRow:beforeRow];
+    
+    NSIndexPath *nextIndexPath;
+    if (indexPath) {
+        if (indexPath.row == 0) {
+            nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+        } else {
+            nextIndexPath = [NSIndexPath indexPathForRow:(indexPath.row) inSection:indexPath.section];
+        }
+    } else {
+        nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+
+    NSMutableArray *paths = [NSMutableArray arrayWithCapacity:rows.count];
+    [paths addObject:nextIndexPath];
+    for (NSInteger i = 1; i < rows.count; i++) {
+        nextIndexPath = [NSIndexPath indexPathForRow:(nextIndexPath.row + 1) inSection:nextIndexPath.section];
+        [paths addObject:nextIndexPath];
+    }
+    
+    [self addRows:rows atIndexPaths:paths animation:animation andScroll:isScrollTo];
+}
+
+// add few rows after
+- (void)addRows:(NSArray *)rows afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation {
+    return [self addRows:rows afterRow:afterRow animation:animation andScroll:NO];
+}
+
+- (void)addRows:(NSArray *)rows afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation andScroll:(BOOL)isScrollTo {
+    NSIndexPath *indexPath = [self pathForRow:afterRow];
+    
+    NSIndexPath *nextIndexPath;
+    if (indexPath) {
+        nextIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:indexPath.section];
+    } else {
+        nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    
+    NSMutableArray *paths = [NSMutableArray arrayWithCapacity:rows.count];
+    [paths addObject:nextIndexPath];
+    for (NSInteger i = 1; i < rows.count; i++) {
+        nextIndexPath = [NSIndexPath indexPathForRow:(nextIndexPath.row + 1) inSection:nextIndexPath.section];
+        [paths addObject:nextIndexPath];
+    }
+    
+    [self addRows:rows atIndexPaths:paths animation:animation andScroll:isScrollTo];
+}
+
+// add one nonull row before
+- (void)addRow:(ZAFormRow *)row beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation {
+    return [self addRow:row beforeRow:beforeRow animation:animation andScrollTo:NO];
+}
+
+- (void)addRow:(ZAFormRow *)row beforeRow:(ZAFormRow *)beforeRow animation:(BOOL)animation andScrollTo:(BOOL)isScrollTo {
+    NSIndexPath *indexPath = [self pathForRow:beforeRow];
+    
+    NSIndexPath *nextIndexPath;
+    if (indexPath) {
+        if (indexPath.row == 0) {
+            nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+        } else {
+            nextIndexPath = [NSIndexPath indexPathForRow:(indexPath.row) inSection:indexPath.section];
+        }
+    } else {
+        nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    
+    [self addRows:@[row] atIndexPaths:@[nextIndexPath] animation:animation andScroll:isScrollTo];
+}
+
+// add one row after
 - (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation {
     return [self addRow:newRow afterRow:afterRow animation:animation andScroll:NO];
 }
@@ -351,6 +463,7 @@
     }
 }
 
+// add row first in section
 - (void)insertRow:(ZAFormRow *)newRow inSection:(ZAFormSection *)section animation:(BOOL)animation {
     if (self.sections == nil) {
         return;

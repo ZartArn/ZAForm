@@ -26,3 +26,29 @@
 - (void)didSelectRow:(ZAFormRow<ZAFormRowSelectableProtocol> *)row;
 
 @end
+
+
+@protocol ZAFormRowTagSelectableProtocol <NSObject>
+
+@property (strong, nonatomic) id optionValue;
+@property (nonatomic) NSInteger tag;
+
+@end
+
+
+@interface ZAFormSectionMultiTagsSingleSelectable : ZAFormSection
+
+/// enable deselection
+@property (nonatomic) BOOL enableDeselection;
+
+/// selectable rows
+//@property (assign, nonatomic) ZAFormRow<ZAFormRowSelectableProtocol> *selectableRow;
+@property (strong, nonatomic) NSArray *selectableRows;
+
+/// on cell select
+- (void)didSelectRow:(ZAFormRow<ZAFormRowTagSelectableProtocol> *)row;
+
+@end
+
+
+
