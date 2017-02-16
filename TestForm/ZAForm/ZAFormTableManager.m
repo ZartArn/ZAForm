@@ -110,10 +110,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
     if (!sectionItem.title) {
+        if ([self.proxyTableDelegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
+            return [self.proxyTableDelegate tableView:tableView heightForHeaderInSection:section];
+        }
         return 0;
     }
     if (self.sectionHeight) {
         return self.sectionHeight.integerValue;
+    }
+    if ([self.proxyTableDelegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
+        return [self.proxyTableDelegate tableView:tableView heightForHeaderInSection:section];
     }
     return 28.f;
 }
