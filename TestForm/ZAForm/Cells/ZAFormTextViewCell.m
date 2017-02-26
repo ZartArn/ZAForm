@@ -31,7 +31,6 @@
     self.textView = [[UITextView alloc] init];
     self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
     self.textView.scrollEnabled = NO;
-    self.textView.backgroundColor = [UIColor greenColor];
     
     [self.contentView addSubview:_textView];
     

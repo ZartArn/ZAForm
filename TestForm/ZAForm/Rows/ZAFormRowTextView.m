@@ -24,10 +24,13 @@
     
     ZAFormTextViewCell *cell = (ZAFormTextViewCell *)aCell;
     cell.textView.delegate = self;
-    RAC(self, value) = cell.textView.rac_textSignal;
     
     @weakify(self);
-    [cell.textView.rac_textSignal
+    RACChannelTerminal *modelTerminal = RACChannelTo(self, value);
+    RAC(cell.textView, text) = modelTerminal;
+    [cell.textView.rac_textSignal subscribe:modelTerminal];
+    
+    [[RACSignal merge:@[cell.textView.rac_textSignal, RACObserve(cell.textView, text)]]
         subscribeNext:^(id x) {
             @strongify(self);
             [self textViewDidChange:nil];
@@ -59,7 +62,7 @@
     [UIView setAnimationsEnabled:YES];
     
     CGFloat newCellHeight = cell.frame.size.height;
-    if (oldCellHeight != newCellHeight) {
+    if (cell.textView.isFirstResponder && (oldCellHeight > 0) && oldCellHeight != newCellHeight) {
         currentOffset.y += newCellHeight - oldCellHeight;
         [tableView setContentOffset:currentOffset animated:YES];
     }
