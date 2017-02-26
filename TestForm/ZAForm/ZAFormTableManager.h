@@ -98,4 +98,7 @@
 /// delete row
 - (void)removeRow:(ZAFormRow *)oldRow animation:(BOOL)animation;
 
+/// scroll to rect (in tableView coordinate)
+- (void)scrollToRect:(CGRect)rect;
+
 @end

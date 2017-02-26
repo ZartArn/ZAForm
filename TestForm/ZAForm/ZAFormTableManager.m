@@ -15,6 +15,7 @@
 #import "ZAFormBaseCell.h"
 #import "ZAFormBaseSectionCell.h"
 #import "ZAFormTextFieldCell.h"
+#import "ZAFormTextViewCell.h"
 #import <ReactiveCocoa.h>
 
 @interface ZAFormTableManager()
@@ -217,11 +218,10 @@
         return;
     }
     
-    // textfield
-    if ([[rowItem cellForForm] isKindOfClass:[ZAFormTextFieldCell class]]) {
-        ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)[rowItem cellForForm];
-        if (![cell.textField isFirstResponder] && [rowItem canBeFirstResponder]) {
-            [cell.textField becomeFirstResponder];
+    // textfield && textView
+    if ([rowItem respondsToSelector:@selector(canBeFirstResponder)]) {
+        if (![rowItem isFirstResponder] && [rowItem canBeFirstResponder]) {
+            [rowItem becomeFirstResponder];
         }
         return;
     }
@@ -745,6 +745,17 @@
                             }].array;
     }
     return _allRows;
+}
+
+# pragma mark - scroll to
+
+/// scroll to rect (in tableView coordinate)
+- (void)scrollToRect:(CGRect)rect {
+    rect.size.height += 5;
+    [UIView animateWithDuration:0.3f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    } completion:^(BOOL finished) {
+        [self.tableView scrollRectToVisible:rect animated:YES];
+    }];
 }
 
 @end
