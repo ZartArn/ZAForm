@@ -219,7 +219,7 @@
     }
     
     // textfield && textView
-    if ([rowItem respondsToSelector:@selector(canBeFirstResponder)]) {
+    if ([rowItem respondsToSelector:@selector(canBeFirstResponder)] && [rowItem canBeFirstResponder]) {
         if (![rowItem isFirstResponder] && [rowItem canBeFirstResponder]) {
             [rowItem becomeFirstResponder];
         }
