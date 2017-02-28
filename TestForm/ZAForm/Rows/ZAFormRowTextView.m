@@ -28,13 +28,13 @@
     @weakify(self);
     RACChannelTerminal *modelTerminal = RACChannelTo(self, value);
     RAC(cell.textView, text) = modelTerminal;
-    [cell.textView.rac_textSignal subscribe:modelTerminal];
-    
-    [[RACSignal merge:@[cell.textView.rac_textSignal, RACObserve(cell.textView, text)]]
-        subscribeNext:^(id x) {
-            @strongify(self);
-            [self textViewDidChange:nil];
-        }];
+//    [cell.textView.rac_textSignal subscribe:modelTerminal];
+
+//    [cell.textView.rac_textSignal
+//        subscribeNext:^(id x) {
+//            @strongify(self);
+//            [self textViewDidChange:nil];
+//        }];
 }
 
 #pragma mark - UITextViewDelegate
