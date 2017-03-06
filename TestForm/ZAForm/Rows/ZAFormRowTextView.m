@@ -63,8 +63,19 @@
     
     CGFloat newCellHeight = cell.frame.size.height;
     if (cell.textView.isFirstResponder && (oldCellHeight > 0) && oldCellHeight != newCellHeight) {
-        currentOffset.y += newCellHeight - oldCellHeight;
-        [tableView setContentOffset:currentOffset animated:YES];
+        CGFloat newOffsetY = currentOffset.y + newCellHeight - oldCellHeight;
+        UIEdgeInsets contentInsets = tableView.contentInset;
+//        NSLog(@"frame :: %@", NSStringFromCGRect(tableView.frame));
+//        NSLog(@"content insets :: %@", NSStringFromUIEdgeInsets(contentInsets));
+//        NSLog(@"content size :: %@", NSStringFromCGSize(tableView.contentSize));
+//        NSLog(@"old offset :: %@", NSStringFromCGPoint(currentOffset));
+//        NSLog(@"new y :: %@", @(newOffsetY));
+//        NSLog(@".............\n\n");
+        
+        if (tableView.contentSize.height > tableView.frame.size.height /*- contentInsets.top - contentInsets.bottom */) {
+            currentOffset.y = newOffsetY;
+            [tableView setContentOffset:currentOffset animated:YES];
+        }
     }
 }
 
