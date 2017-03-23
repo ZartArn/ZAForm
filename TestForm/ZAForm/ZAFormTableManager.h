@@ -72,6 +72,12 @@
 /// update accessoryView when new row begin editing
 - (void)updateAccessoryView:(ZAFormRow *)row;
 
+/// insert section. first if afterSection == nil
+- (void)insertSections:(NSArray *)sections afterSection:(ZAFormSection *)afterSection;
+
+/// remove sections
+- (void)removeSections:(NSArray *)sections;
+
 /// insert row
 - (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation;
 

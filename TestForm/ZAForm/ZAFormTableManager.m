@@ -321,7 +321,41 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - insert\remove
+#pragma mark - insert\remove sections
+
+/// insert section. first if afterSection == nil
+- (void)insertSections:(NSArray *)sections afterSection:(ZAFormSection *)afterSection {
+    NSInteger secIndex = NSNotFound;
+    if (afterSection != nil) {
+        secIndex = [self.sections indexOfObject:afterSection];
+    }
+    secIndex = secIndex == NSNotFound ? 0 : secIndex + 1;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:(NSRange){secIndex, sections.count}];
+    
+    [self.tableView beginUpdates];
+    [self.sections insertObjects:sections atIndexes:indexSet];
+    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
+/// remove sections
+- (void)removeSections:(NSArray *)sections {
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    for (ZAFormSection *sec in sections) {
+        NSInteger secIndex = [self.sections indexOfObject:sec];
+        if (secIndex != NSNotFound) {
+            [indexSet addIndex:secIndex];
+        }
+    }
+    
+    NSIndexSet *iSet = [indexSet copy];
+    [self.tableView beginUpdates];
+    [self.sections removeObjectsAtIndexes:iSet];
+    [self.tableView deleteSections:iSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
+#pragma mark - insert\remove rows
 
 // private
 // !!: add rows only in one section
