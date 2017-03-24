@@ -107,4 +107,9 @@
 /// scroll to rect (in tableView coordinate)
 - (void)scrollToRect:(CGRect)rect;
 
+/// scroll to row
+- (void)scrollToRow:(ZAFormRow *)row;
+
+/// validations
+
 @end

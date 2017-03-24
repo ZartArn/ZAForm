@@ -15,6 +15,8 @@
 
 @interface ZAFormRowTextField()
 
+@property (strong, nonatomic) NSMutableDictionary *errorMessages;
+
 @end
 
 @implementation ZAFormRowTextField
@@ -196,8 +198,24 @@
 
 #pragma mark - validators
 
-- (void)addValidator:(id<ZAFormValidator>)validator {
+//- (void)addValidator:(id<ZAFormValidator>)validator {
+- (void)addValidator:(RACSignal *)validator {
     [self.validators addObject:validator];
+}
+
+- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage {
+    
+    static NSInteger keyInt = 1;
+    [self.validators addObject:validator];
+    NSNumber *keyCode = @(keyInt++);
+    [self.errorMessages setObject:[NSNull null] forKey:keyCode];
+    
+    @weakify(self);
+    [[validator distinctUntilChanged]
+        subscribeNext:^(NSNumber *x) {
+            @strongify(self);
+            self.errorMessages[keyCode] = x.boolValue ? [NSNull null] : errorMessage;
+        }];
 }
 
 - (void)launchValidate {
@@ -227,6 +245,27 @@
                               else:[RACSignal return:@0]];
     }
 
+    RAC(self, isValid) = self.validateSignal;
+}
+
+- (NSString *)errorMessage {
+    if (_errorMessages == nil) {
+        return nil;
+    }
+    NSArray *messages = [self.errorMessages allValues];
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"self != %@", [NSNull null]];
+    NSArray *filterMessages = [messages filteredArrayUsingPredicate:p];
+    
+    return [filterMessages componentsJoinedByString:@"\n"];
+}
+
+#pragma mark - lazy
+
+- (NSMutableDictionary *)errorMessages {
+    if (_errorMessages == nil) {
+        _errorMessages = [NSMutableDictionary dictionary];
+    }
+    return _errorMessages;
 }
 
 @end

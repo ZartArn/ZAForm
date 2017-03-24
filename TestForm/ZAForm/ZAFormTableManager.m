@@ -772,13 +772,10 @@
 #pragma mark - lazy
 
 - (NSArray *)allRows {
-    if (!_allRows) {
-        _allRows = [self.sections.rac_sequence
+        return [self.sections.rac_sequence
                             flattenMap:^RACStream *(ZAFormSection *value) {
                                 return value.rowItems.rac_sequence;
                             }].array;
-    }
-    return _allRows;
 }
 
 # pragma mark - scroll to
@@ -791,5 +788,14 @@
         [self.tableView scrollRectToVisible:rect animated:YES];
     }];
 }
+
+/// scroll to row
+- (void)scrollToRow:(ZAFormRow *)row {
+    NSIndexPath *indexPath = [self pathForRow:row];
+    if (indexPath) {
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
+
 
 @end

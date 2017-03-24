@@ -41,8 +41,17 @@
 /// validators
 @property (strong, nonatomic) NSMutableArray *validators;
 
+/// is row valid. nil - field not unser validation
+@property (strong, nonatomic) NSNumber *isValid;
+
+/// error message (from validators)
+@property (copy, nonatomic) NSString *errorMessage;
+
 /// register validator
 - (void)addValidator:(RACSignal *)validator;
+
+/// register validator with error message
+- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage;
 
 /// launch validate process, not can add validator after(?)
 - (void)launchValidate;
