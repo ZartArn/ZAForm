@@ -13,4 +13,6 @@
 @property (strong, nonatomic) NSDate *minDate;
 @property (strong, nonatomic) NSDate *maxDate;
 
+@property (strong, nonatomic) NSDate *defaultDate;
+
 @end

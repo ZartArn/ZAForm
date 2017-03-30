@@ -41,7 +41,11 @@
 
 // configure
 - (void)update {
-    self.datePicker.date = self.formRow.value;
+    if (self.formRow.value) {
+        self.datePicker.date = self.formRow.value;
+    } else {
+        self.datePicker.date = [NSDate date];
+    }
 }
 
 @end
