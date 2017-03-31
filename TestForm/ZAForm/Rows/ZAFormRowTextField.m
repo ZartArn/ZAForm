@@ -16,6 +16,7 @@
 @interface ZAFormRowTextField()
 
 @property (strong, nonatomic) NSMutableDictionary *errorMessages;
+@property (strong, nonatomic) NSMutableArray *errorMessageSignals;
 
 @end
 
@@ -24,6 +25,7 @@
 - (void)configureRow {
     [super configureRow];
     self.validators = [NSMutableArray array];
+    self.errorMessageSignals = [NSMutableArray array];
 }
 
 #pragma mark - cell
@@ -105,6 +107,9 @@
     
     // no logic delegate
     
+    UITextPosition *beginning = textField.beginningOfDocument;
+    UITextPosition *cursorLocation = [textField positionFromPosition:beginning offset:(range.location + string.length)];
+    
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if (self.valueFormatter) {
@@ -115,6 +120,9 @@
         textField.text = [self.valueFormatter stringForObjectValue:obj];
     } else {
         textField.text = newString;
+        if (cursorLocation) {
+            [textField setSelectedTextRange:[textField textRangeFromPosition:cursorLocation toPosition:cursorLocation]];
+        }
     }
 
     
@@ -257,6 +265,52 @@
     NSArray *filterMessages = [messages filteredArrayUsingPredicate:p];
     
     return [filterMessages componentsJoinedByString:@"\n"];
+}
+
+#pragma mark - validators new
+
+- (void)addRowValidator:(id<ZAFormValidator>)validator {
+    [self.validators addObject:validator.validateSignal];
+    if (validator.errorMessage != nil) {
+        RACSignal *messageSignal = [[validator.validateSignal distinctUntilChanged]
+            map:^id(NSNumber *value) {
+                return (value.boolValue ? nil : validator.errorMessage);
+            }];
+        [self.errorMessageSignals addObject:messageSignal];
+    }
+}
+
+- (void)launchRowValidate {
+    
+    if (self.validators.count > 1) {
+        
+        // bool
+        self.validateSignal = [[[RACSignal combineLatest:[self.validators copy]]
+                                map:^(RACTuple *signalValues) {
+                                    return @([signalValues.rac_sequence all:^BOOL(NSNumber *value) {
+                                        return value.boolValue;
+                                    }]);
+                                }] distinctUntilChanged];
+        
+        
+        
+    } else if (self.validators.count == 1) {
+        self.validateSignal = self.validators.firstObject;
+    }
+
+    // error message
+    if (self.errorMessageSignals.count > 1) {
+        self.flyErrorMessageSignal = [[RACSignal combineLatest:[self.errorMessageSignals copy]]
+            map:^id(RACTuple *signalValues) {
+                return [signalValues.rac_sequence objectPassingTest:^BOOL(NSString *value) {
+                    NSLog(@"%@", value);
+                    return (![value isEqual:[NSNull null]]);
+                }];
+            }];
+    } else if (self.errorMessageSignals.count == 1) {
+        self.flyErrorMessageSignal = self.errorMessageSignals.firstObject;
+    }
+
 }
 
 #pragma mark - lazy

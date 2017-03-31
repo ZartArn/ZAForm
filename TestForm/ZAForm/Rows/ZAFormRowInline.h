@@ -6,9 +6,9 @@
 //
 //
 
-#import <ZAForm/ZAForm.h>
+#import "ZAFormRowTextField.h"
 
-@interface ZAFormRowInline : ZAFormRow
+@interface ZAFormRowInline : ZAFormRowTextField
 
 @property (strong, nonatomic) ZAFormRow *inlineRow;
 

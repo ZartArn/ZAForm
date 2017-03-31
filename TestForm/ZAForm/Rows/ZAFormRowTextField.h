@@ -56,6 +56,15 @@
 /// launch validate process, not can add validator after(?)
 - (void)launchValidate;
 
+#pragma mark - validators
+
+@property (strong, nonatomic) RACSignal *flyErrorMessageSignal;
+
+- (void)addRowValidator:(id<ZAFormValidator>)validator;
+
+- (void)launchRowValidate;
+
+
 #pragma mark - UITextInputTraits
 
 @property (nonatomic) UIKeyboardType keyboardType;
