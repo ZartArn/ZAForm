@@ -34,6 +34,7 @@
     [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@5.f);
         make.bottom.equalTo(@-5.f);
+        make.centerX.equalTo(@0);
     }];
 }
 

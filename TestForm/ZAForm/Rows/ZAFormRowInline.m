@@ -27,6 +27,7 @@
 
     if (!_showed) {
         _showed = YES;
+        self.inlineRow.value = self.value;
         [self.section.form addRow:self.inlineRow afterRow:self animation:YES];
     } else {
         _showed = NO;

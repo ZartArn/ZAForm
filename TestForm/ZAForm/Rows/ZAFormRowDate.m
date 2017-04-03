@@ -22,7 +22,7 @@
     RACChannelTerminal *fieldTerminal =  [cell.datePicker rac_newDateChannelWithNilValue:[NSDate date]];
     RACChannelTerminal *valueTerminal = RACChannelTo(self, value);
     
-    [valueTerminal subscribe:fieldTerminal];
+    [[valueTerminal skip:1] subscribe:fieldTerminal];
     [fieldTerminal subscribe:valueTerminal];
     
     if (self.value == nil) {
