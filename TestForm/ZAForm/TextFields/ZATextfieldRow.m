@@ -8,7 +8,7 @@
 
 #import "ZATextfieldRow.h"
 #import "ZAFormPhoneLogic.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ZATextfieldRow()
 

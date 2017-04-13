@@ -8,7 +8,7 @@
 
 #import "ZAFormAmountCell.h"
 #import "ZAFormRowAmount.h"
-#import <ReactiveCocoa.h>
+#import "ReactiveCocoa.h"
 
 @implementation ZAFormAmountCell
 

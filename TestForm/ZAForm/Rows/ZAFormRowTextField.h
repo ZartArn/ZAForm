@@ -41,28 +41,28 @@
 /// validators
 @property (strong, nonatomic) NSMutableArray *validators;
 
-/// is row valid. nil - field not unser validation
+/// is row valid. nil - field not under validation
 @property (strong, nonatomic) NSNumber *isValid;
 
 /// error message (from validators)
-@property (copy, nonatomic) NSString *errorMessage;
+//@property (copy, nonatomic) NSString *errorMessage;
 
 /// register validator
 - (void)addValidator:(RACSignal *)validator;
 
 /// register validator with error message
-- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage;
+//- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage;
 
 /// launch validate process, not can add validator after(?)
 - (void)launchValidate;
 
 #pragma mark - validators
 
-@property (strong, nonatomic) RACSignal *flyErrorMessageSignal;
+//@property (strong, nonatomic) RACSignal *flyErrorMessageSignal;
 
 - (void)addRowValidator:(id<ZAFormValidator>)validator;
 
-- (void)launchRowValidate;
+//- (void)launchRowValidate;
 
 
 #pragma mark - UITextInputTraits

@@ -16,7 +16,7 @@
 #import "ZAFormBaseSectionCell.h"
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormTextViewCell.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ZAFormTableManager()
 

@@ -7,7 +7,7 @@
 //
 
 #import "ZAFormCellSegmented.h"
-#import <Masonry.h>
+#import <Masonry/Masonry.h>
 
 @implementation ZAFormCellSegmented
 

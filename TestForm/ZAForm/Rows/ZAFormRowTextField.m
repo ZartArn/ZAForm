@@ -7,16 +7,20 @@
 //
 
 #import "ZAFormRow.h"
+#import "ZAFormSection.h"
 #import "ZAFormRowTextField.h"
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormTableManager.h"
 #import "ZAFormPhoneLogic.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ZAFormRowTextField()
 
-@property (strong, nonatomic) NSMutableDictionary *errorMessages;
-@property (strong, nonatomic) NSMutableArray *errorMessageSignals;
+//@property (strong, nonatomic) NSMutableDictionary *errorMessages;
+//@property (strong, nonatomic) NSMutableArray *errorMessageSignals;
+//@property (strong, nonatomic) NSMutableArray *errMessages;
+
+@property (strong, nonatomic) NSMutableArray *rowValidators;
 
 @end
 
@@ -25,7 +29,9 @@
 - (void)configureRow {
     [super configureRow];
     self.validators = [NSMutableArray array];
-    self.errorMessageSignals = [NSMutableArray array];
+//    self.errorMessageSignals = [NSMutableArray array];
+//    self.errMessages = [NSMutableArray array];
+    self.rowValidators = [NSMutableArray array];
 }
 
 #pragma mark - cell
@@ -94,6 +100,9 @@
         cell.textField.keyboardType = self.keyboardType;
         cell.textField.returnKeyType = self.returnKeyType;
     }
+    
+    // launch on change validate
+    [self launchRowValidate];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -211,20 +220,20 @@
     [self.validators addObject:validator];
 }
 
-- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage {
-    
-    static NSInteger keyInt = 1;
-    [self.validators addObject:validator];
-    NSNumber *keyCode = @(keyInt++);
-    [self.errorMessages setObject:[NSNull null] forKey:keyCode];
-    
-    @weakify(self);
-    [[validator distinctUntilChanged]
-        subscribeNext:^(NSNumber *x) {
-            @strongify(self);
-            self.errorMessages[keyCode] = x.boolValue ? [NSNull null] : errorMessage;
-        }];
-}
+//- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage {
+//    
+//    static NSInteger keyInt = 1;
+//    [self.validators addObject:validator];
+//    NSNumber *keyCode = @(keyInt++);
+//    [self.errorMessages setObject:[NSNull null] forKey:keyCode];
+//    
+//    @weakify(self);
+//    [[validator distinctUntilChanged]
+//        subscribeNext:^(NSNumber *x) {
+//            @strongify(self);
+//            self.errorMessages[keyCode] = x.boolValue ? [NSNull null] : errorMessage;
+//        }];
+//}
 
 - (void)launchValidate {
     
@@ -256,70 +265,104 @@
     RAC(self, isValid) = self.validateSignal;
 }
 
-- (NSString *)errorMessage {
-    if (_errorMessages == nil) {
-        return nil;
-    }
-    NSArray *messages = [self.errorMessages allValues];
-    NSPredicate *p = [NSPredicate predicateWithFormat:@"self != %@", [NSNull null]];
-    NSArray *filterMessages = [messages filteredArrayUsingPredicate:p];
-    
-    return [filterMessages componentsJoinedByString:@"\n"];
-}
+//- (NSString *)errorMessage {
+//    if (_errorMessages == nil) {
+//        return nil;
+//    }
+//    NSArray *messages = [self.errorMessages allValues];
+//    NSPredicate *p = [NSPredicate predicateWithFormat:@"self != %@", [NSNull null]];
+//    NSArray *filterMessages = [messages filteredArrayUsingPredicate:p];
+//    
+//    return [filterMessages componentsJoinedByString:@"\n"];
+//}
 
 #pragma mark - validators new
 
 - (void)addRowValidator:(id<ZAFormValidator>)validator {
-    [self.validators addObject:validator.validateSignal];
-    if (validator.errorMessage != nil) {
-        RACSignal *messageSignal = [[validator.validateSignal distinctUntilChanged]
-            map:^id(NSNumber *value) {
-                return (value.boolValue ? nil : validator.errorMessage);
-            }];
-        [self.errorMessageSignals addObject:messageSignal];
-    }
+    [self.rowValidators addObject:validator];
+}
+
+- (RACSignal *)validateErrorSignal:(NSArray *)validators {
+    return
+        [[RACSignal combineLatest:[validators.rac_sequence
+                                     map:^id(id<ZAFormValidator> validator) {
+                                         return  [validator.validateSignal
+                                                  map:^id(id value) {
+                                                      RACTuple *tuple = RACTuplePack(value, validator.errorMessage);
+                                                      return tuple;
+                                                  }];
+                                     }]]
+           
+           map:^id(RACTuple *signalValues) {
+               return [signalValues.rac_sequence objectPassingTest:^BOOL(RACTuple *value) {
+                   NSNumber *isValid = value.first;
+                   return !isValid.boolValue;
+               }];
+           }];
 }
 
 - (void)launchRowValidate {
     
-    if (self.validators.count > 1) {
-        
-        // bool
-        self.validateSignal = [[[RACSignal combineLatest:[self.validators copy]]
-                                map:^(RACTuple *signalValues) {
-                                    return @([signalValues.rac_sequence all:^BOOL(NSNumber *value) {
-                                        return value.boolValue;
-                                    }]);
-                                }] distinctUntilChanged];
-        
-        
-        
-    } else if (self.validators.count == 1) {
-        self.validateSignal = self.validators.firstObject;
-    }
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
 
-    // error message
-    if (self.errorMessageSignals.count > 1) {
-        self.flyErrorMessageSignal = [[RACSignal combineLatest:[self.errorMessageSignals copy]]
-            map:^id(RACTuple *signalValues) {
-                return [signalValues.rac_sequence objectPassingTest:^BOOL(NSString *value) {
-                    NSLog(@"%@", value);
-                    return (![value isEqual:[NSNull null]]);
-                }];
+    // on focus + on change
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"showOnChange = %@", @YES];
+    NSArray *validators = [[self.rowValidators copy] filteredArrayUsingPredicate:p];
+
+    @weakify(self);
+
+    if (validators.count > 0) {
+        
+        [[cell.textField rac_signalForControlEvents:UIControlEventEditingDidBegin]
+            subscribeNext:^(id x) {
+                @strongify(self);
+                [[[self validateErrorSignal:validators]
+                    takeUntil:[cell.textField rac_signalForControlEvents:UIControlEventEditingDidEnd]]
+                    subscribeNext:^(RACTuple *x) {
+                        NSString *message = x.last;
+                        @strongify(self);
+                        NSError *error = nil;
+                        if (message != nil) {
+                            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
+                            error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
+                        }
+                        [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+                        [self.section.form.tableView beginUpdates];
+                        [self.section.form.tableView endUpdates];
+                    }];
             }];
-    } else if (self.errorMessageSignals.count == 1) {
-        self.flyErrorMessageSignal = self.errorMessageSignals.firstObject;
     }
-
+    
+    // on blur
+    [[cell.textField rac_signalForControlEvents:UIControlEventEditingDidEnd]
+        subscribeNext:^(id x) {
+            @strongify(self);
+            NSArray *validators = [self.rowValidators copy];
+                 
+            [[[self validateErrorSignal:validators] take:1]
+                     subscribeNext:^(RACTuple *x) {
+                         NSString *message = x.last;
+                         NSLog(@"validate message subscriber :: %@", x);
+                         @strongify(self);
+                         NSError *error = nil;
+                         if (message != nil) {
+                             NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
+                             error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
+                         }
+                         [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+                         [self.section.form.tableView beginUpdates];
+                         [self.section.form.tableView endUpdates];
+                     }];
+        }];
 }
 
 #pragma mark - lazy
 
-- (NSMutableDictionary *)errorMessages {
-    if (_errorMessages == nil) {
-        _errorMessages = [NSMutableDictionary dictionary];
-    }
-    return _errorMessages;
-}
+//- (NSMutableDictionary *)errorMessages {
+//    if (_errorMessages == nil) {
+//        _errorMessages = [NSMutableDictionary dictionary];
+//    }
+//    return _errorMessages;
+//}
 
 @end
