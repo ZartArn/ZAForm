@@ -101,6 +101,17 @@
     return NO;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.didSelectBlock) {
+        self.didSelectBlock(self);
+        return NO;
+    }
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldShouldBeginEditing:) withObject:textField];
+    }
+    return  YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;

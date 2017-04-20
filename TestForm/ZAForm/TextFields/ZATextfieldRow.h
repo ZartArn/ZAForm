@@ -34,6 +34,9 @@
 /// value formatter
 @property (strong, nonatomic) NSFormatter *valueFormatter;
 
+/// select block
+@property (copy, nonatomic) void(^didSelectBlock)(ZATextfieldRow *row);
+
 /// validators
 @property (strong, nonatomic) NSMutableArray *validators;
 
