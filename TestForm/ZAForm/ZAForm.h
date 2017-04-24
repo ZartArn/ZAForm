@@ -32,3 +32,5 @@
 #import "ZAFormOptionsPushViewController.h"
 #import "ZAFormValidator.h"
 #import "ZATextfieldRow.h"
+#import "ZASegmentedRow.h"
+
