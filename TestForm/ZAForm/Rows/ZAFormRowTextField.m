@@ -326,8 +326,8 @@
                             NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
                             error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
                         }
-                        [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
                         [self.section.form.tableView beginUpdates];
+                        [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
                         [self.section.form.tableView endUpdates];
                     }];
             }];
@@ -349,8 +349,8 @@
                              NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
                              error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
                          }
-                         [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
                          [self.section.form.tableView beginUpdates];
+                         [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
                          [self.section.form.tableView endUpdates];
                      }];
         }];
