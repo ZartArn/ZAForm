@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license       = 'Code is MIT, then custom font licenses.'
   s.author        = { "ZartArn" => "lewozart@gmail.com" }
   s.homepage      = 'https://github.com/ZartArn'
-  s.source        = {:git => 'https://github.com/ZartArn/ZAForm.git'}
+  s.source        = {:git => 'https://github.com/ZartArn/ZAForm.git', :tag => 'v0.0.4'}
   s.source_files  = 'TestForm/ZAForm/  **/*.{h,m}'
   s.requires_arc  = true
 end
