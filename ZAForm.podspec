@@ -6,10 +6,10 @@ Pod::Spec.new do |s|
   s.license       = 'Code is MIT, then custom font licenses.'
   s.author        = { "ZartArn" => "lewozart@gmail.com" }
   s.homepage      = 'https://github.com/ZartArn'
-  s.source        = {:git => 'https://github.com/ZartArn/ZAForm.git', :tag => 'v0.1.3'}
+  s.source        = {:git => 'https://github.com/ZartArn/ZAForm.git', :branch => 'validators'}
   s.source_files  = 'TestForm/ZAForm/**/*.{h,m}'
   s.requires_arc  = true
 
-  s.dependency = 'ReactiveCocoa', '~> 2.0'
-  s.dependency = 'Masonry'
+  s.dependency 'ReactiveCocoa', '~> 2.0'
+  s.dependency 'Masonry'
 end
