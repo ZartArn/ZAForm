@@ -9,4 +9,7 @@ Pod::Spec.new do |s|
   s.source        = {:git => 'https://github.com/ZartArn/ZAForm.git', :tag => 'v0.1.1'}
   s.source_files  = 'TestForm/ZAForm/**/*.{h,m}'
   s.requires_arc  = true
+
+  spec.dependency = 'ReactiveCocoa', '~> 2.0'
+  spec.dependency = 'Masonry'
 end
