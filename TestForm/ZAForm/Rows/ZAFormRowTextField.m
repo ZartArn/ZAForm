@@ -99,6 +99,11 @@
     if (_manualInputTraits) {
         cell.textField.keyboardType = self.keyboardType;
         cell.textField.returnKeyType = self.returnKeyType;
+        cell.textField.secureTextEntry = self.secureTextEntry;
+
+        if (self.secureTextEntry) {
+            cell.textField.clearsOnBeginEditing = YES;
+        }
     }
     
     // launch on change validate
@@ -114,6 +119,11 @@
         return NO;
     }
     
+    // secure field
+    if (self.manualInputTraits && self.secureTextEntry) {
+        return YES;
+    }
+
     // no logic delegate
     
     UITextPosition *beginning = textField.beginningOfDocument;

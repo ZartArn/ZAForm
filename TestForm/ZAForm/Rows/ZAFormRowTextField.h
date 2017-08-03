@@ -69,5 +69,6 @@
 
 @property (nonatomic) UIKeyboardType keyboardType;
 @property (nonatomic) UIReturnKeyType returnKeyType;
+@property (nonatomic, getter=isSecureTextEntry) BOOL secureTextEntry;
 
 @end
