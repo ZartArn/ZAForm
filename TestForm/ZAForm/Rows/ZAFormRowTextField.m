@@ -60,6 +60,17 @@
         cell.textField.placeholder = _placeholderValue; // [self.valueFormatter stringForObjectValue:self.placeholderValue];
     }
 
+    // text input traits proxy
+    if (_manualInputTraits) {
+        cell.textField.keyboardType = self.keyboardType;
+        cell.textField.returnKeyType = self.returnKeyType;
+        cell.textField.secureTextEntry = self.secureTextEntry;
+        
+        if (self.secureTextEntry) {
+            cell.textField.clearsOnBeginEditing = YES;
+        }
+    }    
+    
     // channel value <-> textField.text
     
     @weakify(self);
@@ -95,16 +106,6 @@
     
     [[fieldChangedSignal skip:1] subscribe:valueTerminal];
     
-    // text input traits proxy
-    if (_manualInputTraits) {
-        cell.textField.keyboardType = self.keyboardType;
-        cell.textField.returnKeyType = self.returnKeyType;
-        cell.textField.secureTextEntry = self.secureTextEntry;
-
-        if (self.secureTextEntry) {
-            cell.textField.clearsOnBeginEditing = YES;
-        }
-    }
     
     // launch on change validate
     [self launchRowValidate];
@@ -120,7 +121,7 @@
     }
     
     // secure field
-    if (self.manualInputTraits && self.secureTextEntry) {
+    if (textField.secureTextEntry) {
         return YES;
     }
 
