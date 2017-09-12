@@ -524,6 +524,30 @@
     }
 }
 
+/// append row in section
+- (void)appendRow:(ZAFormRow *)newRow section:(ZAFormSection *)section animation:(BOOL)animation {
+    if (self.sections == nil) {
+        return;
+    }
+    if (!section) {
+        section = self.sections.firstObject;
+    }
+    NSInteger sectionIdx = [self.sections indexOfObject:section];
+    if (sectionIdx == NSNotFound) {
+        return;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:section.rowItems.count inSection:sectionIdx];
+    if (animation) {
+        [self.tableView beginUpdates];
+        [section.rowItems insertObject:newRow atIndex:(indexPath.row)];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+    } else {
+        [section.rowItems insertObject:newRow atIndex:(indexPath.row)];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
 - (void)removeRow:(ZAFormRow *)oldRow animation:(BOOL)animation {
     NSIndexPath *indexPath = [self pathForRow:oldRow];
     if (!indexPath) {

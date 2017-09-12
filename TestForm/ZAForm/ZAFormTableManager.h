@@ -84,6 +84,9 @@
 /// insert row and scrollTo
 - (void)addRow:(ZAFormRow *)newRow afterRow:(ZAFormRow *)afterRow animation:(BOOL)animation andScroll:(BOOL)isScrollTo;
 
+/// append row in section
+- (void)appendRow:(ZAFormRow *)newRow section:(ZAFormSection *)section animation:(BOOL)animation;
+
 /// insert row first in section
 - (void)insertRow:(ZAFormRow *)newRow inSection:(ZAFormSection *)section animation:(BOOL)animation;
 
