@@ -65,6 +65,7 @@
         cell.textField.keyboardType = self.keyboardType;
         cell.textField.returnKeyType = self.returnKeyType;
         cell.textField.secureTextEntry = self.secureTextEntry;
+        cell.textField.autocapitalizationType = self.autocapitalizationType;
         
         if (self.secureTextEntry) {
             cell.textField.clearsOnBeginEditing = YES;

@@ -69,6 +69,7 @@
 
 @property (nonatomic) UIKeyboardType keyboardType;
 @property (nonatomic) UIReturnKeyType returnKeyType;
+@property (nonatomic) UITextAutocapitalizationType autocapitalizationType;
 @property (nonatomic, getter=isSecureTextEntry) BOOL secureTextEntry;
 
 @end
