@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "ZAFormTextFieldLogic.h"
 
+@protocol ZAFormFormatterLogicable;
+
 @interface ZAFormMaskFieldLogic : NSObject <ZAFormTextFieldLogic>
+
+/// text formatter
+@property (assign, nonatomic) NSFormatter<ZAFormFormatterLogicable> *textFormatter;
 
 @end
