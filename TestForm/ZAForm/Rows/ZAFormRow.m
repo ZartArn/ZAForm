@@ -120,7 +120,7 @@
     return NO;
 }
 
-- (BOOL)becomeFirstResponder {
+- (void)becomeFirstResponder {
     
 }
 
