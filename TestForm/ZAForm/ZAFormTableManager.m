@@ -94,6 +94,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    if (sectionItem.header.aView) {
+        return sectionItem.header.aView;
+    }
     if (sectionItem.title) {
         ZAFormBaseSectionCell *headerView = [sectionItem sectionCellForForm];
         [headerView update];
@@ -110,6 +113,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    if (sectionItem.header.aView) {
+        return sectionItem.header.height;
+    }
     if (!sectionItem.title) {
         if ([self.proxyTableDelegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
             return [self.proxyTableDelegate tableView:tableView heightForHeaderInSection:section];
