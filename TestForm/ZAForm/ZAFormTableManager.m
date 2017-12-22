@@ -219,7 +219,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     // selectable section
-    if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]] || [sectionItem isKindOfClass:[ZAFormSectionMultiTagsSingleSelectable class]]) {
+    if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]] ||
+        [sectionItem isKindOfClass:[ZAFormSectionMultiTagsSingleSelectable class]] ||
+        [sectionItem isKindOfClass:[ZAFormSectionMultipleSelectable class]]
+        ) {
+        
         [sectionItem didSelectRow:rowItem];
         return;
     }
