@@ -88,3 +88,46 @@
 }
 
 @end
+
+
+@implementation ZAFormSectionMultipleSelectable
+
+- (void)configure {
+    [super configure];
+    self.selectableRows = [NSArray array];
+}
+
+- (void)didSelectRow:(ZAFormRow<ZAFormRowTagSelectableProtocol> *)row {
+    
+    NSMutableArray *updateItems = [NSMutableArray array];
+    BOOL rowSelected = (row.value != nil);
+    
+    
+    if (_enableDeselection || row.value == nil) {
+        row.value = (row.value == nil ? row.optionValue : nil);
+        [updateItems addObject:row];
+    }
+    
+    BOOL nowSelected = (row.value != nil);
+    
+    NSMutableArray *arr = [self.selectableRows mutableCopy];
+    
+    if (rowSelected && !nowSelected) {
+        [arr removeObject:row];
+    } else if (!rowSelected && nowSelected) {
+        [arr addObject:row];
+    }
+    
+    self.selectableRows = [arr copy];
+    
+    // update
+    [self.form.tableView beginUpdates];
+    for (ZAFormRow *r in updateItems) {
+        [self.form upgradeRow:r];
+    }
+    [self.form.tableView endUpdates];
+}
+
+
+@end
+

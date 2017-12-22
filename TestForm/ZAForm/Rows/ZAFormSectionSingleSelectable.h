@@ -50,5 +50,18 @@
 
 @end
 
+@interface ZAFormSectionMultipleSelectable : ZAFormSection
+
+/// enable deselection
+@property (nonatomic) BOOL enableDeselection;
+
+/// selectable rows
+//@property (assign, nonatomic) ZAFormRow<ZAFormRowSelectableProtocol> *selectableRow;
+@property (strong, nonatomic) NSArray *selectableRows;
+
+/// on cell select
+- (void)didSelectRow:(ZAFormRow<ZAFormRowTagSelectableProtocol> *)row;
+
+@end
 
 
