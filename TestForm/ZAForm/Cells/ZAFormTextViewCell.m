@@ -22,7 +22,7 @@
 - (void)configureViews {
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    self.backgroundColor = [UIColor greenColor];
     // title
     self.titleLabel = [[UILabel alloc] init];
     [self.contentView addSubview:_titleLabel];

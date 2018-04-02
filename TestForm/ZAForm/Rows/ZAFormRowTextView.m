@@ -55,30 +55,44 @@
     
     CGPoint currentOffset = tableView.contentOffset;
     CGFloat oldCellHeight = cell.frame.size.height;
+
+
+    
+    
     
     [UIView setAnimationsEnabled:NO];
     [tableView beginUpdates];
-//    [self.form upgradeRow:self];
     [tableView endUpdates];
     [UIView setAnimationsEnabled:YES];
-    
+
+
     CGFloat newCellHeight = cell.frame.size.height;
+//    CGFloat newCellHeight = [textView sizeThatFits:textView.frame.size].height;
     if (cell.textView.isFirstResponder && (oldCellHeight > 0) && oldCellHeight != newCellHeight) {
+        
         CGFloat newOffsetY = currentOffset.y + newCellHeight - oldCellHeight;
-        UIEdgeInsets contentInsets = tableView.contentInset;
+        UIEdgeInsets contentInsets;
+        if (@available(iOS 11.0, *)) {
+            contentInsets = tableView.adjustedContentInset;
+        } else {
+            contentInsets = tableView.contentInset;
+        }
 //        NSLog(@"frame :: %@", NSStringFromCGRect(tableView.frame));
 //        NSLog(@"content insets :: %@", NSStringFromUIEdgeInsets(contentInsets));
 //        NSLog(@"content size :: %@", NSStringFromCGSize(tableView.contentSize));
 //        NSLog(@"old offset :: %@", NSStringFromCGPoint(currentOffset));
 //        NSLog(@"new y :: %@", @(newOffsetY));
 //        NSLog(@".............\n\n");
-        
-        if (tableView.contentSize.height > tableView.frame.size.height /*- contentInsets.top - contentInsets.bottom */) {
+ 
+        if (tableView.contentSize.height > tableView.frame.size.height - contentInsets.top - contentInsets.bottom) {
             currentOffset.y = newOffsetY;
-            [tableView setContentOffset:currentOffset animated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [tableView setContentOffset:currentOffset animated:YES];
+            });
         }
     }
-}
+
+ }
 
 #pragma mark - responders
 
