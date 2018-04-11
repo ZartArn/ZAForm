@@ -61,6 +61,7 @@
 //@property (strong, nonatomic) RACSignal *flyErrorMessageSignal;
 
 - (void)addRowValidator:(id<ZAFormValidator>)validator;
+- (void)addRowValidators:(NSArray<id<ZAFormValidator>> *)validators;
 
 //- (void)launchRowValidate;
 

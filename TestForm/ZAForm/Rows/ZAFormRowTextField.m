@@ -294,6 +294,10 @@
     [self.rowValidators addObject:validator];
 }
 
+- (void)addRowValidators:(NSArray<id<ZAFormValidator>> *)validators {
+    [self.rowValidators addObjectsFromArray:validators];
+}
+
 - (RACSignal *)validateErrorSignal:(NSArray *)validators {
     return
         [[RACSignal combineLatest:[validators.rac_sequence
