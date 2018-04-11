@@ -11,6 +11,7 @@
 
 #import "ZAFormTextFieldLogic.h"
 #import "ZAFormValidator.h"
+#import "ZAFormValidator.h"
 
 @class RACSignal;
 
@@ -38,27 +39,36 @@
 @property (copy, nonatomic) void(^didSelectBlock)(ZATextfieldRow *row);
 
 /// validators
-@property (strong, nonatomic) NSMutableArray *validators;
+@property (strong, nonatomic) NSMutableArray *validators DEPRECATED_ATTRIBUTE;
 
 /// combine validator
-@property (strong, nonatomic) RACSignal *validateSignal;
+@property (strong, nonatomic) RACSignal *validateSignal DEPRECATED_ATTRIBUTE;
 
 /// warning signal for cell
-@property (strong, nonatomic) RACSignal *warningSignal;
+@property (strong, nonatomic) RACSignal *warningSignal DEPRECATED_ATTRIBUTE;
 
 /// fix length then need show warning
-@property (strong, nonatomic) NSNumber *warningLength;
+@property (strong, nonatomic) NSNumber *warningLength DEPRECATED_ATTRIBUTE;
+
+/// register validator (deprecated)
+/// @see -addRowValidator:validator
+- (void)addValidator:(RACSignal *)validator DEPRECATED_ATTRIBUTE;
+
+/// launch validate process, not can add validator after(?) (deprecated)
+/// @see -launchRowValidate
+- (void)launchValidate DEPRECATED_ATTRIBUTE;
 
 /// register validator
-- (void)addValidator:(RACSignal *)validator;
-
-/// launch validate process, not can add validator after(?)
-- (void)launchValidate;
+- (void)addRowValidator:(id<ZAFormValidator>)validator;
+- (void)addRowValidators:(NSArray<id<ZAFormValidator>> *)validators;
 
 /// configure
 - (void)configure;
 
-/// start
+/// start (configure)
 - (void)start;
+
+/// launch row validate, need call after method start
+- (void)launchRowValidate;
 
 @end
