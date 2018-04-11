@@ -11,4 +11,6 @@
 
 @interface ZAFormCardExpireLogic : NSObject <ZAFormTextFieldLogic>
 
+@property (strong, nonatomic) NSFormatter *textFormatter;
+
 @end
