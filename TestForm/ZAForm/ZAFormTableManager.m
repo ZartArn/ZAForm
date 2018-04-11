@@ -301,9 +301,9 @@
 }
 
 - (void)upgradeRow:(ZAFormRow *)row {
-//    [self.tableView beginUpdates];
+    [self.tableView beginUpdates];
     [row updateCell];
-//    [self.tableView endUpdates];
+    [self.tableView endUpdates];
 }
 
 - (void)reloadRow:(ZAFormRow *)row {
@@ -344,7 +344,7 @@
     
     [self.tableView beginUpdates];
     [self.sections insertObjects:sections atIndexes:indexSet];
-    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
 }
 
@@ -361,7 +361,7 @@
     NSIndexSet *iSet = [indexSet copy];
     [self.tableView beginUpdates];
     [self.sections removeObjectsAtIndexes:iSet];
-    [self.tableView deleteSections:iSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView deleteSections:iSet withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
 }
 
