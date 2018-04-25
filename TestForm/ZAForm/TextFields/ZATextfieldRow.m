@@ -71,6 +71,7 @@
     
     RACSignal *valueChangedSignal = [valueTerminal
                                        map:^id(id value) {
+                                           NSLog(@"value terminal :: %@", value);
                                            @strongify(self);
                                            if (value && self.valueFormatter) {
                                                return [self.valueFormatter stringForObjectValue:value];
@@ -81,6 +82,7 @@
     
     RACSignal *fieldChangedSignal = [fieldTerminal
                                        map:^id(NSString *text) {
+                                           NSLog(@"field terminal :: %@", text);
                                            @strongify(self);
                                            if (self.valueFormatter) {
                                                id objectValue = nil;
@@ -144,10 +146,13 @@
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
+    NSLog(@"textFieldShouldClear");
     if ([self.logicDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
         return [self.logicDelegate performSelector:@selector(textFieldShouldClear:) withObject:textField];
+    } else {
+        textField.text = nil;
+        return YES;
     }
-    return NO;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -242,7 +247,7 @@
                       NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
                       error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
                   }
-                  [self.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+                  [self.textField performSelector:@selector(setError:animated:) withObject:error withObject:@YES];
               }];
          }];
     }
@@ -263,7 +268,7 @@
                   NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
                   error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
               }
-              [self.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+              [self.textField performSelector:@selector(setError:animated:) withObject:error withObject:@YES];
           }];
      }];
 }

@@ -96,6 +96,7 @@
     RACSignal *fieldChangedSignal = [fieldTerminal
         map:^id(NSString *text) {
             @strongify(self);
+            NSLog(@"field terminal :: %@", text);
             if (self.valueFormatter) {
                 id objectValue = nil;
                 BOOL res = [self.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
@@ -370,6 +371,27 @@
                          [self.section.form.tableView endUpdates];
                      }];
         }];
+}
+
+- (void)showErrors {
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
+    NSArray *validators = [self.rowValidators copy];
+    
+    @weakify(self);
+    [[[self validateErrorSignal:validators] take:1]
+     subscribeNext:^(RACTuple *x) {
+         NSString *message = x.last;
+         NSLog(@"validate message subscriber :: %@", x);
+         @strongify(self);
+         NSError *error = nil;
+         if (message != nil) {
+             NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
+             error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
+         }
+         [self.section.form.tableView beginUpdates];
+         [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+         [self.section.form.tableView endUpdates];
+     }];
 }
 
 #pragma mark - lazy
