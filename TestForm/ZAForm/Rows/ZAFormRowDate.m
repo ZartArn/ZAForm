@@ -8,6 +8,7 @@
 
 #import "ZAFormRowDate.h"
 #import "ZAFormDatePickerCell.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @implementation ZAFormRowDate
 

@@ -8,7 +8,7 @@
 
 #import "ZAFormTextViewCell.h"
 #import "ZAFormRow.h"
-#import <Masonry.h>
+#import <Masonry/Masonry.h>
 
 @implementation ZAFormTextViewCell
 

@@ -18,9 +18,14 @@
     return characterSet;
 }
 
+- (void)applyFormatTo:(UITextField *)textField forText:(NSString *)text {
+    textField.text = self.textFormatter ? [self.textFormatter stringForObjectValue:text] : text;
+}
+
 - (NSString *)textField:(UITextField *)textField willChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
     NSString *currentText = textField.text;
+    NSString *newString;
 
     NSCharacterSet *nonNumberCharacterSet = [[self avalaibleCharacterSet] invertedSet];
 
@@ -58,6 +63,7 @@
             }
         }
     }
+    [self applyFormatTo:textField forText:numberOnlyString];
     return numberOnlyString;
 }
 

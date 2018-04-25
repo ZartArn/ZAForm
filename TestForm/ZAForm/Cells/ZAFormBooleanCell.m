@@ -8,8 +8,8 @@
 
 #import "ZAFormBooleanCell.h"
 #import "ZAFormRow.h"
-#import <Masonry.h>
-#import <ReactiveCocoa.h>
+#import <Masonry/Masonry.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @implementation ZAFormBooleanCell
 

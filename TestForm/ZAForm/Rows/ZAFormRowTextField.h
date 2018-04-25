@@ -33,32 +33,45 @@
 - (void)resignFirstResponder;
 
 /// combine validator
-@property (strong, nonatomic) RACSignal *validateSignal;
+@property (strong, nonatomic) RACSignal *validateSignal DEPRECATED_ATTRIBUTE;
 
 /// warning signal for cell
-@property (strong, nonatomic) RACSignal *warningSignal;
+@property (strong, nonatomic) RACSignal *warningSignal DEPRECATED_ATTRIBUTE;
 
 /// validators
-@property (strong, nonatomic) NSMutableArray *validators;
+@property (strong, nonatomic) NSMutableArray *validators DEPRECATED_ATTRIBUTE;
 
-/// is row valid. nil - field not unser validation
-@property (strong, nonatomic) NSNumber *isValid;
+/// is row valid. nil - field not under validation
+@property (strong, nonatomic) NSNumber *isValid DEPRECATED_ATTRIBUTE;
 
 /// error message (from validators)
-@property (copy, nonatomic) NSString *errorMessage;
+//@property (copy, nonatomic) NSString *errorMessage;
 
 /// register validator
-- (void)addValidator:(RACSignal *)validator;
+- (void)addValidator:(RACSignal *)validator DEPRECATED_ATTRIBUTE;
 
 /// register validator with error message
-- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage;
+//- (void)addValidator:(RACSignal *)validator errorMessage:(NSString *)errorMessage;
 
 /// launch validate process, not can add validator after(?)
-- (void)launchValidate;
+- (void)launchValidate DEPRECATED_ATTRIBUTE;
+
+#pragma mark - validators
+
+//@property (strong, nonatomic) RACSignal *flyErrorMessageSignal;
+
+- (void)addRowValidator:(id<ZAFormValidator>)validator;
+- (void)addRowValidators:(NSArray<id<ZAFormValidator>> *)validators;
+
+//- (void)launchRowValidate;
+- (void)showErrors;
+
 
 #pragma mark - UITextInputTraits
 
 @property (nonatomic) UIKeyboardType keyboardType;
 @property (nonatomic) UIReturnKeyType returnKeyType;
+@property (nonatomic) UITextAutocapitalizationType autocapitalizationType;
+@property (nonatomic, getter=isSecureTextEntry) BOOL secureTextEntry;
 
 @end

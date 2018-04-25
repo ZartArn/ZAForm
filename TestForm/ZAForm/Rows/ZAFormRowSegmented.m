@@ -8,6 +8,7 @@
 
 #import "ZAFormRowSegmented.h"
 #import "ZAFormCellSegmented.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @implementation ZAFormRowSegmented
 

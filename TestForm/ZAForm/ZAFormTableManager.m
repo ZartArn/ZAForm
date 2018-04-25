@@ -16,7 +16,7 @@
 #import "ZAFormBaseSectionCell.h"
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormTextViewCell.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ZAFormTableManager()
 
@@ -94,6 +94,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    if (sectionItem.header.aView) {
+        return sectionItem.header.aView;
+    }
     if (sectionItem.title) {
         ZAFormBaseSectionCell *headerView = [sectionItem sectionCellForForm];
         [headerView update];
@@ -110,6 +113,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     ZAFormSection *sectionItem = [self.sections objectAtIndex:section];
+    if (sectionItem.header.aView) {
+        return sectionItem.header.height;
+    }
     if (!sectionItem.title) {
         if ([self.proxyTableDelegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
             return [self.proxyTableDelegate tableView:tableView heightForHeaderInSection:section];
@@ -213,7 +219,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     // selectable section
-    if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]] || [sectionItem isKindOfClass:[ZAFormSectionMultiTagsSingleSelectable class]]) {
+    if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]] ||
+        [sectionItem isKindOfClass:[ZAFormSectionMultiTagsSingleSelectable class]] ||
+        [sectionItem isKindOfClass:[ZAFormSectionMultipleSelectable class]]
+        ) {
+        
         [sectionItem didSelectRow:rowItem];
         return;
     }
@@ -291,9 +301,9 @@
 }
 
 - (void)upgradeRow:(ZAFormRow *)row {
-//    [self.tableView beginUpdates];
+    [self.tableView beginUpdates];
     [row updateCell];
-//    [self.tableView endUpdates];
+    [self.tableView endUpdates];
 }
 
 - (void)reloadRow:(ZAFormRow *)row {
@@ -334,7 +344,7 @@
     
     [self.tableView beginUpdates];
     [self.sections insertObjects:sections atIndexes:indexSet];
-    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
 }
 
@@ -351,7 +361,7 @@
     NSIndexSet *iSet = [indexSet copy];
     [self.tableView beginUpdates];
     [self.sections removeObjectsAtIndexes:iSet];
-    [self.tableView deleteSections:iSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView deleteSections:iSet withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
 }
 
@@ -513,6 +523,30 @@
         return;
     }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sectionIdx];
+    if (animation) {
+        [self.tableView beginUpdates];
+        [section.rowItems insertObject:newRow atIndex:(indexPath.row)];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+    } else {
+        [section.rowItems insertObject:newRow atIndex:(indexPath.row)];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+/// append row in section
+- (void)appendRow:(ZAFormRow *)newRow section:(ZAFormSection *)section animation:(BOOL)animation {
+    if (self.sections == nil) {
+        return;
+    }
+    if (!section) {
+        section = self.sections.firstObject;
+    }
+    NSInteger sectionIdx = [self.sections indexOfObject:section];
+    if (sectionIdx == NSNotFound) {
+        return;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:section.rowItems.count inSection:sectionIdx];
     if (animation) {
         [self.tableView beginUpdates];
         [section.rowItems insertObject:newRow atIndex:(indexPath.row)];

@@ -8,13 +8,24 @@
 
 #import "ZATextfieldRow.h"
 #import "ZAFormPhoneLogic.h"
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ZATextfieldRow()
+
+@property (strong, nonatomic) NSMutableArray *rowValidators;
 
 @end
 
 @implementation ZATextfieldRow
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _rowValidators = [NSMutableArray array];
+    }
+    return self;
+}
+
+#pragma mark - configure
 
 - (void)start {
     [self configure];
@@ -27,9 +38,13 @@
     
     // set delegate
     self.textField.delegate = self;
-    if ([self.logicDelegate isKindOfClass:[ZAFormPhoneLogic class]] && [self.valueFormatter conformsToProtocol:@protocol(ZAFormFormatterLogicable)]) {
-        ZAFormPhoneLogic *logic = (ZAFormPhoneLogic *)self.logicDelegate;
-        logic.textFormatter = self.valueFormatter;
+    if (self.logicDelegate) {
+        if ([self.logicDelegate isKindOfClass:[ZAFormPhoneLogic class]] && [self.valueFormatter conformsToProtocol:@protocol(ZAFormFormatterLogicable)]) {
+            ZAFormPhoneLogic *logic = (ZAFormPhoneLogic *)self.logicDelegate;
+            logic.textFormatter = (NSFormatter <ZAFormFormatterLogicable> *)self.valueFormatter;
+        } else if ([self.logicDelegate respondsToSelector:@selector(setTextFormatter:)]) {
+            [self.logicDelegate performSelector:@selector(setTextFormatter:) withObject:self.valueFormatter];
+        }
     }
     
     // placeholder
@@ -46,11 +61,17 @@
     // channel value <-> textField.text
     
     @weakify(self);
-    RACChannelTerminal *fieldTerminal = RACChannelTo(self.textField, text);
+    RACChannelTerminal *fieldTerminal;
+    if (self.textField.secureTextEntry) {
+        fieldTerminal = [self.textField rac_newTextChannel];
+    } else {
+        fieldTerminal = RACChannelTo(self.textField, text);
+    }
     RACChannelTerminal *valueTerminal = RACChannelTo(self, value);
     
     RACSignal *valueChangedSignal = [valueTerminal
                                        map:^id(id value) {
+                                           NSLog(@"value terminal :: %@", value);
                                            @strongify(self);
                                            if (value && self.valueFormatter) {
                                                return [self.valueFormatter stringForObjectValue:value];
@@ -61,6 +82,7 @@
     
     RACSignal *fieldChangedSignal = [fieldTerminal
                                        map:^id(NSString *text) {
+                                           NSLog(@"field terminal :: %@", text);
                                            @strongify(self);
                                            if (self.valueFormatter) {
                                                id objectValue = nil;
@@ -78,6 +100,12 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(nonnull NSString *)string  {
+
+    // secure field
+    if (textField.secureTextEntry) {
+        return YES;
+    }
+    
     
     if (self.logicDelegate) {
         [self.logicDelegate textField:textField willChangeCharactersInRange:range replacementString:string];
@@ -85,8 +113,8 @@
     }
     
     // no logic delegate
-    
-    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSString *newString;
+    newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if (self.valueFormatter) {
         //
@@ -101,14 +129,29 @@
     return NO;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.didSelectBlock) {
+        self.didSelectBlock(self);
+        return NO;
+    }
+    if ([self.logicDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
+        [self.logicDelegate performSelector:@selector(textFieldShouldBeginEditing:) withObject:textField];
+    }
+    return  YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
+    NSLog(@"textFieldShouldClear");
     if ([self.logicDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
-        [self.logicDelegate performSelector:@selector(textFieldShouldClear:) withObject:textField];
+        return [self.logicDelegate performSelector:@selector(textFieldShouldClear:) withObject:textField];
+    } else {
+        textField.text = nil;
+        return YES;
     }
 }
 
@@ -124,7 +167,7 @@
     }
 }
 
-#pragma mark - validators
+#pragma mark - validators (old)
 
 - (void)addValidator:(id<ZAFormValidator>)validator {
     [self.validators addObject:validator];
@@ -152,6 +195,82 @@
                               then:[self.validateSignal not]
                               else:[RACSignal return:@0]];
     }
+}
+
+#pragma mark - validators
+
+- (void)addRowValidator:(id<ZAFormValidator>)validator {
+    [self.rowValidators addObject:validator];
+}
+
+- (void)addRowValidators:(NSArray<id<ZAFormValidator>> *)validators {
+    [self.rowValidators addObjectsFromArray:validators];
+}
+
+- (RACSignal *)validateErrorSignal:(NSArray *)validators {
+    return
+        [[RACSignal combineLatest:[validators.rac_sequence
+                                   map:^id(id<ZAFormValidator> validator) {
+                                       return  [validator.validateSignal
+                                                map:^id(id value) {
+                                                    RACTuple *tuple = RACTuplePack(value, validator.errorMessage);
+                                                    return tuple;
+                                                }];
+                                   }]]
+         
+         map:^id(RACTuple *signalValues) {
+             return [signalValues.rac_sequence objectPassingTest:^BOOL(RACTuple *value) {
+                 NSNumber *isValid = value.first;
+                 return !isValid.boolValue;
+             }];
+         }];
+}
+
+- (void)launchRowValidate {
+    // on focus + on change
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"showOnChange = %@", @YES];
+    NSArray *validators = [[self.rowValidators copy] filteredArrayUsingPredicate:p];
+    
+    @weakify(self);
+    
+    if (validators.count > 0) {
+        [[self.textField rac_signalForControlEvents:UIControlEventEditingDidBegin]
+         subscribeNext:^(id x) {
+             @strongify(self);
+             [[[self validateErrorSignal:validators]
+               takeUntil:[self.textField rac_signalForControlEvents:UIControlEventEditingDidEnd]]
+              subscribeNext:^(RACTuple *x) {
+                  NSString *message = x.last;
+                  @strongify(self);
+                  NSError *error = nil;
+                  if (message != nil) {
+                      NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
+                      error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
+                  }
+                  [self.textField performSelector:@selector(setError:animated:) withObject:error withObject:@YES];
+              }];
+         }];
+    }
+    
+    // on blur
+    [[self.textField rac_signalForControlEvents:UIControlEventEditingDidEnd]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         NSArray *validators = [self.rowValidators copy];
+         
+         [[[self validateErrorSignal:validators] take:1]
+          subscribeNext:^(RACTuple *x) {
+              NSString *message = x.last;
+              NSLog(@"validate message subscriber :: %@", x);
+              @strongify(self);
+              NSError *error = nil;
+              if (message != nil) {
+                  NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
+                  error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
+              }
+              [self.textField performSelector:@selector(setError:animated:) withObject:error withObject:@YES];
+          }];
+     }];
 }
 
 @end

@@ -29,7 +29,7 @@
 - (NSString *)textField:(UITextField *)textField willChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if (self.textFormatter.prefix.length && range.location < self.textFormatter.prefix.length) {
-        return NO;
+        return nil;
     }
     
     NSInteger caretPosition = [self pushCaretPosition:textField range:range];

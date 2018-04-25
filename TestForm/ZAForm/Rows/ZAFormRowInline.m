@@ -7,6 +7,8 @@
 //
 
 #import "ZAFormRowInline.h"
+#import "ZAFormSection.h"
+#import "ZAFormTableManager.h"
 
 @implementation ZAFormRowInline
 

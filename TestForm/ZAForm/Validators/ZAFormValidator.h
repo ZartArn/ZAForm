@@ -7,10 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ReactiveCocoa.h>
+
+@class RACSignal;
 
 @protocol ZAFormValidator <NSObject>
 
-- (RACSignal *)validateSignal;
+/// validate signal
+@property (strong, nonatomic) RACSignal *validateSignal;
+
+/// error message
+@property (copy, nonatomic) NSString *errorMessage;
+
+/// show on change
+@property (nonatomic) BOOL showOnChange;
+
+/// show on blur
+@property (nonatomic) BOOL showOnBlur;
 
 @end
