@@ -63,8 +63,12 @@
 - (void)addRowValidator:(id<ZAFormValidator>)validator;
 - (void)addRowValidators:(NSArray<id<ZAFormValidator>> *)validators;
 
-//- (void)launchRowValidate;
+/// add mock validator. make it as last validator in field
+- (void)addZValidator;
+
+/// show fields errors like after blur
 - (void)showErrors;
+
 
 
 #pragma mark - UITextInputTraits

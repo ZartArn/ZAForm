@@ -12,6 +12,7 @@
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormTableManager.h"
 #import "ZAFormPhoneLogic.h"
+#import "ZAFormRowValidator.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ZAFormRowTextField()
@@ -289,6 +290,18 @@
 //    return [filterMessages componentsJoinedByString:@"\n"];
 //}
 
+#pragma mark - specific row validators
+
+- (void)addZValidator {
+    ZAFormRowValidator *validator = [[ZAFormRowValidator alloc] init];
+    validator.validateSignal = [RACSignal return:@1];
+    validator.errorMessage = @"zaglushka";
+    validator.showOnChange = YES;
+    validator.showOnBlur = NO;
+
+    [self addRowValidator:validator];
+}
+
 #pragma mark - validators new
 
 - (void)addRowValidator:(id<ZAFormValidator>)validator {
@@ -344,7 +357,7 @@
                             error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
                         }
                         [self.section.form.tableView beginUpdates];
-                        [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+                        [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@YES];
                         [self.section.form.tableView endUpdates];
                     }];
             }];
