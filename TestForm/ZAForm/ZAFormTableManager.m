@@ -344,7 +344,7 @@
     
     [self.tableView beginUpdates];
     [self.sections insertObjects:sections atIndexes:indexSet];
-    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
 }
 
@@ -368,7 +368,7 @@
 #pragma mark - insert\remove rows
 
 // private
-// !!: add rows only in one section
+// !!: add rows in ONE section ONLY
 - (void)addRows:(NSArray *)newRows atIndexPaths:(NSArray *)indexPaths animation:(BOOL)animation andScroll:(BOOL)isScrollTo {
     
     NSIndexPath *firstIndexPath = indexPaths.firstObject;
@@ -380,6 +380,10 @@
     NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
     for (NSIndexPath *indexPath in indexPaths) {
         [indexSet addIndex:indexPath.row];
+    }
+    
+    for (ZAFormRow *row in newRows) {
+        row.section = section;
     }
     
     if (animation) {
@@ -495,6 +499,7 @@
     }
 
     ZAFormSection *section = [self.sections objectAtIndex:nextIndexPath.section];
+    newRow.section = section;
     
     if (animation) {
         [self.tableView beginUpdates];
@@ -522,6 +527,7 @@
     if (sectionIdx == NSNotFound) {
         return;
     }
+    newRow.section = section;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sectionIdx];
     if (animation) {
         [self.tableView beginUpdates];
@@ -546,6 +552,7 @@
     if (sectionIdx == NSNotFound) {
         return;
     }
+    newRow.section = section;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:section.rowItems.count inSection:sectionIdx];
     if (animation) {
         [self.tableView beginUpdates];
