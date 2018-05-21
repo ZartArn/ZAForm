@@ -97,7 +97,7 @@
     RACSignal *fieldChangedSignal = [fieldTerminal
         map:^id(NSString *text) {
             @strongify(self);
-            NSLog(@"field terminal :: %@", text);
+//            NSLog(@"field terminal :: %@", text);
             if (self.valueFormatter) {
                 id objectValue = nil;
                 BOOL res = [self.valueFormatter getObjectValue:&objectValue forString:text errorDescription:nil];
