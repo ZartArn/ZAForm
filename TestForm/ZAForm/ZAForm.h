@@ -5,6 +5,7 @@
 #import "ZAFormSectionSingleSelectable.h"
 #import "ZAFormRow.h"
 #import "ZAFormRowInline.h"
+#import "ZAFormRowInlineBasic.h"
 #import "ZAFormRowTextField.h"
 #import "ZAFormRowTextView.h"
 #import "ZAFormRowAmount.h"
