@@ -34,4 +34,6 @@
 #import "ZAFormValidator.h"
 #import "ZATextfieldRow.h"
 #import "ZASegmentedRow.h"
+#import "ZAFormRowPicker.h"
+#import "ZAFormPickerCell.h"
 
