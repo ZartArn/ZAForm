@@ -334,6 +334,7 @@
 - (void)launchRowValidate {
     
     ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
+    UITextField *textField = cell.textField;
 
     // on focus + on change
     NSPredicate *p = [NSPredicate predicateWithFormat:@"showOnChange = %@", @YES];
@@ -362,25 +363,25 @@
                     }];
             }];
     }
-    
+
     // on blur
     [[cell.textField rac_signalForControlEvents:UIControlEventEditingDidEnd]
         subscribeNext:^(id x) {
             @strongify(self);
             NSArray *validators = [self.rowValidators copy];
-                 
+
             [[[self validateErrorSignal:validators] take:1]
                      subscribeNext:^(RACTuple *x) {
+                         @strongify(self);
                          NSString *message = x.last;
                          NSLog(@"validate message subscriber :: %@", x);
-                         @strongify(self);
                          NSError *error = nil;
                          if (message != nil) {
                              NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
                              error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
                          }
                          [self.section.form.tableView beginUpdates];
-                         [cell.textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+                         [textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
                          [self.section.form.tableView endUpdates];
                      }];
         }];
