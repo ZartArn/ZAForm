@@ -42,6 +42,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    self.didSelectReplaySignal = [RACReplaySubject replaySubjectWithCapacity:0];
     [self createAccessoryView];
 }
 
@@ -213,6 +214,9 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.didSelectReplaySignal sendNext:@1];
+    
     ZAFormSection *sectionItem = [self.sections objectAtIndex:indexPath.section];
     ZAFormRow *rowItem = [sectionItem.rowItems objectAtIndex:indexPath.row];
     

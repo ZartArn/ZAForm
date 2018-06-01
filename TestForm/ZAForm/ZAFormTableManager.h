@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @class ZAFormSection, ZAFormRow;
+@class RACReplaySubject;
 
 @interface ZAFormTableManager : NSObject <UITableViewDataSource, UITableViewDelegate>
 
@@ -34,8 +35,14 @@
 /// row height
 @property (nonatomic) NSNumber *rowHeight;
 
+/// did select signal
+@property (strong, nonatomic) RACReplaySubject *didSelectReplaySignal;
+
 /// initialize
 - (instancetype)initWithTableView:(UITableView *)tableView proxyDelegate:(id<UITableViewDelegate>)proxyDelegate;
+
+/// may override for subclass, need call super
+- (void)configure;
 
 /// add Section Item
 - (ZAFormSection *)createAndAddSection:(NSString *)title;

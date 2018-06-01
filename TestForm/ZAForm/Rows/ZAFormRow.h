@@ -33,6 +33,9 @@
 /// editable
 @property (nonatomic) BOOL editable;
 
+/// required
+@property (nonatomic) BOOL required;
+
 /// viewModel
 @property (strong, nonatomic) id viewModel;
 

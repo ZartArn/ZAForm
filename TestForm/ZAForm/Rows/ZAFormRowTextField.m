@@ -209,7 +209,8 @@
 #pragma mark - responders
 
 - (BOOL)canBeFirstResponder {
-    return YES;
+    ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
+    return (cell.textField.userInteractionEnabled);
 }
 
 - (BOOL)isFirstResponder {
