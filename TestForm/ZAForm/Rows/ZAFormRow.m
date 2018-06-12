@@ -121,7 +121,7 @@
 }
 
 - (BOOL)becomeFirstResponder {
-    
+    return NO;
 }
 
 - (void)resignFirstResponder {

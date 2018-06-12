@@ -168,7 +168,7 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     if ([self.logicDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
-        [self.logicDelegate performSelector:@selector(textFieldShouldClear:) withObject:textField];
+        return [self.logicDelegate performSelector:@selector(textFieldShouldClear:) withObject:textField];
     } else {
         textField.text = nil;
         return YES;
