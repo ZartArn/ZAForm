@@ -23,7 +23,10 @@
     cell.pickerView.dataSource = self;
     cell.pickerView.delegate = self;
 
-    id currentValue = self.value ?: self.defaultValue ?: nil;
+    id currentValue = self.value; // ?: self.defaultValue ?: nil;
+    if (!currentValue && self.defaultValue) {
+        currentValue = self.value = self.defaultValue;
+    }
     if (currentValue) {
         NSInteger idx = [self.pickerValues indexOfObject:currentValue];
         if (idx != NSNotFound) {
