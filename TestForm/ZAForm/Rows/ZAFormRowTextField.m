@@ -337,11 +337,44 @@
     ZAFormTextFieldCell *cell = (ZAFormTextFieldCell *)self.cell;
     UITextField *textField = cell.textField;
 
+    if (self.rowValidators.count < 1) {
+        return;
+    }
+    
+    @weakify(self);
+    
+    // always
+    
+    // suggest: if first rowValidator respond to "showAlways" property than all rowValidators respond
+    // warning: if at least one always validator exists, another validators ignore
+    
+    if ([self.rowValidators.firstObject respondsToSelector:@selector(showAlways)]) {
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"showAlways = %@", @YES];
+        NSArray *validators = [[self.rowValidators copy] filteredArrayUsingPredicate:p];
+        if (validators.count > 0) {
+            [[self validateErrorSignal:validators]
+             subscribeNext:^(RACTuple *x) {
+                 @strongify(self);
+                 NSString *message = x.last;
+                 NSLog(@"validate message subscriber :: %@", x);
+                 NSError *error = nil;
+                 if (message != nil) {
+                     NSDictionary *userInfo = @{NSLocalizedDescriptionKey: message};
+                     error = [NSError errorWithDomain:@"111" code:1 userInfo:userInfo];
+                 }
+                 [self.section.form.tableView beginUpdates];
+                 [textField performSelector:@selector(setError:animated:) withObject:error withObject:@NO];
+                 [self.section.form.tableView endUpdates];
+             }];
+            // warning: if at least one always validator exists, another validators ignore
+            return;
+        }
+    }
+    
+    
     // on focus + on change
     NSPredicate *p = [NSPredicate predicateWithFormat:@"showOnChange = %@", @YES];
     NSArray *validators = [[self.rowValidators copy] filteredArrayUsingPredicate:p];
-
-    @weakify(self);
 
     if (validators.count > 0) {
         

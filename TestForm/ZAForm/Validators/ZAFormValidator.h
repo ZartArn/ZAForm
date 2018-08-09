@@ -24,4 +24,9 @@
 /// show on blur
 @property (nonatomic) BOOL showOnBlur;
 
+@optional
+
+/// show always
+@property (nonatomic) BOOL showAlways;
+
 @end

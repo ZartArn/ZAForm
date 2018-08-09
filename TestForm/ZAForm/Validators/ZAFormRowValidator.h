@@ -14,5 +14,6 @@
 @property (copy, nonatomic) NSString *errorMessage;
 @property (nonatomic) BOOL showOnChange;
 @property (nonatomic) BOOL showOnBlur;
+@property (nonatomic) BOOL showAlways;
 
 @end
