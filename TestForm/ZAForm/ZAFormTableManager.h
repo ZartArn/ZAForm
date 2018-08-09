@@ -82,6 +82,9 @@
 /// insert section. first if afterSection == nil
 - (void)insertSections:(NSArray *)sections afterSection:(ZAFormSection *)afterSection;
 
+/// insert section before section, last if nil 
+- (void)insertSections:(NSArray *)sections beforeSection:(ZAFormSection *)beforeSection;
+
 /// remove sections
 - (void)removeSections:(NSArray *)sections;
 

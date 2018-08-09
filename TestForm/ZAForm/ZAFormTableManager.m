@@ -194,7 +194,7 @@
     ZAFormRow *rowItem = [sectionItem.rowItems objectAtIndex:indexPath.row];
     // row height set fix in row
     if (rowItem.cellHeight && rowItem.cellHeight >= 0) {
-        return rowItem.cellHeight;
+        return (MAX(2, rowItem.cellHeight));
     }
     // row height calculated
     if ([rowItem.cellClass isSubclassOfClass:[ZAFormBaseCell class]]) {
@@ -346,14 +346,39 @@
     secIndex = secIndex == NSNotFound ? 0 : secIndex + 1;
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:(NSRange){secIndex, sections.count}];
     
+    for (ZAFormSection *section in sections) {
+        section.form = self;
+    }
+    
     [self.tableView beginUpdates];
     [self.sections insertObjects:sections atIndexes:indexSet];
-    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
 }
 
+/// insert section before section, last if nil
+- (void)insertSections:(NSArray *)sections beforeSection:(ZAFormSection *)beforeSection {
+    NSInteger secIndex = NSNotFound;
+    if (beforeSection != nil) {
+        secIndex = [self.sections indexOfObject:beforeSection];
+    }
+    secIndex = secIndex == NSNotFound ? self.sections.count : secIndex;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:(NSRange){secIndex, sections.count}];
+    
+    for (ZAFormSection *section in sections) {
+        section.form = self;
+    }
+    
+    [self.tableView beginUpdates];
+    [self.sections insertObjects:sections atIndexes:indexSet];
+    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
+}
+
+
 /// remove sections
 - (void)removeSections:(NSArray *)sections {
+    NSLog(@"remove sections start");
     NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
     for (ZAFormSection *sec in sections) {
         NSInteger secIndex = [self.sections indexOfObject:sec];
@@ -365,8 +390,9 @@
     NSIndexSet *iSet = [indexSet copy];
     [self.tableView beginUpdates];
     [self.sections removeObjectsAtIndexes:iSet];
-    [self.tableView deleteSections:iSet withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView deleteSections:iSet withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+    NSLog(@"remove sections ended");
 }
 
 #pragma mark - insert\remove rows
