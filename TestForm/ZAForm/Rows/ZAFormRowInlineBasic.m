@@ -26,7 +26,7 @@
 
 
 - (void)configureCell:(ZAFormBaseCell *)aCell {
-    RACChannelTo(self, value) = RACChannelTo(self.inlineRow, value);
+    RACChannelTo(self.inlineRow, value) = RACChannelTo(self, value);
     @weakify(self);
     [RACObserve(self, value)
      subscribeNext:^(id x) {
