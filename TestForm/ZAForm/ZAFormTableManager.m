@@ -220,7 +220,9 @@
     ZAFormSection *sectionItem = [self.sections objectAtIndex:indexPath.section];
     ZAFormRow *rowItem = [sectionItem.rowItems objectAtIndex:indexPath.row];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (!_allowRowSelected) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
     
     // selectable section
     if ([sectionItem isKindOfClass:[ZAFormSectionSingleSelectable class]] ||

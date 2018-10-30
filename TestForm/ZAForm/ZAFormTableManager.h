@@ -38,6 +38,9 @@
 /// did select signal
 @property (strong, nonatomic) RACReplaySubject *didSelectReplaySignal;
 
+/// if YES allow selectable row, otherwise automatic deselect on didselect. Default is NO
+@property (nonatomic) BOOL allowRowSelected;
+
 /// initialize
 - (instancetype)initWithTableView:(UITableView *)tableView proxyDelegate:(id<UITableViewDelegate>)proxyDelegate;
 
