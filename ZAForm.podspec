@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = 'ZAForm'
-  s.version       = '0.1.7'
+  s.version       = '0.1.8'
   s.summary       = 'Form Manager'
   s.platform      = :ios, '8.0'
   s.license       = 'Code is MIT, then custom font licenses.'

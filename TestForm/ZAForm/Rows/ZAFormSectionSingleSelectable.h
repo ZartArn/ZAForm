@@ -40,6 +40,12 @@
 /// on cell select
 - (void)didSelectRow:(ZAFormRow<ZAFormRowSelectableProtocol> *)row;
 
+/// clear all
+- (void)setZeroSelected;
+
+/// fill all
+- (void)setAllSelected;
+
 @end
 
 

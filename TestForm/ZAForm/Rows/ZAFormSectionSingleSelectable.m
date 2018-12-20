@@ -54,13 +54,6 @@
     NSMutableArray *updateItems = [NSMutableArray array];
     BOOL rowSelected = (row.value != nil);
 
-//    NSPredicate *p = [NSPredicate predicateWithFormat:@"value != nil AND self != %@", row];
-//    NSArray *f = [self.rowItems filteredArrayUsingPredicate:p];
-//    for (ZAFormRow *wrongRow in f) {
-//        wrongRow.value = nil;
-//        [updateItems addObject:wrongRow];
-//    }
-    
     if (_enableDeselection || row.value == nil) {
         row.value = (row.value == nil ? row.optionValue : nil);
         [updateItems addObject:row];
@@ -76,6 +69,42 @@
     }
     
     self.selectableRows = [arr copy];
+    
+    // update
+    [self.form.tableView beginUpdates];
+    for (ZAFormRow *r in updateItems) {
+        [self.form upgradeRow:r];
+    }
+    [self.form.tableView endUpdates];
+}
+
+- (void)setZeroSelected {
+    for (ZAFormRow *row in self.selectableRows) {
+        row.value = nil;
+    }
+    NSArray *updateItems = [NSArray arrayWithArray:self.selectableRows];
+    self.selectableRows = @[];
+    
+    // update
+    [self.form.tableView beginUpdates];
+    for (ZAFormRow *r in updateItems) {
+        [self.form upgradeRow:r];
+    }
+    [self.form.tableView endUpdates];
+}
+
+- (void)setAllSelected {
+    
+    NSMutableArray *updateItems = [NSMutableArray array];
+    
+    for (ZAFormRow<ZAFormRowSelectableProtocol> *row in self.rowItems) {
+        if (row.value == nil) {
+            row.value = row.optionValue;
+            [updateItems addObject:row];
+        }
+    }
+    
+    self.selectableRows = [NSArray arrayWithArray:self.rowItems];
     
     // update
     [self.form.tableView beginUpdates];
