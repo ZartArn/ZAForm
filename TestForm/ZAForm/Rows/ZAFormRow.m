@@ -82,7 +82,13 @@
         }
         _cell = (ZAFormBaseCell *)[[_cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         _cell.formRow = self;
+        if (self.willRowConfigureCellBlock) {
+            self.willRowConfigureCellBlock(self);
+        }
         [_cell configure];
+        if (self.didRowConfigureCellBlock) {
+            self.didRowConfigureCellBlock(self);
+        }
         [self configureCell:_cell];
         RAC(self.cell, userInteractionEnabled) = RACObserve(self, editable);
         _cell.userInteractionEnabled = self.editable;

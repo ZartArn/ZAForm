@@ -53,6 +53,12 @@
 /// select cell block
 @property (copy, nonatomic) void(^didSelectBlock)(ZAFormRow *row, NSIndexPath *indexPath);
 
+/// did row configureCell block. call before [self.cell configure]
+@property (copy, nonatomic) void(^willRowConfigureCellBlock)(ZAFormRow *row);
+
+/// did row configureCell block. call after [self.cell configure]
+@property (copy, nonatomic) void(^didRowConfigureCellBlock)(ZAFormRow *row);
+
 /// register cell
 - (void)registerClassForCell:(Class)cellClass;
 
