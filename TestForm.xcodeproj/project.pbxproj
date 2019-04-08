@@ -50,6 +50,7 @@
 		B50A7A681D37C33F00788568 /* ZAFormSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormSection.m; sourceTree = "<group>"; };
 		B50B79BE1D311DEB004CCD12 /* TestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
 		B50B79BF1D311DEB004CCD12 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
+		B53556AF225AB3BD00C0A6A4 /* ZAForm-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZAForm-prefix.pch"; sourceTree = "<group>"; };
 		B54B6A211D6B32CB0048D585 /* ZAFormRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRow.h; sourceTree = "<group>"; };
 		B54B6A221D6B32CB0048D585 /* ZAFormRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZAFormRow.m; sourceTree = "<group>"; };
 		B54B6A231D6B32CB0048D585 /* ZAFormRowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZAFormRowAction.h; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 		B5BEC8471D2E5EC100DF7920 = {
 			isa = PBXGroup;
 			children = (
+				B53556AF225AB3BD00C0A6A4 /* ZAForm-prefix.pch */,
 				B5BEC86A1D2E5EFA00DF7920 /* ZAForm */,
 				B5BEC8521D2E5EC100DF7920 /* TestForm */,
 				B5BEC8511D2E5EC100DF7920 /* Products */,

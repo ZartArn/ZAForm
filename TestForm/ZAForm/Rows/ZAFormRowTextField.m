@@ -13,7 +13,7 @@
 #import "ZAFormTableManager.h"
 #import "ZAFormPhoneLogic.h"
 #import "ZAFormRowValidator.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
+
 
 @interface ZAFormRowTextField()
 

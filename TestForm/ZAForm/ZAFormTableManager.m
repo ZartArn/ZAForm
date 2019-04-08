@@ -16,7 +16,6 @@
 #import "ZAFormBaseSectionCell.h"
 #import "ZAFormTextFieldCell.h"
 #import "ZAFormTextViewCell.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ZAFormTableManager()
 
@@ -845,10 +844,14 @@
 #pragma mark - lazy
 
 - (NSArray *)allRows {
+/*
         return [self.sections.rac_sequence
                             flattenMap:^RACStream *(ZAFormSection *value) {
                                 return value.rowItems.rac_sequence;
                             }].array;
+*/
+    NSArray *arrayOfArrays = [self.sections valueForKeyPath:@"rowItems"];
+    return [arrayOfArrays valueForKeyPath:@"@unionOfArrays.self"];
 }
 
 # pragma mark - scroll to

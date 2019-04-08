@@ -8,7 +8,7 @@
 
 #import "ZAFormRowTextView.h"
 #import "ZAFormTextViewCell.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
+
 
 @implementation ZAFormRowTextView
 

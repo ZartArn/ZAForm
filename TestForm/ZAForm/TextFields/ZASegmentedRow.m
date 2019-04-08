@@ -7,7 +7,7 @@
 //
 
 #import "ZASegmentedRow.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
+
 
 @implementation ZASegmentedRow
 
